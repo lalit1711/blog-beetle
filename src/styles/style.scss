@@ -1,0 +1,42 @@
+button {
+	font-weight: 600;
+	height: 50px;
+	padding: 0px 20px;
+	font-size: 18px;
+	min-width: 90px;
+}
+
+input[type="text"] {
+	box-shadow: none;
+	border: none;
+	border-bottom: 1px solid $grey;
+	font-weight: 400;
+	font-size: 21px;
+	padding-left: 2px;
+}
+
+.textarea {
+	box-shadow: none;
+	border: none;
+	border-bottom: 1px solid $grey;
+	font-weight: 400;
+	font-size: 21px;
+	padding-left: 2px;
+}
+.textarea:not([rows]) {
+	max-height: 20em;
+	min-height: 0em;
+}
+
+.label {
+	font-size: 21px;
+}
+
+.help {
+	font-weight: 600;
+}
+
+.tag {
+	font-size: 12px;
+	font-weight: 600;
+}
