@@ -4,6 +4,9 @@ import CategoryTile from "../components/atoms/categoryTile";
 import ImageCard from "../components/molecules/imageCard";
 import BlogCard from "../components/molecules/blogCard";
 import LargeBlogCard from "../components/molecules/largeBlogCard";
+import BriefCard from "../components/molecules/breifCard";
+import Tabs from "../components/atoms/tabs/Tabs";
+import Footer from "../components/atoms/footer";
 
 function DummyComp() {
 	const dummyData = { id: "xyz", name: "Blog name" };
@@ -37,9 +40,19 @@ function DummyComp() {
 							<LargeBlogCard blogInfo={tempData} />
 						</div>
 						<hr className="hr-v" style={{ height: 300 }} />
+						<div className="column">
+							<h2 className="brief-blog-heading">Latest Blog(s)</h2>
+							<BriefCard blogInfo={tempData} />
+						</div>
 					</div>
 				</div>
+				<div
+					className="container section"
+					style={{ border: "1px solid", padding: "10px 30px" }}>
+					<Tabs />
+				</div>
 			</div>
+			<Footer />
 		</div>
 	);
 }

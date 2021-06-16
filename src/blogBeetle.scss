@@ -41,5 +41,16 @@ $label-weight: 600;
 // tag variables
 $tag-radius: 0px;
 
+//tabs variable
+$tabs-border-bottom-color: $grey;
+$tabs-link-color: $grey;
+$tabs-link-active-border-bottom-color: $black;
+$tabs-link-active-color: $black;
+
+// footer variable
+$footer-background-color: #171717;
+$footer-color: $white;
+$footer-padding: 40px;
+
 @import "./node_modules/bulma/bulma";
 @import "./styles/style.scss";

@@ -47,6 +47,7 @@ input[type="text"] {
 .tag {
 	font-size: 12px;
 	font-weight: 600;
+	height: 2.3em !important;
 }
 
 .category-tile {
@@ -156,6 +157,45 @@ input[type="text"] {
 			margin-top: 20px;
 			font-size: 13px;
 			font-weight: 600;
+		}
+	}
+}
+.brief-blog-heading {
+	font-size: 24px;
+	font-weight: 600;
+	margin-bottom: 20px;
+}
+
+.brief-card {
+	display: flex;
+	.blog-image {
+		height: 90px;
+		width: 90px;
+	}
+	.blog-description {
+		margin-left: 15px;
+		height: 90px;
+		.brief-blog-title {
+			font-size: 15px;
+			line-height: 22px;
+			font-weight: 600;
+		}
+		.author-info {
+			margin-top: 25px;
+			font-weight: 600;
+			color: $grey;
+		}
+	}
+}
+
+footer {
+	.content {
+		.social {
+			float: right;
+			color: $white;
+			span {
+				margin: 0px 20px;
+			}
 		}
 	}
 }
