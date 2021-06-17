@@ -15,6 +15,7 @@ function Button(props) {
 	const buttonClass = classnames("button", "is-rounded", {
 		"is-outlined": outlined,
 		"is-primary": type === BUTTON_TYPES.PRIMARY,
+		"is-light": type === BUTTON_TYPES.LIGHT,
 		"is-loading": loading,
 		"is-disabled": disabled
 	});
