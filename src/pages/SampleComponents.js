@@ -1,5 +1,6 @@
 import React from "react";
 import Button from "../components/atoms/button";
+import SelectBox from "../components/atoms/selectBox";
 
 function SampleComponents() {
 	return (
@@ -44,6 +45,9 @@ function SampleComponents() {
 					</div>
 					<p className="help has-text-black">Max 160 characters</p>
 				</div>
+				<br />
+				<SelectBox />
+				<br />
 				<span className="tag is-medium is-primary">Frontend</span>
 			</div>
 		</div>

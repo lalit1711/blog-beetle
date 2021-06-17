@@ -304,3 +304,40 @@ footer {
 		}
 	}
 }
+
+#select-box {
+	.select__control {
+		border: none;
+		border-bottom: 1px solid $black;
+		border-radius: 0;
+	}
+	.css-1527syg-multiValue {
+	}
+	.select__multi-value {
+		background-color: $green2;
+		color: $white;
+		padding: 5px 8px 5px 5px;
+		border-radius: 5%;
+		padding: 1px 10px 1px 7px;
+		border-radius: 10%;
+	}
+	.select__control--is_focused {
+		border: none;
+		box-shadow: none;
+	}
+	.select__multi-value__label {
+		color: $white;
+	}
+	.select__multi-value__remove {
+		display: none;
+	}
+	.select__indicator-separator {
+		display: none;
+	}
+	.select__indicator {
+		svg {
+			width: 30px;
+			height: 30px;
+		}
+	}
+}
