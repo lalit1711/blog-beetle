@@ -1,5 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { FaFacebook, FaGithub, FaTwitter } from "react-icons/fa";
 
 function AuthorInfo({ userInfo }) {
 	const { name, userId, image, bio } = userInfo;
@@ -16,9 +17,15 @@ function AuthorInfo({ userInfo }) {
 					<hr />
 					<p className="">{bio}</p>
 					<div className="social-section">
-						<span>Facebook</span>
-						<span>Facebook</span>
-						<span>Facebook</span>
+						<span>
+							<FaFacebook />
+						</span>
+						<span>
+							<FaTwitter />
+						</span>
+						<span>
+							<FaGithub />
+						</span>
 					</div>
 				</div>
 			</section>

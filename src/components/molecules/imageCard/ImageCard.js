@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import DEFAULT_CATEGORY_INFO from "./constants/ImageCategory.default";
+import { FaUser } from "react-icons/fa";
 
 function ImageCard({ blogInfo }) {
 	const { title, cover, authorName, url, authorId, categoryName } = blogInfo;
@@ -18,7 +19,7 @@ function ImageCard({ blogInfo }) {
 
 					<hr />
 					<span className="subtitle has-text-white has-text-weight-bold">
-						{authorName}
+						<FaUser /> {authorName}
 					</span>
 				</div>
 			</div>

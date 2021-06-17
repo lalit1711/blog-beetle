@@ -6,7 +6,7 @@ function Footer() {
 			<div className="content ">
 				<p>
 					<strong className="has-text-left has-text-white">
-						Copyright @ Born to Blog. 2021
+						Copyright &#169; Born to Blog. 2021
 					</strong>
 
 					<strong className="has-text-right social">

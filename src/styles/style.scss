@@ -96,7 +96,7 @@ input[type="text"] {
 
 	hr {
 		width: 100px;
-		margin: 2px 0;
+		margin: 10px 0;
 	}
 }
 .card-title {
@@ -121,6 +121,9 @@ input[type="text"] {
 .blog-author-card {
 	font-size: 13px;
 	color: $grey2;
+	svg {
+		margin-right: 5px;
+	}
 }
 
 .blog-description {
@@ -296,12 +299,16 @@ footer {
 			width: 50%;
 			margin-bottom: 30px;
 		}
-		.social-section {
-			margin-top: 50px;
-			span {
-				margin: 0 10px;
-			}
-		}
+	}
+}
+.social-section {
+	margin-top: 50px;
+	span {
+		margin: 0 10px;
+	}
+	svg {
+		height: 30px;
+		width: 30px;
 	}
 }
 

@@ -1,6 +1,7 @@
-import React from "react";
+import React, { Fragment } from "react";
 import PropTypes from "prop-types";
 import Button from "../../atoms/button/Button";
+import { FaSearch } from "react-icons/fa";
 
 function Navbar(props) {
 	const { isLoggedIn } = props;
@@ -30,21 +31,26 @@ function Navbar(props) {
 			<div id="navbarBasicExample" className="navbar-menu">
 				<div className="navbar-end">
 					<div className="navbar-item">
-						<Button>Search</Button>
+						<img src="/icons/akar-icons_search.svg" />
 					</div>
 					{!isLoggedIn ? (
 						<div className="navbar-item">
 							<Button>Sign in</Button>
 						</div>
 					) : (
-						<div className="navbar-item">
-							<figure className="image is-48x48">
-								<img
-									className="is-rounded"
-									src="https://bulma.io/images/placeholders/128x128.png"
-								/>
-							</figure>
-						</div>
+						<Fragment>
+							<div className="navbar-item has-text-weight-semibold">
+								Write a Blog
+							</div>
+							<div className="navbar-item">
+								<figure className="image is-48x48">
+									<img
+										className="is-rounded"
+										src="https://bulma.io/images/placeholders/128x128.png"
+									/>
+								</figure>
+							</div>
+						</Fragment>
 					)}
 				</div>
 			</div>

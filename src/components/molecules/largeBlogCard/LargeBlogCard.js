@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import DEFAULT_CATEGORY_INFO from "../imageCard/constants/ImageCategory.default";
+import { FaUser } from "react-icons/fa";
 
 function LargeBlogCard({ blogInfo }) {
 	const { title, cover, authorName, url, authorId, categoryName, description } =
@@ -14,7 +15,9 @@ function LargeBlogCard({ blogInfo }) {
 				<div className="title">{title}</div>
 				<hr />
 				<div className="blog-description">{description}</div>
-				<div className="author-info is-uppercase">{authorName}</div>
+				<div className="author-info is-uppercase">
+					<FaUser /> {" " + authorName}
+				</div>
 			</div>
 		</div>
 	);

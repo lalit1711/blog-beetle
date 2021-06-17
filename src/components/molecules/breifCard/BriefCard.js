@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import DEFAULT_CATEGORY_INFO from "../imageCard/constants/ImageCategory.default";
+import { FaUser } from "react-icons/fa";
 
 function BriefCard({ blogInfo }) {
 	const { title, cover, authorName, url, authorId, categoryName } = blogInfo;
@@ -10,7 +11,9 @@ function BriefCard({ blogInfo }) {
 			<div className="blog-image" style={{ background: `url(${cover})` }}></div>
 			<div className="blog-description">
 				<span className="brief-blog-title">{title}</span>
-				<div className="author-info is-uppercase">Lalit</div>
+				<div className="author-info is-uppercase">
+					<FaUser /> {" " + authorName}
+				</div>
 			</div>
 		</div>
 	);
