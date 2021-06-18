@@ -16,6 +16,7 @@ function Button(props) {
 		"is-outlined": outlined,
 		"is-primary": type === BUTTON_TYPES.PRIMARY,
 		"is-light": type === BUTTON_TYPES.LIGHT,
+		"is-dark": type === BUTTON_TYPES.DARK,
 		"is-loading": loading,
 		"is-disabled": disabled
 	});

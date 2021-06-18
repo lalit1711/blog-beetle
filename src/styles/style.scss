@@ -348,3 +348,49 @@ footer {
 		}
 	}
 }
+
+// Create blog Start
+.create-blog {
+	.actions {
+		margin-top: 10px;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		button {
+			margin: 5px 0px;
+		}
+	}
+	.is-large {
+		border-bottom: 1px solid;
+	}
+	.select-box-area {
+		margin-top: 3%;
+	}
+	.editor-container {
+		margin-top: 30px;
+
+		p {
+			line-height: 36px;
+			font-size: 17px;
+		}
+		h2 {
+			line-height: 36px;
+		}
+		.ql-container {
+			font-family: inherit;
+		}
+		.ql-formats {
+			button {
+				min-width: 0px;
+			}
+		}
+	}
+}
+
+.upload-image-area {
+	.file-label {
+		width: 100%;
+	}
+}
+
+// Create blog End

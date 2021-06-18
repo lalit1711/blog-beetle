@@ -8,6 +8,7 @@ function componentName({ ...props }) {
 			options={tempOptions}
 			classNamePrefix="select"
 			placeholder="please select"
+			isMulti
 		/>
 	);
 }

@@ -23,7 +23,7 @@ BriefCard.propTypes = {
 };
 
 BriefCard.defaultProps = {
-	BriefCard: DEFAULT_CATEGORY_INFO
+	blogInfo: DEFAULT_CATEGORY_INFO
 };
 
 export default BriefCard;
