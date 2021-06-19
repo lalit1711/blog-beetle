@@ -5,16 +5,16 @@ function Tabs() {
 		<div className="tabs">
 			<ul>
 				<li className="is-active">
-					<a>Pictures</a>
+					<span>Pictures</span>
 				</li>
 				<li>
-					<a>Music</a>
+					<span>Music</span>
 				</li>
 				<li>
-					<a>Videos</a>
+					<span>Videos</span>
 				</li>
 				<li>
-					<a>Documents</a>
+					<span>Documents</span>
 				</li>
 			</ul>
 		</div>

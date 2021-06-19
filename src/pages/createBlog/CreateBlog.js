@@ -1,8 +1,7 @@
-import axios from "../config/axios";
 import React, { useState } from "react";
-import Button from "../components/atoms/button";
-import SelectBox from "../components/atoms/selectBox";
-import Editor from "../components/organisms/Editor";
+import Button from "../../components/atoms/button";
+import Editor from "../../components/organisms/Editor";
+import { _createBlog } from "./services";
 
 function CreateBlog(props) {
 	const [title, setTitle] = useState("");
@@ -17,8 +16,17 @@ function CreateBlog(props) {
 			subTitle: "",
 			blogContent: value
 		};
-		axios
-			.post(`/blogs`, dataToSend)
+		// axios
+		// 	.post(`/blogs`, dataToSend)
+		// 	.then(res => {
+		// 		setLoader(false);
+		// 		props.history.push(`/blog/${res.data.id}`);
+		// 	})
+		// 	.catch(err => {
+		// 		setLoader(false);
+		// 		alert("Oops! something went wrong");
+		// 	});
+		_createBlog(dataToSend)
 			.then(res => {
 				setLoader(false);
 				props.history.push(`/blog/${res.data.id}`);

@@ -12,7 +12,7 @@ function CategoryTile(props) {
 		"category-tile-selected": selected
 	});
 	return (
-		<div className={tileClasses}>
+		<div className={tileClasses} onClick={onClick}>
 			<div className="card-content">
 				<p className="title">Frontend</p>
 			</div>

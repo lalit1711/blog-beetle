@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { FaFacebook, FaGithub, FaTwitter } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 function AuthorInfo({ userInfo }) {
 	const { name, userId, image, bio } = userInfo;
@@ -12,7 +13,10 @@ function AuthorInfo({ userInfo }) {
 						<div
 							className="user-image"
 							style={{ backgroundImage: `url(${image})` }}></div>
-						<p className="title">{name}</p>
+						<Link to={`/author/${userId}`}>
+							{" "}
+							<p className="title has-text-color-black">{name}</p>
+						</Link>
 					</div>
 					<hr />
 					<p className="">{bio}</p>

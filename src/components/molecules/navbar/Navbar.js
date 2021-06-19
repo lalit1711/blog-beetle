@@ -1,7 +1,6 @@
 import React, { Fragment } from "react";
 import PropTypes from "prop-types";
 import Button from "../../atoms/button/Button";
-import { FaSearch } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
 function Navbar(props) {
@@ -9,33 +8,21 @@ function Navbar(props) {
 	return (
 		<nav className="navbar" role="navigation" aria-label="main navigation">
 			<div className="navbar-brand">
-				<a className="navbar-item" href="#">
-					<Link to="/">
-						<img
-							src="https://image-dock-uploads-be.s3.ap-south-1.amazonaws.com/image.2021-06-16T14%3A53%3A35.151Z"
-							width="60"
-							height="80"
-						/>
-					</Link>
-				</a>
-
-				<a
-					role="button"
-					className="navbar-burger"
-					aria-label="menu"
-					aria-expanded="false"
-					data-target="navbarBasicExample">
-					<span aria-hidden="true"></span>
-					<span aria-hidden="true"></span>
-					<span aria-hidden="true"></span>
-				</a>
+				<Link to="/" className="navbar-item">
+					<img
+						src="https://image-dock-uploads-be.s3.ap-south-1.amazonaws.com/image.2021-06-16T14%3A53%3A35.151Z"
+						width="60"
+						height="80"
+						alt="blog-beetle"
+					/>
+				</Link>
 			</div>
 
 			<div id="navbarBasicExample" className="navbar-menu">
 				<div className="navbar-end">
-					<div className="navbar-item">
+					{/* <div className="navbar-item">
 						<img src="/icons/akar-icons_search.svg" />
-					</div>
+					</div> */}
 					{!isLoggedIn ? (
 						<div className="navbar-item">
 							<Button>Sign in</Button>
@@ -51,6 +38,7 @@ function Navbar(props) {
 									<img
 										className="is-rounded"
 										src="https://bulma.io/images/placeholders/128x128.png"
+										alt="user-profile"
 									/>
 								</figure>
 							</div>

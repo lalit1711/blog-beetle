@@ -59,8 +59,8 @@ ConfirmationBox.propTypes = {
 };
 
 ConfirmationBox.defaultProps = {
-	secondaryButton: _noop,
-	primaryButton: _noop,
+	secondaryAction: _noop,
+	primaryAction: _noop,
 	secondaryButton: SECONDARY_BUTTON,
 	primaryButton: PRIMARY_BUTTON,
 	onClose: _noop,

@@ -1,11 +1,11 @@
-import axios from "axios";
 import React, { useEffect, useState } from "react";
-import BlogCard from "../components/molecules/blogCard";
+import BlogCard from "../../components/molecules/blogCard";
+import { _getAllBlogs } from "./services";
 
 function LandingPage() {
 	const [blogsList, setBlogsList] = useState([]);
 	useEffect(() => {
-		axios.get(`/blogs`).then(res => {
+		_getAllBlogs().then(res => {
 			setBlogsList(res.data);
 		});
 	}, []);

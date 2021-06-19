@@ -1,8 +1,9 @@
 import React from "react";
 import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
 
 function UserSearch({ userInfo }) {
-	const { name, userId, image, bio } = userInfo;
+	const { name, authorId, image, bio } = userInfo;
 	return (
 		<div className="user-search is-flex">
 			<div
@@ -11,7 +12,9 @@ function UserSearch({ userInfo }) {
 					backgroundImage: `url(${image})`
 				}}></div>
 			<div className="user-info">
-				<div className="user-name">{name}</div>
+				<Link to={`/author/${authorId}`}>
+					<div className="user-name has-text-black">{name}</div>
+				</Link>
 				<div className="user-bio">{bio}</div>
 			</div>
 		</div>

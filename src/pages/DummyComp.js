@@ -13,7 +13,6 @@ import ConfirmationBox from "../components/molecules/confirmationBox";
 import AuthorInfo from "../components/molecules/authorInfo";
 
 function DummyComp() {
-	const dummyData = { id: "xyz", name: "Blog name" };
 	return (
 		<div>
 			<Navbar />
@@ -36,13 +35,13 @@ function DummyComp() {
 			<div className="columns is-10 is-flex">
 				<div className="columns">
 					<div className="column is-3">
-						<BlogCard />
+						<BlogCard blogInfo={tempData} />
 					</div>
 					<div className="column is-3">
-						<BlogCard />
+						<BlogCard blogInfo={tempData} />
 					</div>
 					<div className="column is-3">
-						<BlogCard />
+						<BlogCard blogInfo={tempData} />
 					</div>
 				</div>
 			</div>
@@ -86,6 +85,7 @@ const tempData = {
 	url: "/howtohack",
 	authorId: "007",
 	categoryName: "Food",
+	blogContent: "",
 	description: `Nostrud fugiat cupidatat consequat anim aliquip officia. Nostrud non eu nisi tempor ad. Culpa do velit minim dolore cupidatat tempor deserunt in officia. Adipisicing excepteur fugiat voluptate duis deserunt commodo nostrud ad do et culpa ad adipisicing fugiat. Consequat proident voluptate fugiat irure ullamco ipsum cillum proident aliqua incididunt non nisi consequat.`
 };
 

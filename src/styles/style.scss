@@ -186,11 +186,33 @@ input[type="text"] {
 			font-size: 15px;
 			line-height: 22px;
 			font-weight: 600;
+			color: $black;
 		}
 		.author-info {
 			margin-top: 25px;
 			font-weight: 600;
 			color: $grey;
+		}
+	}
+}
+
+.tabs {
+	span {
+		align-items: center;
+		border-bottom-color: #b9b9b9;
+		border-bottom-style: solid;
+		border-bottom-width: 1px;
+		color: #b9b9b9;
+		display: flex;
+		justify-content: center;
+		margin-bottom: -1px;
+		padding: 0.5em 1em;
+		vertical-align: top;
+	}
+	.is-active {
+		span {
+			border-bottom-color: $grey3;
+			color: $grey3;
 		}
 	}
 }

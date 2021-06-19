@@ -7,9 +7,6 @@ import _noop from "lodash/noop";
 import BUTTON_TYPES from "./constants/buttonTypes";
 import { DEFAULT_CHILDREN } from "./constants/button.general";
 
-// styles
-import styles from "./button.module.scss";
-
 function Button(props) {
 	const { type, outlined, disabled, onClick, loading, children } = props;
 	const buttonClass = classnames("button", "is-rounded", {

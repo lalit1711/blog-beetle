@@ -2,9 +2,10 @@ import React from "react";
 import PropTypes from "prop-types";
 import DEFAULT_CATEGORY_INFO from "../imageCard/constants/ImageCategory.default";
 import { FaUser } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 function LargeBlogCard({ blogInfo }) {
-	const { title, cover, authorName, url, authorId, categoryName, description } =
+	const { title, cover, authorName, id, authorId, categoryName, description } =
 		blogInfo;
 	return (
 		<div className="large-blog-card">
@@ -12,12 +13,16 @@ function LargeBlogCard({ blogInfo }) {
 				<span className="tag is-link">{categoryName}</span>
 			</div>
 			<div className="blog-info">
-				<div className="title">{title}</div>
+				<Link to={`/blog/${id}`}>
+					<div className="title has-text-black">{title}</div>
+				</Link>
 				<hr />
 				<div className="blog-description">{description}</div>
-				<div className="author-info is-uppercase">
-					<FaUser /> {" " + authorName}
-				</div>
+				<Link to={`/author/${authorId}`}>
+					<div className="author-info is-uppercase">
+						<FaUser /> {" " + authorName}
+					</div>
+				</Link>
 			</div>
 		</div>
 	);

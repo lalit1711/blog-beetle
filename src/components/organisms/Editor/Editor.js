@@ -1,5 +1,4 @@
 import ReactQuill from "react-quill";
-import { useState } from "react";
 import "react-quill/dist/quill.bubble.css"; // ES6
 
 export default function Editor({ value, setValue }) {

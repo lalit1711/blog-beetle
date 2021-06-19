@@ -1,5 +1,6 @@
 import React from "react";
 import { FaFacebook, FaGithub, FaTwitter } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 function AuthorBanner({ userInfo }) {
 	const { name, userId, image, bio, cover } = userInfo;
@@ -12,7 +13,9 @@ function AuthorBanner({ userInfo }) {
 					className="user-image is-rounded"
 					style={{ backgroundImage: `url(${image})` }}></div>
 
-				<p className="title">{name}</p>
+				<p className="title">
+					<Link to={`/author/${userId}`}>{name}</Link>
+				</p>
 				<hr />
 				<p className="subtitle">{bio}</p>
 				<div className="social-section" style={{ margin: "20px 0px" }}>

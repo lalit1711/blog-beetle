@@ -1,19 +1,18 @@
-import axios from "../config/axios";
 import React, { useEffect, useState } from "react";
-import AuthorInfo from "../components/molecules/authorInfo";
-import ImageCard from "../components/molecules/imageCard";
-import BlogContent from "../components/organisms/Blog/BlogContent";
-import LikeSaveShare from "../components/organisms/Blog/LikeSaveShare";
+import AuthorInfo from "../../components/molecules/authorInfo";
+import ImageCard from "../../components/molecules/imageCard";
+import BlogContent from "../../components/organisms/Blog/BlogContent";
+import LikeSaveShare from "../../components/organisms/Blog/LikeSaveShare";
+import { _getBlogById } from "./services";
 
 function Blog(props) {
 	const [content, setContent] = useState("");
 
 	useEffect(() => {
 		const blogId = props.match.params.id;
-		axios
-			.get(`/blogs/${blogId}`)
-			.then(res => setContent({ ...tempData, ...res.data }));
-	}, []);
+		_getBlogById(blogId).then(res => setContent({ ...tempData, ...res.data }));
+	}, [props.match.params.id]);
+
 	return (
 		<div>
 			<div className="hero is-large blog-content">

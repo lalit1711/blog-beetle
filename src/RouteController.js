@@ -1,10 +1,10 @@
 import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Navbar from "./components/molecules/navbar";
-import Blog from "./pages/Blog";
-import CreateBlog from "./pages/CreateBlog";
+import Blog from "./pages/blog/Blog";
+import CreateBlog from "./pages/createBlog/CreateBlog";
 import DummyComp from "./pages/DummyComp";
-import LandingPage from "./pages/LandingPage";
+import LandingPage from "./pages/landingPage/LandingPage";
 import SampleComponents from "./pages/SampleComponents";
 
 function RouteController() {
