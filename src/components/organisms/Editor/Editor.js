@@ -2,8 +2,8 @@ import ReactQuill from "react-quill";
 import { useState } from "react";
 import "react-quill/dist/quill.bubble.css"; // ES6
 
-export default function Editor() {
-	const [value, setValue] = useState(null);
+export default function Editor({ value, setValue }) {
+	console.log("values", value);
 	return (
 		<div className="App">
 			<ReactQuill
@@ -28,6 +28,6 @@ const modules = {
 		[{ size: ["small", false, "large", "huge"] }], // custom dropdown
 
 		[{ align: [] }],
-		["image"]
+		["link", "image"]
 	]
 };

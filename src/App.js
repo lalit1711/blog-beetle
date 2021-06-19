@@ -11,9 +11,10 @@ function App() {
 	return (
 		<ErrorBoundary>
 			<Navbar />
-			<div style={{ minHeight: "40rem" }}>
+			<div>
 				<RouteController />
 			</div>
+			<Footer />
 		</ErrorBoundary>
 	);
 }

@@ -3,10 +3,10 @@ import PropTypes from "prop-types";
 import DEFAULT_CATEGORY_INFO from "./constants/ImageCategory.default";
 import { FaUser } from "react-icons/fa";
 
-function ImageCard({ blogInfo }) {
+function ImageCard({ blogInfo, height = 250 }) {
 	const { title, cover, authorName, url, authorId, categoryName } = blogInfo;
 	return (
-		<div class="card " style={{ height: 250 }}>
+		<div class="card " style={{ height: height }}>
 			<div class="card-content is-paddingless" style={{ height: "100%" }}>
 				<div
 					className="image-card"

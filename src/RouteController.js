@@ -1,5 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import Blog from "./pages/Blog";
 import CreateBlog from "./pages/CreateBlog";
 import DummyComp from "./pages/DummyComp";
 import SampleComponents from "./pages/SampleComponents";
@@ -17,6 +18,8 @@ function RouteController() {
 				<Route path="/dummy">
 					<DummyComp />
 				</Route>
+				<Route path="/blog/:id" render={props => <Blog {...props} />} />
+
 				<Route path="*">
 					<p>No Match</p>
 				</Route>

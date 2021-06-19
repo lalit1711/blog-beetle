@@ -20,12 +20,16 @@ function Button(props) {
 		"is-loading": loading,
 		"is-disabled": disabled
 	});
-	return <button className={buttonClass}>{children}</button>;
+	return (
+		<button className={buttonClass} onClick={onClick}>
+			{children}
+		</button>
+	);
 }
 
 Button.propTypes = {
 	type: PropTypes.string,
-	outlined: PropTypes.string,
+	outlined: PropTypes.bool,
 	children: PropTypes.string,
 	disabled: PropTypes.bool,
 	loading: PropTypes.bool,

@@ -1,9 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import Button from "../components/atoms/button";
 import SelectBox from "../components/atoms/selectBox";
 import Editor from "../components/organisms/Editor";
 
 function CreateBlog() {
+	const [value, setValue] = useState("");
+
+	const handleBlog = () => {
+		console.log("here clicked");
+		localStorage.setItem("blog", value);
+	};
 	return (
 		<div className="columns create-blog">
 			<div className="column is-2"></div>
@@ -23,13 +29,13 @@ function CreateBlog() {
 							</div>
 						</div>
 						<div className="editor-container">
-							<Editor />
+							<Editor value={value} setValue={setValue} />
 						</div>
 					</div>
 				</div>
 			</div>
 			<div className="column is-2 actions">
-				<Button>Save</Button>
+				<Button onClick={handleBlog}>Save</Button>
 				<Button outlined={false}>Publish</Button>
 				<Button type="is-light">Cancel</Button>
 			</div>

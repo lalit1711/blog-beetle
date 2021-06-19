@@ -369,7 +369,8 @@ footer {
 	.editor-container {
 		margin-top: 30px;
 
-		p {
+		p,
+		li {
 			line-height: 36px;
 			font-size: 17px;
 		}
@@ -384,7 +385,53 @@ footer {
 				min-width: 0px;
 			}
 		}
+		pre {
+			background-color: #23241f;
+			color: #f8f8f2;
+			padding: 10px !important;
+		}
 	}
+}
+
+.blog-content-container {
+	margin-top: 30px;
+
+	p,
+	li {
+		line-height: 36px;
+		font-size: 17px;
+	}
+	h2,
+	strong {
+		line-height: 36px;
+	}
+
+	.ql-container {
+		font-family: inherit;
+	}
+	.ql-formats {
+		button {
+			min-width: 0px;
+		}
+	}
+	pre {
+		background-color: #23241f;
+		color: #f8f8f2;
+		padding: 10px !important;
+	}
+}
+.blog-content {
+	.card-title {
+		font-size: 50px;
+	}
+}
+.like-save-share-section {
+	display: flex;
+	justify-content: space-between;
+}
+.suggested-blog-section {
+	display: flex;
+	justify-content: center !important;
 }
 
 .upload-image-area {
