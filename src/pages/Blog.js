@@ -1,5 +1,5 @@
+import axios from "../config/axios";
 import React, { useEffect, useState } from "react";
-import AuthorBanner from "../components/molecules/authorBanner";
 import AuthorInfo from "../components/molecules/authorInfo";
 import ImageCard from "../components/molecules/imageCard";
 import BlogContent from "../components/organisms/Blog/BlogContent";
@@ -9,18 +9,21 @@ function Blog(props) {
 	const [content, setContent] = useState("");
 
 	useEffect(() => {
-		setContent(localStorage.getItem("blog"));
+		const blogId = props.match.params.id;
+		axios
+			.get(`/blogs/${blogId}`)
+			.then(res => setContent({ ...tempData, ...res.data }));
 	}, []);
 	return (
 		<div>
 			<div className="hero is-large blog-content">
-				<ImageCard blogInfo={tempData} height={450} />
+				<ImageCard blogInfo={content} height={450} />
 			</div>
 			<div className="container">
 				<div className="columns create-blog">
 					<div className="column is-2"></div>
 					<div className="column is-8">
-						<BlogContent content={content} />
+						<BlogContent content={content.blogContent} />
 						<LikeSaveShare />
 					</div>
 					<div className="column "></div>

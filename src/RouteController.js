@@ -1,17 +1,24 @@
 import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import Navbar from "./components/molecules/navbar";
 import Blog from "./pages/Blog";
 import CreateBlog from "./pages/CreateBlog";
 import DummyComp from "./pages/DummyComp";
+import LandingPage from "./pages/LandingPage";
 import SampleComponents from "./pages/SampleComponents";
 
 function RouteController() {
 	return (
 		<Router>
+			<Navbar />
 			<Switch>
 				<Route exact path="/">
-					<CreateBlog />
+					<LandingPage />
 				</Route>
+				<Route
+					path="/create-blog"
+					render={props => <CreateBlog {...props} />}
+				/>
 				<Route path="/sample">
 					<SampleComponents />
 				</Route>

@@ -104,6 +104,10 @@ input[type="text"] {
 	font-size: 24px;
 	font-weight: bold;
 	color: $black;
+	text-overflow: ellipsis;
+	overflow: hidden;
+	max-width: 100%;
+	height: 69px;
 }
 .blog-card {
 	display: flex;
@@ -192,6 +196,7 @@ input[type="text"] {
 }
 
 footer {
+	margin-top: 20px;
 	.content {
 		.social {
 			float: right;
@@ -441,3 +446,13 @@ footer {
 }
 
 // Create blog End
+
+// landing page
+.landing-page {
+	.container {
+		margin-top: 3%;
+	}
+	.title {
+		text-align: center;
+	}
+}

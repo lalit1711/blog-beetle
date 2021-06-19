@@ -2,6 +2,7 @@ import React, { Fragment } from "react";
 import PropTypes from "prop-types";
 import Button from "../../atoms/button/Button";
 import { FaSearch } from "react-icons/fa";
+import { Link } from "react-router-dom";
 
 function Navbar(props) {
 	const { isLoggedIn } = props;
@@ -9,11 +10,13 @@ function Navbar(props) {
 		<nav className="navbar" role="navigation" aria-label="main navigation">
 			<div className="navbar-brand">
 				<a className="navbar-item" href="#">
-					<img
-						src="https://image-dock-uploads-be.s3.ap-south-1.amazonaws.com/image.2021-06-16T14%3A53%3A35.151Z"
-						width="60"
-						height="80"
-					/>
+					<Link to="/">
+						<img
+							src="https://image-dock-uploads-be.s3.ap-south-1.amazonaws.com/image.2021-06-16T14%3A53%3A35.151Z"
+							width="60"
+							height="80"
+						/>
+					</Link>
 				</a>
 
 				<a
@@ -40,8 +43,9 @@ function Navbar(props) {
 					) : (
 						<Fragment>
 							<div className="navbar-item has-text-weight-semibold">
-								Write a Blog
+								<Link to="/create-blog">Write a Blog</Link>
 							</div>
+
 							<div className="navbar-item">
 								<figure className="image is-48x48">
 									<img
@@ -63,7 +67,7 @@ Navbar.prototypes = {
 };
 
 Navbar.defaultProps = {
-	isLoggedIn: false
+	isLoggedIn: true
 };
 
 export default Navbar;

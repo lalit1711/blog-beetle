@@ -1,26 +1,29 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { FaUser } from "react-icons/fa";
+import { Link } from "react-router-dom";
+import ReactHtmlParser from "react-html-parser";
 
-function BlogCard() {
+function BlogCard({ blogInfo }) {
+	const { title, blogContent, id } = blogInfo;
 	return (
-		<div className="card" style={{ height: 250 }}>
-			<div className="card-content">
-				<div className="content blog-card">
-					<span className="tag is-info">Frontend</span>
-					<span className="card-title">How to hack NASA with HTML</span>
-					<hr />
-					<span className="blog-description">
-						It’s rather impossible to know all the APIs by heart. This is where
-						cheat sheets come in! Here are It’s rather impossible to know all
-						the APIs by heart.
-					</span>
-					<span className="blog-author-card has-text-weight-bold is-uppercase">
-						<FaUser />
-						Lalit
-					</span>
+		<Link to={`/blog/${id}`}>
+			<div className="card" style={{ height: 250 }}>
+				<div className="card-content">
+					<div className="content blog-card">
+						<span className="tag is-info">Category</span>
+						<span className="card-title">{title}</span>
+						<hr />
+						<span className="blog-description">
+							{ReactHtmlParser(blogContent)}
+						</span>
+						<span className="blog-author-card has-text-weight-bold is-uppercase">
+							<FaUser />
+							Lalit
+						</span>
+					</div>
 				</div>
 			</div>
-		</div>
+		</Link>
 	);
 }
 

@@ -1,15 +1,34 @@
+import axios from "../config/axios";
 import React, { useState } from "react";
 import Button from "../components/atoms/button";
 import SelectBox from "../components/atoms/selectBox";
 import Editor from "../components/organisms/Editor";
 
-function CreateBlog() {
+function CreateBlog(props) {
+	const [title, setTitle] = useState("");
 	const [value, setValue] = useState("");
-
+	const [loader, setLoader] = useState(false);
+	console.log(props);
 	const handleBlog = () => {
-		console.log("here clicked");
-		localStorage.setItem("blog", value);
+		setLoader(true);
+		const dataToSend = {
+			title: title,
+			coverImgSrc: "",
+			subTitle: "",
+			blogContent: value
+		};
+		axios
+			.post(`/blogs`, dataToSend)
+			.then(res => {
+				setLoader(false);
+				props.history.push(`/blog/${res.data.id}`);
+			})
+			.catch(err => {
+				setLoader(false);
+				alert("Oops! something went wrong");
+			});
 	};
+
 	return (
 		<div className="columns create-blog">
 			<div className="column is-2"></div>
@@ -23,10 +42,12 @@ function CreateBlog() {
 								type="text"
 								className="input is-large"
 								placeholder="Title"
+								value={title}
+								onChange={e => setTitle(e.target.value)}
 							/>
-							<div className="select-box-area">
+							{/* <div className="select-box-area">
 								<SelectBox />
-							</div>
+							</div> */}
 						</div>
 						<div className="editor-container">
 							<Editor value={value} setValue={setValue} />
@@ -35,9 +56,13 @@ function CreateBlog() {
 				</div>
 			</div>
 			<div className="column is-2 actions">
-				<Button onClick={handleBlog}>Save</Button>
+				<Button onClick={handleBlog} loading={loader} disabled={loader}>
+					Save
+				</Button>
 				<Button outlined={false}>Publish</Button>
-				<Button type="is-light">Cancel</Button>
+				<Button type="is-light" onClick={() => setValue("")}>
+					Cancel
+				</Button>
 			</div>
 		</div>
 	);
