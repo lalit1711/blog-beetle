@@ -3,18 +3,19 @@ import { FaUser } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import ReactHtmlParser from "react-html-parser";
 
+import BlogReader from "../../../readers/blog";
+
 function BlogCard({ blogInfo }) {
-	const { title, blogContent, id } = blogInfo;
 	return (
-		<Link to={`/blog/${id}`}>
+		<Link to={`/blog/${BlogReader.id(blogInfo)}`}>
 			<div className="card" style={{ height: 250 }}>
 				<div className="card-content">
 					<div className="content blog-card">
 						<span className="tag is-info">Category</span>
-						<span className="card-title">{title}</span>
+						<span className="card-title">{BlogReader.title(blogInfo)}</span>
 						<hr />
 						<span className="blog-description">
-							{ReactHtmlParser(blogContent)}
+							{ReactHtmlParser(BlogReader.blogContent(blogInfo))}
 						</span>
 						<span className="blog-author-card has-text-weight-bold is-uppercase">
 							<FaUser />

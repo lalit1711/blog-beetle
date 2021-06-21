@@ -7,7 +7,6 @@ function CreateBlog(props) {
 	const [title, setTitle] = useState("");
 	const [value, setValue] = useState("");
 	const [loader, setLoader] = useState(false);
-	console.log(props);
 	const handleBlog = () => {
 		setLoader(true);
 		const dataToSend = {
@@ -16,16 +15,6 @@ function CreateBlog(props) {
 			subTitle: "",
 			blogContent: value
 		};
-		// axios
-		// 	.post(`/blogs`, dataToSend)
-		// 	.then(res => {
-		// 		setLoader(false);
-		// 		props.history.push(`/blog/${res.data.id}`);
-		// 	})
-		// 	.catch(err => {
-		// 		setLoader(false);
-		// 		alert("Oops! something went wrong");
-		// 	});
 		_createBlog(dataToSend)
 			.then(res => {
 				setLoader(false);
@@ -67,7 +56,7 @@ function CreateBlog(props) {
 				<Button onClick={handleBlog} loading={loader} disabled={loader}>
 					Save
 				</Button>
-				<Button outlined={false}>Publish</Button>
+				{/* <Button outlined={false}>Publish</Button> */}
 				<Button type="is-light" onClick={() => setValue("")}>
 					Cancel
 				</Button>

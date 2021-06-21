@@ -5,7 +5,7 @@ const COVER_URL =
 const URL = "/404";
 const AUTHOR_NAME = "";
 const CATEGORY_NAME = "";
-const DESCRIPTION =
+const BLOG_CONTENT =
 	"It’s rather impossible to know all the APIs by heart. This is where cheat sheets come in! Here are It’s rather impossible to know all theAPIs by heart. It’s rather impossible to know all the APIs by heart.";
 
 const DEFAULT_CATEGORY_INFO = {
@@ -15,6 +15,6 @@ const DEFAULT_CATEGORY_INFO = {
 	url: URL,
 	authorName: AUTHOR_NAME,
 	categoryName: CATEGORY_NAME,
-	description: DESCRIPTION
+	blogContent: BLOG_CONTENT
 };
 export default DEFAULT_CATEGORY_INFO;

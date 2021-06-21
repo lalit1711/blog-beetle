@@ -1,6 +1,13 @@
 import React, { useEffect, useState } from "react";
+
+import _map from "lodash/map";
+
+// components import
 import BlogCard from "../../components/molecules/blogCard";
 import { _getAllBlogs } from "./services";
+
+// blog reader
+import BlogReader from "../../readers/blog";
 
 function LandingPage() {
 	const [blogsList, setBlogsList] = useState([]);
@@ -17,16 +24,20 @@ function LandingPage() {
 					<div className="column is-10">
 						<div className="title">Blogs List</div>
 						<div className="columns is-multiline">
-							{blogsList.map(blog => (
-								<div className="column is-4">
-									<BlogCard blogInfo={blog} />
-								</div>
-							))}
+							{_map(blogsList, renderBlogCard)}
 						</div>
 					</div>
 					<div className="column is-1"></div>
 				</div>
 			</div>
+		</div>
+	);
+}
+
+function renderBlogCard(blog) {
+	return (
+		<div className="column is-4" key={BlogReader.id(blog)}>
+			<BlogCard blogInfo={blog} />
 		</div>
 	);
 }
