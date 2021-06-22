@@ -1,8 +1,12 @@
 import { render } from "@testing-library/react";
 import React, { useEffect, useState } from "react";
+// components import
 import BlogCard from "../../components/molecules/blogCard";
 import { _getAllBlogs } from "./services";
 import _map from "lodash/map"
+
+// blog reader
+import BlogReader from "../../readers/blog";
 
 function LandingPage() {
 	const [blogsList, setBlogsList] = useState([]);
@@ -30,9 +34,11 @@ function LandingPage() {
 }
 
 function renderBlogCard(blog) {
-	return (<div className="column is-4">
-		<BlogCard blogInfo={blog} />
-	</div>)
+	return (
+		<div className="column is-4" key={BlogReader.id(blog)}>
+			<BlogCard blogInfo={blog} />
+		</div>
+	);
 }
 
 export default LandingPage;

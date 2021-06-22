@@ -17,6 +17,22 @@ input[type="text"] {
 	font-size: 21px;
 	padding-left: 2px;
 }
+input[type="email"] {
+	box-shadow: none;
+	border: none;
+	border-bottom: 1px solid $grey;
+	font-weight: 400;
+	font-size: 21px;
+	padding-left: 2px;
+}
+input[type="password"] {
+	box-shadow: none;
+	border: none;
+	border-bottom: 1px solid $grey;
+	font-weight: 400;
+	font-size: 21px;
+	padding-left: 2px;
+}
 
 .hr-v {
 	width: 1px;
@@ -478,3 +494,59 @@ footer {
 		text-align: center;
 	}
 }
+
+// log-in and sign-up start
+.sign-up-log-in {
+	overflow: hidden;
+	.modal-background {
+		background: #ffffff;
+	}
+	.modal-close::before,
+	.delete::after,
+	.modal-close::after {
+		background-color: $grey3;
+		content: "";
+		display: block;
+		left: 50%;
+		position: absolute;
+		top: 50%;
+		transform: translateX(-50%) translateY(-50%) rotate(45deg);
+		transform-origin: center center;
+	}
+	.modal-content {
+		max-height: 100%;
+		overflow: hidden;
+	}
+	.container {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		flex-direction: column;
+		overflow: hidden;
+	}
+	.form-container {
+		width: 100%;
+		overflow: hidden;
+	}
+	.actions {
+		text-align: center;
+		p {
+			margin-top: 20px;
+			color: $green2;
+			font-weight: 600;
+		}
+	}
+}
+
+// log-in and sign-up end
+
+// Categories start
+.categories-container {
+	margin-top: 20px;
+	.column {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+	}
+}
+// Categories end
