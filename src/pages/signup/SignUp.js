@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { flipInY } from "react-animations";
 import { StyleSheet, css } from "aphrodite";
 import Button from "../../components/atoms/button";
@@ -28,7 +28,7 @@ function SignUp(props) {
 				<div className="columns is-mobile">
 					<div className="column is-three-fifths is-offset-one-fifth container">
 						<figure class="image is-128x128">
-							<img src="/logo.png" />
+							<img src="/logo.png" alt="logo" />
 						</figure>
 						<div className="form-container">
 							<form onSubmit={handleSubmit}>
