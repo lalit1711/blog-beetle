@@ -10,10 +10,7 @@ import Footer from "./components/molecules/footer";
 function App() {
 	return (
 		<ErrorBoundary>
-			<div style={{ minHeight: "45em" }}>
-				<RouteController />
-			</div>
-			<Footer />
+			<RouteController />
 		</ErrorBoundary>
 	);
 }
