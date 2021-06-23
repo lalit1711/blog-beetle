@@ -11,7 +11,7 @@ const BLOG_CONTENT =
 const DEFAULT_CATEGORY_INFO = {
 	title: TITLE,
 	name: NAME,
-	cover: COVER_URL,
+	coverImageSrc: COVER_URL,
 	url: URL,
 	authorName: AUTHOR_NAME,
 	categoryName: CATEGORY_NAME,
