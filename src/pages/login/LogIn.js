@@ -1,10 +1,18 @@
-import React from "react";
+import React, { useContext, useState } from "react";
 import { flipInY } from "react-animations";
 import { StyleSheet, css } from "aphrodite";
 import Button from "../../components/atoms/button";
 import { Link } from "react-router-dom";
+import { _getUserInfo, _signIn } from "./services";
+import { AuthenticatorContext } from "../../context/authenticatorContext";
 
 function LogIn(props) {
+	const [username, setUsername] = useState("");
+	const [password, setPassword] = useState("");
+	const [loader, setLoader] = useState(false);
+	const [errorMessage, setErrorMessage] = useState("");
+	const { userLoggedIn } = useContext(AuthenticatorContext);
+
 	const styles = StyleSheet.create({
 		bounce: {
 			animationName: flipInY,
@@ -12,12 +20,28 @@ function LogIn(props) {
 		}
 	});
 
-	function handleSubmit(e) {
-		console.log("e", e);
+	async function handleSubmit(e) {
+		e.preventDefault();
+		setLoader(true);
+		setErrorMessage("");
+		const cognitoIdentity = await _signIn(
+			username,
+			password,
+			setLoader,
+			setErrorMessage
+		);
+		setLoader(false);
+		if (!cognitoIdentity) return;
+		const user = await _getUserInfo(cognitoIdentity.attributes.sub);
+
+		if (!user) return;
+		localStorage.setItem("user", JSON.stringify(user.data));
+		userLoggedIn();
+		props.history.push(`/`);
 	}
 
 	function goBack() {
-		props.history.goBack();
+		props.history.push(`/`);
 	}
 
 	return (
@@ -38,6 +62,8 @@ function LogIn(props) {
 											className="input"
 											type="email"
 											placeholder="Enter your email"
+											value={username}
+											onChange={e => setUsername(e.target.value)}
 										/>
 									</div>
 								</div>
@@ -48,13 +74,19 @@ function LogIn(props) {
 											className="input"
 											type="password"
 											placeholder="Enter your password"
+											value={password}
+											onChange={e => setPassword(e.target.value)}
 										/>
 									</div>
 								</div>
+								{errorMessage && (
+									<p className="is-help has-text-danger">{errorMessage}</p>
+								)}
 								<br />
 								<div className="actions">
-									<Button>Log In</Button>
-
+									<Button disabled={!username || !password} loading={loader}>
+										Log In
+									</Button>
 									<Link to="/signup">
 										<p className="has text-primary">Create an account</p>
 									</Link>

@@ -14,11 +14,10 @@ function Button(props) {
 		"is-primary": type === BUTTON_TYPES.PRIMARY,
 		"is-light": type === BUTTON_TYPES.LIGHT,
 		"is-dark": type === BUTTON_TYPES.DARK,
-		"is-loading": loading,
-		"is-disabled": disabled
+		"is-loading": loading
 	});
 	return (
-		<button className={buttonClass} onClick={onClick}>
+		<button className={buttonClass} onClick={onClick} disabled={disabled}>
 			{children}
 		</button>
 	);
