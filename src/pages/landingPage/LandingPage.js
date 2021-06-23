@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 // components import
 import BlogCard from "../../components/molecules/blogCard";
 import { _getAllBlogs } from "./services";
+import Loader from "../../common/Loader"
 import _map from "lodash/map"
 
 // blog reader
@@ -10,9 +11,12 @@ import BlogReader from "../../readers/blog";
 
 function LandingPage() {
 	const [blogsList, setBlogsList] = useState([]);
+	const [load, setLoad] = useState(false);
 	useEffect(() => {
+		setLoad(true)
 		_getAllBlogs().then(res => {
 			setBlogsList(res.data);
+			setLoad(false)
 		});
 	}, []);
 	return (
@@ -29,6 +33,7 @@ function LandingPage() {
 					<div className="column is-1"></div>
 				</div>
 			</div>
+			<Loader load={load} />
 		</div>
 	);
 }
