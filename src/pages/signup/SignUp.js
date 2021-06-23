@@ -1,11 +1,17 @@
-import React from "react";
+import React, { useState } from "react";
 import { flipInY } from "react-animations";
 import { StyleSheet, css } from "aphrodite";
 import Button from "../../components/atoms/button";
 import { Link } from "react-router-dom";
+import { _createUser, _signUp } from "./services";
 
 function SignUp(props) {
-	console.log(props);
+	const [email, setEmail] = useState("");
+	const [password, setPassword] = useState("");
+	const [name, setName] = useState("");
+	const [loader, setLoader] = useState(false);
+	const [errorMessage, setErrorMessage] = useState("");
+
 	const styles = StyleSheet.create({
 		bounce: {
 			animationName: flipInY,
@@ -13,8 +19,15 @@ function SignUp(props) {
 		}
 	});
 
-	function handleSubmit(e) {
-		console.log("e", e);
+	async function handleSubmit(e) {
+		setLoader(true);
+		setErrorMessage("");
+		e.preventDefault();
+		const userData = { email, password, name };
+		const user = await _signUp(userData, setLoader, setErrorMessage);
+		await _createUser(userData, user.userSub, setLoader);
+		setLoader(false);
+		props.history.push(`/category`);
 	}
 
 	function goBack() {
@@ -37,8 +50,10 @@ function SignUp(props) {
 									<div className="control">
 										<input
 											className="input"
-											type="email"
+											type="text"
 											placeholder="Enter your name"
+											value={name}
+											onChange={e => setName(e.target.value)}
 										/>
 									</div>
 								</div>
@@ -49,6 +64,8 @@ function SignUp(props) {
 											className="input"
 											type="email"
 											placeholder="Enter your email"
+											value={email}
+											onChange={e => setEmail(e.target.value)}
 										/>
 									</div>
 								</div>
@@ -59,12 +76,21 @@ function SignUp(props) {
 											className="input"
 											type="password"
 											placeholder="Enter your password"
+											value={password}
+											onChange={e => setPassword(e.target.value)}
 										/>
 									</div>
 								</div>
+								{errorMessage && (
+									<p className="is-help has-text-danger">{errorMessage}</p>
+								)}
 								<br />
 								<div className="actions">
-									<Button>Sign Up</Button>
+									<Button
+										disabled={!email.trim() || !name.trim() || !password.trim()}
+										loading={loader}>
+										Sign Up
+									</Button>
 									<Link to="/login">
 										<p className="has text-primary">
 											Already have an account ?
