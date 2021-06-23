@@ -34,6 +34,19 @@ input[type="password"] {
 	padding-left: 2px;
 }
 
+input:disabled {
+	box-shadow: none;
+	border: none;
+	border-bottom: 1px solid $grey;
+	font-weight: 400;
+	font-size: 21px;
+	padding-left: 2px;
+	background-color: #fff !important;
+}
+textarea:disabled {
+	background-color: #fff !important;
+}
+
 .hr-v {
 	width: 1px;
 	background-color: $grey;
@@ -376,6 +389,10 @@ footer {
 		border: none;
 		box-shadow: none;
 	}
+	.select__control--is-disabled {
+		background-color: $white;
+		border-color: $grey;
+	}
 	.select__multi-value__label {
 		color: $white;
 	}
@@ -554,3 +571,37 @@ footer {
 	}
 }
 // Categories end
+
+// author page start
+.author-page {
+	.tab-section {
+		margin-top: 3%;
+	}
+	.main-section {
+		margin-top: 5%;
+	}
+	.authors-blogs {
+		.blog {
+			hr {
+				margin: 5% 0px;
+			}
+		}
+	}
+
+	.author-profile {
+		.form-control {
+			justify-content: space-between;
+			align-items: center;
+			padding: 1%;
+			.field {
+				width: 100%;
+			}
+			.actions {
+				button {
+					margin: 0px 5px;
+				}
+			}
+		}
+	}
+}
+// author page end

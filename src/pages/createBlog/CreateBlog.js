@@ -1,15 +1,18 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import Button from "../../components/atoms/button";
 import Editor from "../../components/organisms/Editor";
+import { AuthenticatorContext } from "../../context/authenticatorContext";
 import { _createBlog } from "./services";
 
 function CreateBlog(props) {
 	const [title, setTitle] = useState("");
 	const [value, setValue] = useState("");
 	const [loader, setLoader] = useState(false);
+	const { user } = useContext(AuthenticatorContext);
 	const handleBlog = () => {
 		setLoader(true);
 		const dataToSend = {
+			id: user.id,
 			title: title,
 			coverImgSrc: "",
 			subTitle: "",
