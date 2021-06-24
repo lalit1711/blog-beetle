@@ -4,6 +4,7 @@ import Button from "../../atoms/button/Button";
 import { Link } from "react-router-dom";
 import { AuthenticatorContext } from "../../../context/authenticatorContext";
 import Auth from "@aws-amplify/auth";
+import blogBeetleLogo from ".././../../assets/beetle.jpg"
 
 function Navbar(props) {
 	const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -39,7 +40,7 @@ function Navbar(props) {
 			<div className="navbar-brand">
 				<Link to="/" className="navbar-item">
 					<img
-						src="https://image-dock-uploads-be.s3.ap-south-1.amazonaws.com/image.2021-06-16T14%3A53%3A35.151Z"
+						src={blogBeetleLogo}
 						width="60"
 						height="80"
 						alt="blog-beetle"
@@ -74,9 +75,8 @@ function Navbar(props) {
 								</figure>
 							</div>
 							<div
-								className={`navbar-item has-dropdown ${
-									isDropDownOpen && "is-active"
-								}`}
+								className={`navbar-item has-dropdown ${isDropDownOpen && "is-active"
+									}`}
 								onClick={openDropDown}>
 								<span className="navbar-link"></span>
 
