@@ -7,3 +7,11 @@ export const _getBlogById = function (id) {
 		url
 	});
 };
+
+export const _deleteBlog = function (id) {
+	const url = `/blogs/${id}`;
+	return axios({
+		method: "DELETE",
+		url
+	});
+};

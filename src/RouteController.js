@@ -30,6 +30,10 @@ function RouteController() {
 						path="/create-blog"
 						render={props => <CreateBlog {...props} />}
 					/>
+					<Route
+						path="/edit-blog/:id"
+						render={props => <CreateBlog {...props} />}
+					/>
 					<Route path="/sample">
 						<SampleComponents />
 					</Route>
