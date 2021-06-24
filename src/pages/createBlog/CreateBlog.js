@@ -1,27 +1,54 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Button from "../../components/atoms/button";
 import Editor from "../../components/organisms/Editor";
 import { AuthenticatorContext } from "../../context/authenticatorContext";
-import { _createBlog } from "./services";
+import { _getBlogById } from "../blog/services";
+import { _createAndEditBlog } from "./services";
 
 function CreateBlog(props) {
 	const [title, setTitle] = useState("");
 	const [value, setValue] = useState("");
 	const [loader, setLoader] = useState(false);
+	const [isEdit, setEdit] = useState(false);
 	const { user } = useContext(AuthenticatorContext);
+
+	useEffect(() => {
+		if (!user) return;
+		checkIsValidEditBlog();
+	}, [user]);
+
+	const checkIsValidEditBlog = async () => {
+		if (props.match.path.indexOf("edit-blog") > -1) {
+			const blogId = props.match.params.id;
+			const { data } = await _getBlogById(blogId);
+			if (data.authorId !== user.id) {
+				props.history.push(`/`);
+			} else {
+				setEdit(data);
+				setTitle(data.title);
+				setValue(data.blogContent);
+			}
+		}
+	};
+
 	const handleBlog = () => {
 		setLoader(true);
 		const dataToSend = {
-			id: user.id,
+			authorId: user.id,
 			title: title,
 			coverImgSrc: "",
 			subTitle: "",
 			blogContent: value
 		};
-		_createBlog(dataToSend)
+		const url = isEdit ? `/blogs/${isEdit.id}` : `/blogs`;
+		const method = isEdit ? "PUT" : "POST";
+		_createAndEditBlog(dataToSend, method, url)
 			.then(res => {
 				setLoader(false);
-				props.history.push(`/blog/${res.data.id}`);
+				if (isEdit) props.history.push(`/blog/${isEdit.id}`);
+				else {
+					props.history.push(`/blog/${res.data.id}`);
+				}
 			})
 			.catch(err => {
 				setLoader(false);

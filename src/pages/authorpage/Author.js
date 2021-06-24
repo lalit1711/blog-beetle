@@ -50,6 +50,8 @@ const tabBody = active => {
 
 		case 3:
 			return <Draft />;
+		default:
+			return null;
 	}
 };
 

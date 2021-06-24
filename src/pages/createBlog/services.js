@@ -1,9 +1,9 @@
 import axios from "../../config/axios";
 
-export const _createBlog = function (data) {
+export const _createAndEditBlog = function (data, method = "POST", url) {
 	return axios({
-		url: `/blogs`,
+		url: url,
 		data,
-		method: "POST"
+		method: method
 	});
 };
