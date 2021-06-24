@@ -1,6 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Skeleton from "./components/organisms/skeleton/Skeleton";
+import AuthorPage from "./pages/authorpage";
 import Blog from "./pages/blog";
 import Categories from "./pages/categories";
 import CreateBlog from "./pages/createBlog";
@@ -20,6 +21,10 @@ function RouteController() {
 						<LandingPage />
 					</Route>
 					<Route path="/signup" render={props => <SignUp {...props} />} />
+					<Route
+						path="/author/:id"
+						render={props => <AuthorPage {...props} />}
+					/>
 					<Route path="/login" render={props => <LogIn {...props} />} />
 					<Route path="/category" render={props => <Categories {...props} />} />
 					<Route

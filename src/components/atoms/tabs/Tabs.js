@@ -1,22 +1,20 @@
 import React from "react";
+import _map from "lodash/map";
 
-function Tabs() {
+function Tabs({ tabOptions, active, setActiveTab }) {
+	console.log(active);
+	function renderTabs(tab) {
+		return (
+			<li
+				className={`${tab.index === active && "is-active"}`}
+				onClick={() => setActiveTab(tab.index)}>
+				<span>{tab.title}</span>
+			</li>
+		);
+	}
 	return (
 		<div className="tabs">
-			<ul>
-				<li className="is-active">
-					<span>Pictures</span>
-				</li>
-				<li>
-					<span>Music</span>
-				</li>
-				<li>
-					<span>Videos</span>
-				</li>
-				<li>
-					<span>Documents</span>
-				</li>
-			</ul>
+			<ul>{_map(tabOptions, renderTabs)}</ul>
 		</div>
 	);
 }

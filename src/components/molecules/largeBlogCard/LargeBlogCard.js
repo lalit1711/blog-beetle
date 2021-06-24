@@ -3,24 +3,35 @@ import PropTypes from "prop-types";
 import DEFAULT_CATEGORY_INFO from "../imageCard/constants/ImageCategory.default";
 import { FaUser } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import ReactHtmlParser from "react-html-parser";
+import BlogReader from "../../../readers/blog";
 
 function LargeBlogCard({ blogInfo }) {
-	const { title, cover, authorName, id, authorId, categoryName, description } =
-		blogInfo;
 	return (
-		<div className="large-blog-card">
-			<div className="blog-image" style={{ background: `url(${cover})` }}>
-				<span className="tag is-link">{categoryName}</span>
+		<div className="large-blog-card columns">
+			<div
+				className="column is-5"
+				style={{
+					background: `url(${
+						BlogReader.coverImgSrc(blogInfo) ||
+						"https://cdn.pixabay.com/photo/2021/05/01/09/59/city-6220689_960_720.jpg"
+					})`
+				}}>
+				<span className="tag is-link">category</span>
 			</div>
-			<div className="blog-info">
-				<Link to={`/blog/${id}`}>
-					<div className="title has-text-black">{title}</div>
+			<div className="blog-info column is-7">
+				<Link to={`/blog/${BlogReader.id(blogInfo)}`}>
+					<div className="title has-text-black">
+						{BlogReader.title(blogInfo)}
+					</div>
 				</Link>
 				<hr />
-				<div className="blog-description">{description}</div>
-				<Link to={`/author/${authorId}`}>
+				<div className="blog-description">
+					{ReactHtmlParser(BlogReader.blogContent(blogInfo))}
+				</div>
+				<Link to={`/author/${"user"}`}>
 					<div className="author-info is-uppercase">
-						<FaUser /> {" " + authorName}
+						<FaUser /> {" " + "authorName"}
 					</div>
 				</Link>
 			</div>
