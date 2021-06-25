@@ -19,15 +19,20 @@ function SignUp(props) {
 		}
 	});
 
-	async function handleSubmit(e) {
+	function handleSubmit(e) {
 		setLoader(true);
 		setErrorMessage("");
 		e.preventDefault();
 		const userData = { email, password, name };
-		const user = await _signUp(userData, setLoader, setErrorMessage);
-		await _createUser(userData, user.userSub, setLoader);
-		setLoader(false);
-		props.history.push(`/category`);
+		_signUp(userData, setLoader, setErrorMessage)
+			.then(({ user }) => {
+				console.log(user);
+				_createUser(userData, user.userSub, setLoader).then(res => {
+					setLoader(false);
+					props.history.push(`/category`);
+				});
+			})
+			.catch(err => {});
 	}
 
 	function goBack() {

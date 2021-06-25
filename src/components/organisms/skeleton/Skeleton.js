@@ -12,7 +12,7 @@ Amplify.configure({
 });
 
 function Skeleton({ children, ...rest }) {
-	const [user, setUser] = useState(null);
+	const [user, setUser] = useState(1);
 
 	useEffect(() => {
 		userLoggedIn();
