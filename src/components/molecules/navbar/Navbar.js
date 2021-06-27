@@ -4,7 +4,7 @@ import Button from "../../atoms/button/Button";
 import { Link } from "react-router-dom";
 import { AuthenticatorContext } from "../../../context/authenticatorContext";
 import Auth from "@aws-amplify/auth";
-import blogBeetleLogo from ".././../../assets/beetle.jpg"
+import blogBeetleLogo from ".././../../assets/beetle.png"
 
 function Navbar(props) {
 	const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -41,9 +41,8 @@ function Navbar(props) {
 				<Link to="/" className="navbar-item">
 					<img
 						src={blogBeetleLogo}
-						width="60"
-						height="80"
 						alt="blog-beetle"
+						style={{ height: "80px", width: '60px' }}
 					/>
 				</Link>
 			</div>
