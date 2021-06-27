@@ -1,7 +1,7 @@
 import React, { Fragment, useContext, useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import Button from "../../atoms/button/Button";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { AuthenticatorContext } from "../../../context/authenticatorContext";
 import Auth from "@aws-amplify/auth";
 import blogBeetleLogo from ".././../../assets/beetle.png"
@@ -10,9 +10,11 @@ function Navbar(props) {
 	const [isLoggedIn, setIsLoggedIn] = useState(false);
 	const [isDropDownOpen, setIsDropDownOpen] = useState(false);
 	const { user, userLoggedIn } = useContext(AuthenticatorContext);
+	const history = useHistory();
 
 	useEffect(() => {
 		const user = localStorage.getItem("user");
+
 		if (user) {
 			setIsLoggedIn(true);
 		} else {
@@ -30,6 +32,7 @@ function Navbar(props) {
 			await Auth.signOut();
 			localStorage.removeItem("user");
 			userLoggedIn();
+			history.push(`/`);
 		} catch (error) {
 			console.log("error signing out: ", error);
 		}
@@ -65,13 +68,15 @@ function Navbar(props) {
 							</div>
 
 							<div className="navbar-item">
-								<figure className="image is-48x48">
-									<img
-										className="is-rounded"
-										src="https://bulma.io/images/placeholders/128x128.png"
-										alt="user-profile"
-									/>
-								</figure>
+								<Link to={`/author/${user && user.id}`}>
+									<figure className="image is-48x48">
+										<img
+											className="is-rounded"
+											src="https://bulma.io/images/placeholders/128x128.png"
+											alt="user-profile"
+										/>
+									</figure>
+								</Link>
 							</div>
 							<div
 								className={`navbar-item has-dropdown ${isDropDownOpen && "is-active"
