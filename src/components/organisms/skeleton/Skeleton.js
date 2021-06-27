@@ -6,8 +6,14 @@ import { AuthenticatorContext } from "../../../context/authenticatorContext";
 Amplify.configure({
 	Auth: {
 		mandatorySignId: true,
-		userPoolId: "ap-southeast-1_0mytnpFdg",
-		userPoolWebClientId: "66l90vafmod7domca0ma0mjr5q"
+		userPoolId: "ap-south-1_UtALYj397",
+		userPoolWebClientId: "5b59a9ca4p3o56jm9ukns44pp"
+	},
+	Storage: {
+		AWSS3: {
+			bucket: "blogbeetle", //REQUIRED -  Amazon S3 bucket name
+			region: "ap-south-1" //OPTIONAL -  Amazon service region
+		}
 	}
 });
 

@@ -25,8 +25,7 @@ function SignUp(props) {
 		e.preventDefault();
 		const userData = { email, password, name };
 		_signUp(userData, setLoader, setErrorMessage)
-			.then(({ user }) => {
-				console.log(user);
+			.then(user => {
 				_createUser(userData, user.userSub, setLoader).then(res => {
 					setLoader(false);
 					props.history.push(`/category`);

@@ -30,7 +30,9 @@ function AuthorPage() {
 								setActiveTab={setActiveTab}
 							/>
 						</div>
-						<div className="main-section">{tabBody(activeTab)}</div>
+						<div className="main-section">
+							{getActiveTabComponent(activeTab)}
+						</div>
 					</div>
 					<div className="column is-2"></div>
 				</div>
@@ -39,7 +41,7 @@ function AuthorPage() {
 	);
 }
 
-const tabBody = active => {
+const getActiveTabComponent = active => {
 	switch (active) {
 		case 0:
 			return <BlogsOfAuthor />;

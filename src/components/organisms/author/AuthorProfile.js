@@ -1,3 +1,4 @@
+import Storage from "@aws-amplify/storage";
 import React, { Fragment, useState } from "react";
 import Button from "../../atoms/button";
 import SelectBox from "../../atoms/selectBox";
@@ -83,6 +84,9 @@ function AuthorProfile() {
 							</Button>
 						)}
 					</div>
+				</div>
+				<div className="form-control is-flex-desktop">
+					<UploadFile />
 				</div>
 				<div className="form-control is-flex-desktop">
 					<div className="field">
@@ -196,5 +200,44 @@ function AuthorProfile() {
 		</div>
 	);
 }
+
+const UploadFile = () => {
+	async function onChange(e) {
+		console.log("trigger");
+		const file = e.target.files[0];
+		try {
+			const result = await Storage.put(file.name, file, {
+				contentType: "image/png" // contentType is optional
+			});
+			console.log(result);
+		} catch (error) {
+			console.log("Error uploading file: ", error);
+		}
+	}
+
+	return (
+		<div className="field">
+			<label className="label">Photo</label>
+			<div className="control">
+				<div className="file is-small is-boxed">
+					<label className="file-label">
+						<input
+							className="file-input"
+							type="file"
+							name="resume"
+							onChange={onChange}
+						/>
+						<span className="file-cta">
+							<span className="file-icon">
+								<i className="fas fa-upload"></i>
+							</span>
+							<span className="file-label">Upload Image</span>
+						</span>
+					</label>
+				</div>
+			</div>
+		</div>
+	);
+};
 
 export default AuthorProfile;
