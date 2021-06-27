@@ -1,11 +1,7 @@
 import Auth from "@aws-amplify/auth";
 import axios from "axios";
 
-export const _signUp = (
-	{ email, password, name },
-	setLoader,
-	setErrorMessage
-) => {
+export const _signUp = ({ email, password, name }) => {
 	return Auth.signUp({
 		username: email.trim(),
 		password: password,
@@ -14,9 +10,6 @@ export const _signUp = (
 			name: name // optional - E.164 number convention
 			// other custom attributes
 		}
-	}).catch(err => {
-		setErrorMessage(err.message);
-		setLoader(false);
 	});
 };
 

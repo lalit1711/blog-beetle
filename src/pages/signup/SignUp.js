@@ -24,14 +24,17 @@ function SignUp(props) {
 		setErrorMessage("");
 		e.preventDefault();
 		const userData = { email, password, name };
-		_signUp(userData, setLoader, setErrorMessage)
+		_signUp(userData)
 			.then(user => {
 				_createUser(userData, user.userSub, setLoader).then(res => {
 					setLoader(false);
-					props.history.push(`/category`);
+					props.history.push(`/category?id=${user.userSub}`);
 				});
 			})
-			.catch(err => {});
+			.catch(err => {
+				setErrorMessage(err.message);
+				setLoader(false);
+			});
 	}
 
 	function goBack() {

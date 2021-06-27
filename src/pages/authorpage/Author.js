@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { useParams } from "react-router";
+import { useLocation, useParams, useRouteMatch } from "react-router";
 import Tabs from "../../components/atoms/tabs/Tabs";
 import AuthorBanner from "../../components/molecules/authorBanner";
 import AuthorProfile from "../../components/organisms/author/AuthorProfile";
