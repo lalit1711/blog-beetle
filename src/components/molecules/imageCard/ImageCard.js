@@ -4,8 +4,8 @@ import DEFAULT_CATEGORY_INFO from "./constants/ImageCategory.default";
 import { FaUser } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
-function ImageCard({ blogInfo, height = 250 }) {
-	const { title, cover, authorName, id, authorId, categoryName } = blogInfo;
+function ImageCard({ blogInfo, height = 250, authorInfo }) {
+	const { title, cover, authorName, id, authorId, categories } = blogInfo;
 	return (
 		<div class="card " style={{ height: height }}>
 			<div class="card-content is-paddingless" style={{ height: "100%" }}>
@@ -15,7 +15,7 @@ function ImageCard({ blogInfo, height = 250 }) {
 						backgroundImage: `url(${cover})`
 					}}></div>
 				<div class="content image-card-content">
-					<span className="tag is-dark">{categoryName}</span>
+					<span className="tag is-dark">{categories}</span>
 					<Link to={`/blog/${id}`}>
 						<span className="card-title has-text-white">{title}</span>
 					</Link>
@@ -23,7 +23,7 @@ function ImageCard({ blogInfo, height = 250 }) {
 					<hr />
 					<Link to={`/author/${authorId}`}>
 						<span className="subtitle has-text-white has-text-weight-bold">
-							<FaUser /> {authorName}
+							<FaUser /> {authorInfo && authorInfo.fullName}
 						</span>
 					</Link>
 				</div>

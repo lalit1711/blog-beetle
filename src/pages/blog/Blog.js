@@ -3,22 +3,27 @@ import AuthorInfo from "../../components/molecules/authorInfo";
 import ImageCard from "../../components/molecules/imageCard";
 import BlogContent from "../../components/organisms/blog/BlogContent";
 import LikeSaveShare from "../../components/organisms/blog/LikeSaveShare";
+import { _getUserInfo } from "../login/services";
 import { _getBlogById } from "./services";
 
 function Blog(props) {
 	const [content, setContent] = useState("");
+	const [authorInfo, setAuthorInfo] = useState(null);
 
 	useEffect(() => {
 		const blogId = props.match.params.id;
 		_getBlogById(blogId)
-			.then(res => setContent({ ...tempData, ...res.data }))
+			.then(res => {
+				setContent({ ...tempData, ...res.data });
+				_getUserInfo(res.data.authorId).then(res => setAuthorInfo(res.data));
+			})
 			.catch(err => props.history.push("/"));
 	}, []);
 
 	return (
 		<div>
 			<div className="hero is-large blog-content">
-				<ImageCard blogInfo={content} height={450} />
+				<ImageCard blogInfo={content} height={450} authorInfo={authorInfo} />
 			</div>
 			<div className="container">
 				<div className="columns create-blog">
@@ -32,7 +37,7 @@ function Blog(props) {
 				<div className="columns">
 					<div className="column is-1"></div>
 					<div className="column is-10">
-						<AuthorInfo userInfo={userInfo} />
+						{authorInfo && <AuthorInfo userInfo={authorInfo} />}
 					</div>
 					<div className="column is-1"></div>
 				</div>

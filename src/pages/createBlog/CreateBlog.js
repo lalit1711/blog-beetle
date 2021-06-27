@@ -1,5 +1,7 @@
+import axios from "axios";
 import React, { useContext, useEffect, useState } from "react";
 import Button from "../../components/atoms/button";
+import SelectBox from "../../components/atoms/selectBox";
 import Editor from "../../components/organisms/editor";
 import { AuthenticatorContext } from "../../context/authenticatorContext";
 import { _getBlogById } from "../blog/services";
@@ -8,6 +10,8 @@ import { _createAndEditBlog } from "./services";
 function CreateBlog(props) {
 	const [title, setTitle] = useState("");
 	const [value, setValue] = useState("");
+	const [category, setCategory] = useState(null);
+	const [list, setList] = useState([]);
 	const [loader, setLoader] = useState(false);
 	const [isEdit, setEdit] = useState(false);
 	const { user } = useContext(AuthenticatorContext);
@@ -17,6 +21,22 @@ function CreateBlog(props) {
 		if (user === 1) return;
 		checkIsValidEditBlog();
 	}, [user]);
+
+	useEffect(() => {
+		axios.get(`/categories`).then(res => {
+			setList(convertCategoryForSelectBox(res.data));
+		});
+	}, []);
+
+	useState(() => {
+		setCategory(list[0]);
+	}, [list]);
+
+	const convertCategoryForSelectBox = arr => {
+		return arr.map(o => {
+			return { value: o.id, label: o.categoryName };
+		});
+	};
 
 	const checkIsValidEditBlog = async () => {
 		if (props.match.path.indexOf("edit-blog") > -1) {
@@ -28,6 +48,7 @@ function CreateBlog(props) {
 				setEdit(data);
 				setTitle(data.title);
 				setValue(data.blogContent);
+				setCategory({ label: data.categories, value: data.categories });
 			}
 		}
 	};
@@ -39,6 +60,7 @@ function CreateBlog(props) {
 			title: title,
 			coverImgSrc: "",
 			subTitle: "",
+			categories: category && category.label,
 			blogContent: value
 		};
 		const url = isEdit ? `/blogs/${isEdit.id}` : `/blogs`;
@@ -73,9 +95,13 @@ function CreateBlog(props) {
 								value={title}
 								onChange={e => setTitle(e.target.value)}
 							/>
-							{/* <div className="select-box-area">
-								<SelectBox />
-							</div> */}
+							<div className="select-box-area">
+								<SelectBox
+									options={list}
+									value={category}
+									onChange={e => setCategory(e)}
+								/>
+							</div>
 						</div>
 						<div className="editor-container">
 							<Editor value={value} setValue={setValue} />
