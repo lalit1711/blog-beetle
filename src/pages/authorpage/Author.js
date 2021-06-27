@@ -1,4 +1,5 @@
 import React, { useContext, useState } from "react";
+import { useParams } from "react-router";
 import Tabs from "../../components/atoms/tabs/Tabs";
 import AuthorBanner from "../../components/molecules/authorBanner";
 import AuthorProfile from "../../components/organisms/author/AuthorProfile";
@@ -10,6 +11,8 @@ import { AuthenticatorContext } from "../../context/authenticatorContext";
 function AuthorPage() {
 	const [activeTab, setActiveTab] = useState(0);
 	const { user } = useContext(AuthenticatorContext);
+	const params = useParams();
+
 	const tabOptions = [
 		{ title: "Blogs", index: 0 },
 		{ title: "Profile", index: 1 },
@@ -24,11 +27,14 @@ function AuthorPage() {
 					<div className="column is-2"></div>
 					<div className="column is-8">
 						<div className="tab-section">
-							<Tabs
-								tabOptions={tabOptions}
-								active={activeTab}
-								setActiveTab={setActiveTab}
-							/>
+							{!user ||
+								(user && params.id === user.id && (
+									<Tabs
+										tabOptions={tabOptions}
+										active={activeTab}
+										setActiveTab={setActiveTab}
+									/>
+								))}
 						</div>
 						<div className="main-section">
 							{getActiveTabComponent(activeTab)}
