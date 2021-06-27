@@ -11,6 +11,7 @@ import LogIn from "./pages/login";
 import SampleComponents from "./pages/SampleComponents";
 import SignUp from "./pages/signup";
 
+
 function RouteController() {
 	return (
 		<Router>
