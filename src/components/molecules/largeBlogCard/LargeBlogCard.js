@@ -31,7 +31,7 @@ function LargeBlogCard({ blogInfo }) {
 				</div>
 				<Link to={`/author/${"user"}`}>
 					<div className="author-info is-uppercase">
-						<FaUser /> {" " + "authorName"}
+						<FaUser /> authorName
 					</div>
 				</Link>
 			</div>

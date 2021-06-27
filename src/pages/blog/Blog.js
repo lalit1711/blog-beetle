@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import AuthorInfo from "../../components/molecules/authorInfo";
 import ImageCard from "../../components/molecules/imageCard";
-import BlogContent from "../../components/organisms/Blog/BlogContent";
-import LikeSaveShare from "../../components/organisms/Blog/LikeSaveShare";
+import BlogContent from "../../components/organisms/blog/BlogContent";
+import LikeSaveShare from "../../components/organisms/blog/LikeSaveShare";
 import { _getBlogById } from "./services";
 
 function Blog(props) {
@@ -10,8 +10,10 @@ function Blog(props) {
 
 	useEffect(() => {
 		const blogId = props.match.params.id;
-		_getBlogById(blogId).then(res => setContent({ ...tempData, ...res.data }));
-	}, [props.match.params.id]);
+		_getBlogById(blogId)
+			.then(res => setContent({ ...tempData, ...res.data }))
+			.catch(err => props.history.push("/"));
+	}, []);
 
 	return (
 		<div>
@@ -23,9 +25,8 @@ function Blog(props) {
 					<div className="column is-2"></div>
 					<div className="column is-8">
 						<BlogContent content={content.blogContent} />
-						<LikeSaveShare />
+						<LikeSaveShare blogInfo={content} />
 					</div>
-					<div className="column "></div>
 				</div>
 				<hr />
 				<div className="columns">

@@ -1,6 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import Skeleton from "./components/organisms/skeleton/Skeleton";
+import Skeleton from "./components/organisms/skeleton";
 import AuthorPage from "./pages/authorpage";
 import Blog from "./pages/blog";
 import Categories from "./pages/categories";
@@ -29,6 +29,10 @@ function RouteController() {
 					<Route path="/category" render={props => <Categories {...props} />} />
 					<Route
 						path="/create-blog"
+						render={props => <CreateBlog {...props} />}
+					/>
+					<Route
+						path="/edit-blog/:id"
 						render={props => <CreateBlog {...props} />}
 					/>
 					<Route path="/sample">

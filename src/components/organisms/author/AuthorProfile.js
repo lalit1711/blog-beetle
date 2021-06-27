@@ -2,10 +2,10 @@
 import React, { Fragment, useState, useEffect } from "react";
 import Button from "../../atoms/button";
 import SelectBox from "../../atoms/selectBox";
-import axios from "../../../config/axios"
+import axios from "../../../config/axios";
 import Swal from "sweetalert2";
 
-const userId = "7c2313cb-4f15-49d1-a2e1-9f6c5f72862d"
+const userId = "7c2313cb-4f15-49d1-a2e1-9f6c5f72862d";
 
 function AuthorProfile() {
 	const [activeBox, setActiveBox] = useState(-1);
@@ -17,11 +17,9 @@ function AuthorProfile() {
 
 	useEffect(() => {
 		if (userData) {
-			setFullName(userData.fullName)
+			setFullName(userData.fullName);
 		}
-	}, [userData])
-
-
+	}, [userData]);
 
 	function capitalizeFirstLetter(string) {
 		return string.charAt(0).toUpperCase() + string.slice(1);
@@ -33,27 +31,27 @@ function AuthorProfile() {
 		var reqData = {};
 		let enteredFieldValue = value;
 		switch (fieldName) {
-			case 'fullName':
+			case "fullName":
 				{
-					reqData.fullName = enteredFieldValue
+					reqData.fullName = enteredFieldValue;
 				}
 				break;
-			default:
-				{
-
-				}
+			default: {
+			}
 		}
 
 		axios.patch("/users/" + userId, reqData).then(res => {
 			if (res.status === 204) {
-				Swal.fire({ icon: 'success', title: capitalizeFirstLetter(fieldName) + " Updated Successfully!", timer: 2000 })
+				Swal.fire({
+					icon: "success",
+					title: capitalizeFirstLetter(fieldName) + " Updated Successfully!",
+					timer: 2000
+				});
+			} else {
+				Swal.fire({ icon: "warning", title: "Update Failed !", timer: 2000 });
 			}
-			else {
-				Swal.fire({ icon: 'warning', title: "Update Failed !", timer: 2000 })
-			}
-		})
-
-	}
+		});
+	};
 	// -----------------------------------------------------------------------------------------------
 
 	return (
@@ -66,26 +64,35 @@ function AuthorProfile() {
 							<input
 								className="input"
 								type="text"
-								placeholder={userData ? userData.fullName : ''}
+								placeholder={userData ? userData.fullName : ""}
 								disabled={activeBox !== 0}
-								value={fullName ? fullName : ''}
-								onChange={(e) => { setFullName(e.target.value) }}
-
+								value={fullName ? fullName : ""}
+								onChange={e => {
+									setFullName(e.target.value);
+								}}
 							/>
 						</div>
 					</div>
 					<div className="actions is-flex">
 						{activeBox === 0 ? (
 							<Fragment>
-								<Button onClick={async (e) => {
-									let res = await updateProfileTextField(fullName, 'fullName')
-									console.log("&Res", res)
-								}}>Save</Button>
-								<Button type="light" onClick={(e) => {
-									setActiveBox(-1)
+								<Button
+									onClick={async e => {
+										let res = await updateProfileTextField(
+											fullName,
+											"fullName"
+										);
+										console.log("&Res", res);
+									}}>
+									Save
+								</Button>
+								<Button
+									type="light"
+									onClick={e => {
+										setActiveBox(-1);
 
-									// updateProfileTextField(e, 'fullName')
-								}}>
+										// updateProfileTextField(e, 'fullName')
+									}}>
 									Cancel
 								</Button>
 							</Fragment>
@@ -145,6 +152,9 @@ function AuthorProfile() {
 							</Button>
 						)}
 					</div>
+				</div>
+				<div className="form-control is-flex-desktop">
+					<UploadFile />
 				</div>
 				<div className="form-control is-flex-desktop">
 					<div className="field">
@@ -258,5 +268,44 @@ function AuthorProfile() {
 		</div>
 	);
 }
+
+const UploadFile = () => {
+	async function onChange(e) {
+		console.log("trigger");
+		const file = e.target.files[0];
+		try {
+			const result = await Storage.put(file.name, file, {
+				contentType: "image/png" // contentType is optional
+			});
+			console.log(result);
+		} catch (error) {
+			console.log("Error uploading file: ", error);
+		}
+	}
+
+	return (
+		<div className="field">
+			<label className="label">Photo</label>
+			<div className="control">
+				<div className="file is-small is-boxed">
+					<label className="file-label">
+						<input
+							className="file-input"
+							type="file"
+							name="resume"
+							onChange={onChange}
+						/>
+						<span className="file-cta">
+							<span className="file-icon">
+								<i className="fas fa-upload"></i>
+							</span>
+							<span className="file-label">Upload Image</span>
+						</span>
+					</label>
+				</div>
+			</div>
+		</div>
+	);
+};
 
 export default AuthorProfile;
