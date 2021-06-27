@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import Button from "../../components/atoms/button";
-import Editor from "../../components/organisms/Editor";
+import Editor from "../../components/organisms/editor";
 import { AuthenticatorContext } from "../../context/authenticatorContext";
 import { _getBlogById } from "../blog/services";
 import { _createAndEditBlog } from "./services";
@@ -13,7 +13,8 @@ function CreateBlog(props) {
 	const { user } = useContext(AuthenticatorContext);
 
 	useEffect(() => {
-		if (!user) return;
+		if (!user) props.history.push("/login");
+		if (user === 1) return;
 		checkIsValidEditBlog();
 	}, [user]);
 

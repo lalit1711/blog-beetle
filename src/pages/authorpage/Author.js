@@ -1,13 +1,15 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import Tabs from "../../components/atoms/tabs/Tabs";
 import AuthorBanner from "../../components/molecules/authorBanner";
 import AuthorProfile from "../../components/organisms/author/AuthorProfile";
 import BlogsOfAuthor from "../../components/organisms/author/BlogsOfAuthor";
 import Draft from "../../components/organisms/author/Draft";
 import SavedBlogs from "../../components/organisms/author/SavedBlogs";
+import { AuthenticatorContext } from "../../context/authenticatorContext";
 
 function AuthorPage() {
 	const [activeTab, setActiveTab] = useState(0);
+	const { user } = useContext(AuthenticatorContext);
 	const tabOptions = [
 		{ title: "Blogs", index: 0 },
 		{ title: "Profile", index: 1 },
@@ -28,7 +30,9 @@ function AuthorPage() {
 								setActiveTab={setActiveTab}
 							/>
 						</div>
-						<div className="main-section">{tabBody(activeTab)}</div>
+						<div className="main-section">
+							{getActiveTabComponent(activeTab)}
+						</div>
 					</div>
 					<div className="column is-2"></div>
 				</div>
@@ -37,7 +41,7 @@ function AuthorPage() {
 	);
 }
 
-const tabBody = active => {
+const getActiveTabComponent = active => {
 	switch (active) {
 		case 0:
 			return <BlogsOfAuthor />;

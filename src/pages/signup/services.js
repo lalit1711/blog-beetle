@@ -21,14 +21,14 @@ export const _signUp = (
 };
 
 export const _createUser = (user, id, setLoader) => {
-	console.log(id);
 	const postData = {
 		id: id,
 		emailAddress: user.email,
 		imgSrc: "",
 		userName: user.email,
 		fullName: user.name,
-		socialLinks: ""
+		socialLinks: "",
+		password: "****"
 	};
 	return axios({
 		method: "POST",
