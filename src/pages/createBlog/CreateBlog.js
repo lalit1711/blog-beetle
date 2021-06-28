@@ -20,7 +20,8 @@ function CreateBlog(props) {
 		if (!user) props.history.push("/login");
 		if (user === 1) return;
 		checkIsValidEditBlog();
-	}, [user]);
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [user, props.history]);
 
 	useEffect(() => {
 		axios.get(`/categories`).then(res => {
