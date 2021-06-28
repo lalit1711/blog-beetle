@@ -1,14 +1,14 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import { useLocation } from "react-router";
+// import { useLocation } from "react-router";
 import Button from "../../components/atoms/button";
 import CategoryTile from "../../components/atoms/categoryTile";
 
 function Categories(props) {
 	const [categoryList, setCategoryList] = useState([]);
 	const [selectedCategory, setSelectedCategory] = useState([]);
-	const [loader, setLoader] = useState(false);
-	const location = useLocation();
+	// const [loader, setLoader] = useState(false);
+	// const location = useLocation();
 
 	useEffect(() => {
 		axios.get(`/categories`).then(res => {
@@ -24,14 +24,14 @@ function Categories(props) {
 		}
 	}
 
-	function saveCategories() {
-		setLoader(true);
-		const data = { categories: selectedCategory.join(",") };
-		axios.patch(`/users/${location.search.split("=")[1]}`, data).then(res => {
-			setLoader(false);
-			routeToLogin();
-		});
-	}
+	// function saveCategories() {
+	// 	setLoader(true);
+	// 	const data = { categories: selectedCategory.join(",") };
+	// 	axios.patch(`/users/${location.search.split("=")[1]}`, data).then(res => {
+	// 		setLoader(false);
+	// 		routeToLogin();
+	// 	});
+	// }
 
 	function routeToLogin() {
 		props.history.push(`/login`);
@@ -49,9 +49,7 @@ function Categories(props) {
 				<div className="columns">
 					<div className="column">
 						<div className="actions">
-							<Button onClick={routeToLogin} disabled={loader} loading={loader}>
-								Save
-							</Button>
+							<Button onClick={routeToLogin}>Save</Button>
 						</div>
 					</div>
 				</div>
