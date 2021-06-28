@@ -7,14 +7,13 @@ import BlogReader from "../../../readers/blog";
 import categories from "../../../constants/categories";
 
 function ImageCard({ blogInfo, height = 250, authorInfo }) {
-	const { title, cover, authorName, id, authorId } = blogInfo;
 	return (
 		<div class="card " style={{ height: height }}>
 			<div class="card-content is-paddingless" style={{ height: "100%" }}>
 				<div
 					className="image-card"
 					style={{
-						backgroundImage: `url(${cover})`
+						backgroundImage: `url(${blogInfo.cover})`
 					}}></div>
 				<div class="content image-card-content">
 					<span
@@ -27,14 +26,14 @@ function ImageCard({ blogInfo, height = 250, authorInfo }) {
 						}}>
 						{BlogReader.categories(blogInfo)}
 					</span>
-					<Link to={`/blog/${id}`}>
+					<Link to={`/blog/${BlogReader.id(blogInfo)}`}>
 						<span className="card-title has-text-white">
 							{BlogReader.title(blogInfo)}
 						</span>
 					</Link>
 
 					<hr />
-					<Link to={`/author/${authorId}`}>
+					<Link to={`/author/${BlogReader.authorId(blogInfo)}`}>
 						<span className="subtitle has-text-white has-text-weight-bold">
 							<FaUser /> {authorInfo && authorInfo.fullName}
 						</span>
