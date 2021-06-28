@@ -2,7 +2,7 @@ import axios from "axios";
 import React, { useContext, useEffect, useState } from "react";
 import Button from "../../components/atoms/button";
 import SelectBox from "../../components/atoms/selectBox";
-import Editor from "../../components/organisms/editor";
+import Editor from "../../components/organisms/Editor";
 import { AuthenticatorContext } from "../../context/authenticatorContext";
 import { _getBlogById } from "../blog/services";
 import { _createAndEditBlog } from "./services";
