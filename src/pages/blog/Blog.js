@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import AuthorInfo from "../../components/molecules/authorInfo";
 import ImageCard from "../../components/molecules/imageCard";
-import BlogContent from "../../components/organisms/blog/BlogContent";
-import LikeSaveShare from "../../components/organisms/blog/LikeSaveShare";
+import BlogContent from "../../components/organisms/Blog/BlogContent";
+import LikeSaveShare from "../../components/organisms/Blog/LikeSaveShare";
 import { _getUserInfo } from "../login/services";
 import { _getBlogById } from "./services";
 
