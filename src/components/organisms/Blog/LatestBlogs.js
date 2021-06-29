@@ -39,7 +39,7 @@ function LatestBlogs({ blogsList }) {
 
 function renderLargeCard(blog) {
 	return (
-		<div className="column is-11">
+		<div className="column is-11" key={blog.id}>
 			<LargeBlogCard blogInfo={blog} />
 			<br />
 			<hr />
@@ -49,7 +49,7 @@ function renderLargeCard(blog) {
 }
 function renderBriefCard(blog) {
 	return (
-		<div className="column ">
+		<div className="column " key={blog.id}>
 			<BriefCard blogInfo={blog} />
 			<br />
 		</div>

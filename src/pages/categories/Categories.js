@@ -1,14 +1,14 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-// import { useLocation } from "react-router";
+import { useLocation } from "react-router";
 import Button from "../../components/atoms/button";
 import CategoryTile from "../../components/atoms/categoryTile";
 
 function Categories(props) {
 	const [categoryList, setCategoryList] = useState([]);
 	const [selectedCategory, setSelectedCategory] = useState([]);
-	// const [loader, setLoader] = useState(false);
-	// const location = useLocation();
+	const [loader, setLoader] = useState(false);
+	const location = useLocation();
 
 	useEffect(() => {
 		axios.get(`/categories`).then(res => {
@@ -16,22 +16,22 @@ function Categories(props) {
 		});
 	}, []);
 
-	function updateCategoryTile(id, action) {
+	function updateCategoryTile(categoryName, action) {
 		if (action === "add") {
-			setSelectedCategory([...selectedCategory, id]);
+			setSelectedCategory([...selectedCategory, categoryName]);
 		} else {
-			setSelectedCategory(selectedCategory.filter(o => o !== id));
+			setSelectedCategory(selectedCategory.filter(o => o !== categoryName));
 		}
 	}
 
-	// function saveCategories() {
-	// 	setLoader(true);
-	// 	const data = { categories: selectedCategory.join(",") };
-	// 	axios.patch(`/users/${location.search.split("=")[1]}`, data).then(res => {
-	// 		setLoader(false);
-	// 		routeToLogin();
-	// 	});
-	// }
+	function saveCategories() {
+		setLoader(true);
+		const data = { interests: selectedCategory.join(",") };
+		axios.patch(`/users/${location.search.split("=")[1]}`, data).then(res => {
+			setLoader(false);
+			routeToLogin();
+		});
+	}
 
 	function routeToLogin() {
 		props.history.push(`/login`);
@@ -49,7 +49,12 @@ function Categories(props) {
 				<div className="columns">
 					<div className="column">
 						<div className="actions">
-							<Button onClick={routeToLogin}>Save</Button>
+							<Button
+								onClick={saveCategories}
+								disabled={loader}
+								loading={loader}>
+								Save
+							</Button>
 						</div>
 					</div>
 				</div>
@@ -65,7 +70,7 @@ function renderCategoryTile(category, updateCategoryTile, selectedCategory) {
 			<CategoryTile
 				category={category}
 				onClick={updateCategoryTile}
-				selected={selectedCategory.includes(category.id)}
+				selected={selectedCategory.includes(category.categoryName)}
 			/>
 		</div>
 	);

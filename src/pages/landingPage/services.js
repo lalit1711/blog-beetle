@@ -6,3 +6,10 @@ export const _getAllBlogs = function () {
 		method: "GET"
 	});
 };
+
+export const _getFilterBlogs = function (url) {
+	return axios({
+		url: url,
+		method: "GET"
+	});
+};
