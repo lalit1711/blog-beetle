@@ -23,7 +23,7 @@ function Blog(props) {
 	return (
 		<div>
 			<div className="hero is-large blog-content">
-				<ImageCard blogInfo={content} height={450} authorInfo={authorInfo} />
+				<ImageCard blogInfo={content} height={450} date={true} />
 			</div>
 			<div className="container">
 				<div className="columns create-blog">
