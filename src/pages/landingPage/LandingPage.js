@@ -7,6 +7,8 @@ import _map from "lodash/map";
 
 // blog reader
 import BlogReader from "../../readers/blog";
+import LatestBlogs from "../../components/organisms/Blog/LatestBlogs";
+import TrendingBlogs from "../../components/organisms/Blog/TrendingBlogs";
 
 function LandingPage() {
 	const [blogsList, setBlogsList] = useState([]);
@@ -21,16 +23,24 @@ function LandingPage() {
 	return (
 		<div className="landing-page">
 			<div className="container">
+				<TrendingBlogs blogsList={blogsList} />
+				<br />
+				<br />
+				<br />
+				<LatestBlogs blogsList={blogsList} />
 				<div className="columns">
 					<div className="column is-1"></div>
 					<div className="column is-10">
-						<div className="title">Blogs List</div>
+						<div className="title">Suggested blogs</div>
 						<div className="columns is-multiline">
 							{_map(blogsList, renderBlogCard)}
 						</div>
 					</div>
 					<div className="column is-1"></div>
 				</div>
+				<br />
+				<br />
+				<br />
 			</div>
 			<Loader load={load} />
 		</div>

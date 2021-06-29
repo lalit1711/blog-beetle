@@ -1,11 +1,19 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import ReactHtmlParser from "react-html-parser";
 
 import BlogReader from "../../../readers/blog";
 import categories from "../../../constants/categories";
+import { FaUser } from "react-icons/fa";
+import { _getAuthorInfo } from "../../../services/services";
 
 function BlogCard({ blogInfo }) {
+	const [authorInfo, setAuthorInfo] = useState(null);
+	useEffect(() => {
+		_getAuthorInfo(blogInfo.authorId).then(res => {
+			setAuthorInfo(res.data);
+		});
+	}, [blogInfo.authorId]);
 	return (
 		<Link to={`/blog/${BlogReader.id(blogInfo)}`}>
 			<div className="card" style={{ height: 250 }}>
@@ -26,10 +34,10 @@ function BlogCard({ blogInfo }) {
 						<span className="blog-description">
 							{ReactHtmlParser(BlogReader.blogContent(blogInfo))}
 						</span>
-						{/* <span className="blog-author-card has-text-weight-bold is-uppercase">
+						<span className="blog-author-card has-text-weight-bold is-uppercase">
 							<FaUser />
-							Lalit
-						</span> */}
+							{authorInfo && authorInfo.fullName}
+						</span>
 					</div>
 				</div>
 			</div>

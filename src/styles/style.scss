@@ -177,8 +177,10 @@ textarea:disabled {
 	}
 	.blog-info {
 		margin: 0 50px 0 70px;
+
 		.title {
 			line-height: 49px;
+			text-align: left;
 		}
 		hr {
 			width: 100px;
@@ -206,22 +208,28 @@ textarea:disabled {
 .brief-card {
 	display: flex;
 	.blog-image {
-		height: 90px;
-		width: 90px;
+		height: 100px;
+		width: 100px;
+	}
+	.blog-info {
+		width: 70%;
+		.author-info {
+			font-weight: 600;
+			color: $grey;
+			margin-left: 15px;
+			font-size: 12px;
+			margin-top: 12px;
+		}
 	}
 	.blog-description {
 		margin-left: 15px;
-		height: 90px;
+		height: 70px;
+		width: 100%;
 		.brief-blog-title {
 			font-size: 15px;
 			line-height: 22px;
 			font-weight: 600;
 			color: $black;
-		}
-		.author-info {
-			margin-top: 25px;
-			font-weight: 600;
-			color: $grey;
 		}
 	}
 }
@@ -607,3 +615,13 @@ footer {
 	}
 }
 // author page end
+
+.latest-blog-container {
+	margin-top: 30px;
+	.vl {
+		border-left: 1px solid $grey;
+		height: 100%;
+		margin-top: 20px;
+		margin-left: 15px;
+	}
+}

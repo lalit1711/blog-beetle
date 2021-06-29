@@ -1,19 +1,28 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import DEFAULT_CATEGORY_INFO from "./constants/ImageCategory.default";
-import { FaUser } from "react-icons/fa";
+import { FaClock, FaUser } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import BlogReader from "../../../readers/blog";
 import categories from "../../../constants/categories";
+import { _getAuthorInfo } from "../../../services/services";
 
-function ImageCard({ blogInfo, height = 250, authorInfo }) {
+function ImageCard({ blogInfo, height = 250, date = false }) {
+	const [authorInfo, setAuthorInfo] = useState(null);
+
+	useEffect(() => {
+		_getAuthorInfo(blogInfo.authorId).then(res => {
+			setAuthorInfo(res.data);
+		});
+	}, [blogInfo.authorId]);
+
 	return (
 		<div class="card " style={{ height: height }}>
 			<div class="card-content is-paddingless" style={{ height: "100%" }}>
 				<div
 					className="image-card"
 					style={{
-						backgroundImage: `url(${blogInfo.cover})`
+						backgroundImage: `url(${DEFAULT_CATEGORY_INFO.coverImageSrc})`
 					}}></div>
 				<div class="content image-card-content">
 					<span
@@ -37,6 +46,13 @@ function ImageCard({ blogInfo, height = 250, authorInfo }) {
 						<span className="subtitle has-text-white has-text-weight-bold">
 							<FaUser /> {authorInfo && authorInfo.fullName}
 						</span>
+						{date && (
+							<span
+								className="subtitle has-text-white "
+								style={{ marginLeft: 20 }}>
+								<FaClock /> {new Date(blogInfo.createdAt).toDateString()}
+							</span>
+						)}
 					</Link>
 				</div>
 			</div>
