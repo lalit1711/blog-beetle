@@ -1,18 +1,19 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 // components import
-import BlogCard from "../../components/molecules/blogCard";
 import { _getAllBlogs } from "./services";
 import Loader from "../../common/Loader";
-import _map from "lodash/map";
 
 // blog reader
-import BlogReader from "../../readers/blog";
+
 import LatestBlogs from "../../components/organisms/Blog/LatestBlogs";
 import TrendingBlogs from "../../components/organisms/Blog/TrendingBlogs";
+import { AuthenticatorContext } from "../../context/authenticatorContext";
+import SuggestedBlogs from "../../components/organisms/Blog/SuggestedBlogs";
 
 function LandingPage() {
 	const [blogsList, setBlogsList] = useState([]);
 	const [load, setLoad] = useState(false);
+	const { user } = useContext(AuthenticatorContext);
 	useEffect(() => {
 		setLoad(true);
 		_getAllBlogs().then(res => {
@@ -28,29 +29,12 @@ function LandingPage() {
 				<br />
 				<br />
 				<LatestBlogs blogsList={blogsList} />
-				<div className="columns">
-					<div className="column is-1"></div>
-					<div className="column is-10">
-						<div className="title">Suggested blogs</div>
-						<div className="columns is-multiline">
-							{_map(blogsList, renderBlogCard)}
-						</div>
-					</div>
-					<div className="column is-1"></div>
-				</div>
+				{user && user.interests && <SuggestedBlogs userId={user.id} />}
 				<br />
 				<br />
 				<br />
 			</div>
 			<Loader load={load} />
-		</div>
-	);
-}
-
-function renderBlogCard(blog) {
-	return (
-		<div className="column is-4" key={BlogReader.id(blog)}>
-			<BlogCard blogInfo={blog} />
 		</div>
 	);
 }

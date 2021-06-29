@@ -14,7 +14,9 @@ function CategoryTile(props) {
 	return (
 		<div
 			className={tileClasses}
-			onClick={() => onClick(category.id, selected ? "remove" : "add")}>
+			onClick={() =>
+				onClick(category.categoryName, selected ? "remove" : "add")
+			}>
 			<div className="card-content">
 				<p className="title">{category.categoryName}</p>
 			</div>
