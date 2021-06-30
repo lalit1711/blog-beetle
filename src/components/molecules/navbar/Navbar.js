@@ -75,7 +75,7 @@ function Navbar(props) {
 									<figure className="image is-42x42">
 										<img
 											className="is-rounded"
-											src={user.imgSrc || IMG_SRC}
+											src={(user && user.imgSrc) || IMG_SRC}
 											alt="user-profile"
 										/>
 									</figure>
