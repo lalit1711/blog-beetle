@@ -50,7 +50,7 @@ function LargeBlogCard({ blogInfo }) {
 				<div className="blog-description">
 					{ReactHtmlParser(BlogReader.blogContent(blogInfo))}
 				</div>
-				<Link to={`/author/${"user"}`}>
+				<Link to={`/author/${blogInfo.authorId}`}>
 					<div className="author-info is-uppercase">
 						<FaUser /> {authorInfo && authorInfo.fullName}
 					</div>
