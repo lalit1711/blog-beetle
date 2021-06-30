@@ -2,7 +2,6 @@ import React from "react";
 import _map from "lodash/map";
 
 function Tabs({ tabOptions, active, setActiveTab }) {
-	console.log(active);
 	function renderTabs(tab) {
 		return (
 			<li
