@@ -292,6 +292,10 @@ footer {
 	background-repeat: no-repeat;
 	background-size: cover;
 }
+.is-42x42 {
+	height: 42px;
+	width: 42px;
+}
 
 .user-search {
 	.user-info {
@@ -625,3 +629,9 @@ footer {
 		margin-left: 15px;
 	}
 }
+
+// search page
+.search-container {
+	margin-top: 5%;
+}
+//search page end

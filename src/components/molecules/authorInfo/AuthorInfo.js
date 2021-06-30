@@ -2,6 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { FaFacebook, FaGithub, FaTwitter } from "react-icons/fa";
 import { Link } from "react-router-dom";
+import { IMG_SRC } from "../../../constants/user";
 
 function AuthorInfo({ userInfo }) {
 	const { fullName, id, imgSrc, bio, socialLinks } = userInfo;
@@ -13,10 +14,7 @@ function AuthorInfo({ userInfo }) {
 						<div
 							className="user-image"
 							style={{
-								backgroundImage: `url(${
-									imgSrc ||
-									"https://png.pngtree.com/element_our/20200610/ourmid/pngtree-black-default-avatar-image_2237212.jpg"
-								})`
+								backgroundImage: `url(${imgSrc || IMG_SRC})`
 							}}></div>
 						<Link to={`/author/${id}`}>
 							{" "}

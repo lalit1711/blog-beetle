@@ -9,8 +9,8 @@ import DummyComp from "./pages/DummyComp";
 import LandingPage from "./pages/landingPage";
 import LogIn from "./pages/login";
 import SampleComponents from "./pages/SampleComponents";
+import Search from "./pages/search";
 import SignUp from "./pages/signup";
-
 
 function RouteController() {
 	return (
@@ -37,6 +37,9 @@ function RouteController() {
 					/>
 					<Route path="/sample">
 						<SampleComponents />
+					</Route>
+					<Route path="/search">
+						<Search />
 					</Route>
 					<Route path="/dummy">
 						<DummyComp />

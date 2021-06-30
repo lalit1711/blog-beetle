@@ -4,7 +4,8 @@ import Button from "../../atoms/button/Button";
 import { Link, useHistory } from "react-router-dom";
 import { AuthenticatorContext } from "../../../context/authenticatorContext";
 import Auth from "@aws-amplify/auth";
-import blogBeetleLogo from ".././../../assets/beetle.png"
+import blogBeetleLogo from ".././../../assets/beetle.png";
+import { IMG_SRC } from "../../../constants/user";
 
 function Navbar(props) {
 	const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -45,16 +46,18 @@ function Navbar(props) {
 					<img
 						src={blogBeetleLogo}
 						alt="blog-beetle"
-						style={{ height: "80px", width: '60px' }}
+						style={{ height: "80px", width: "60px" }}
 					/>
 				</Link>
 			</div>
 
 			<div id="navbarBasicExample" className="navbar-menu">
 				<div className="navbar-end">
-					{/* <div className="navbar-item">
-						<img src="/icons/akar-icons_search.svg" />
-					</div> */}
+					<div className="navbar-item">
+						<Link to="/search">
+							<img src="/icons/akar-icons_search.svg" alt="search-img" />
+						</Link>
+					</div>
 					{!isLoggedIn ? (
 						<div className="navbar-item">
 							<Link to="/login">
@@ -69,18 +72,19 @@ function Navbar(props) {
 
 							<div className="navbar-item">
 								<Link to={`/author/${user && user.id}`}>
-									<figure className="image is-48x48">
+									<figure className="image is-42x42">
 										<img
 											className="is-rounded"
-											src="https://bulma.io/images/placeholders/128x128.png"
+											src={(user && user.imgSrc) || IMG_SRC}
 											alt="user-profile"
 										/>
 									</figure>
 								</Link>
 							</div>
 							<div
-								className={`navbar-item has-dropdown ${isDropDownOpen && "is-active"
-									}`}
+								className={`navbar-item has-dropdown ${
+									isDropDownOpen && "is-active"
+								}`}
 								onClick={openDropDown}>
 								<span className="navbar-link"></span>
 
