@@ -21,7 +21,7 @@ function AuthorPage() {
 	];
 	return (
 		<div className="author-page">
-			<AuthorBanner userInfo={userInfo} />
+			<AuthorBanner userInfo={user} />
 			<div className="main-container ">
 				<div className="columns">
 					<div className="column is-2"></div>

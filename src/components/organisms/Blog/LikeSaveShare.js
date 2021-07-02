@@ -34,12 +34,12 @@ function LikeSaveShare({ blogInfo }) {
 						<Fragment>
 							<Link to={`/edit-blog/${blogInfo.id}`}>
 								<span>
-									<FaEdit />
+									<img src="/icons/edit.svg" alt="search-img" />
 								</span>
 							</Link>
 
 							<span>
-								<FaTrash onClick={handleDelete} />
+								<img src="/icons/trash.svg" alt="search-img" />
 							</span>
 						</Fragment>
 					) : (

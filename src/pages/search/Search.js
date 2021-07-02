@@ -65,6 +65,7 @@ function Search() {
 								onKeyDown={e => {
 									if (e.keyCode === 13) searchKey();
 								}}
+								autoFocus
 							/>
 							{!loader && (
 								<span className="icon is-small is-right">
@@ -77,7 +78,7 @@ function Search() {
 					</div>
 					<div className="columns">
 						<div
-							className="column is-10 is-offset-1"
+							className="column  "
 							style={{
 								marginTop: "2%"
 							}}>

@@ -24,15 +24,15 @@ function LandingPage() {
 	return (
 		<div className="landing-page">
 			<div className="container">
-				<TrendingBlogs blogsList={blogsList} />
-				<br />
-				<br />
-				<br />
-				<LatestBlogs blogsList={blogsList} />
-				{user && user.interests && <SuggestedBlogs userId={user.id} />}
-				<br />
-				<br />
-				<br />
+				<div style={{ marginTop: "5%" }}>
+					<TrendingBlogs blogsList={blogsList} />
+				</div>
+				<div style={{ marginTop: "5%" }}>
+					<LatestBlogs blogsList={blogsList} />
+				</div>
+				<div style={{ margin: "1% 0%" }}>
+					{user && user.interests && <SuggestedBlogs userId={user.id} />}
+				</div>
 			</div>
 			<Loader load={load} />
 		</div>

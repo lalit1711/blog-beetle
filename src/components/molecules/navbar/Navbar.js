@@ -1,7 +1,7 @@
 import React, { Fragment, useContext, useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import Button from "../../atoms/button/Button";
-import { Link, useHistory } from "react-router-dom";
+import { Link, useHistory, useLocation } from "react-router-dom";
 import { AuthenticatorContext } from "../../../context/authenticatorContext";
 import Auth from "@aws-amplify/auth";
 import blogBeetleLogo from ".././../../assets/beetle.png";
@@ -12,6 +12,7 @@ function Navbar(props) {
 	const [isDropDownOpen, setIsDropDownOpen] = useState(false);
 	const { user, userLoggedIn } = useContext(AuthenticatorContext);
 	const history = useHistory();
+	const location = useLocation();
 
 	useEffect(() => {
 		const user = localStorage.getItem("user");
@@ -53,11 +54,13 @@ function Navbar(props) {
 
 			<div id="navbarBasicExample" className="navbar-menu">
 				<div className="navbar-end">
-					<div className="navbar-item">
-						<Link to="/search">
-							<img src="/icons/akar-icons_search.svg" alt="search-img" />
-						</Link>
-					</div>
+					{location.pathname.indexOf("search") === -1 && (
+						<div className="navbar-item">
+							<Link to="/search">
+								<img src="/icons/akar-icons_search.svg" alt="search-img" />
+							</Link>
+						</div>
+					)}
 					{!isLoggedIn ? (
 						<div className="navbar-item">
 							<Link to="/login">

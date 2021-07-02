@@ -51,6 +51,14 @@ textarea:disabled {
 	width: 1px;
 	background-color: $grey;
 }
+.card {
+	box-shadow: 0px 0px 0px 2px rgba(0, 0, 0, 0.1);
+	border-radius: 0% !important;
+}
+
+.image-card-border {
+	box-shadow: none;
+}
 
 .textarea {
 	box-shadow: none;
@@ -181,6 +189,9 @@ textarea:disabled {
 		.title {
 			line-height: 49px;
 			text-align: left;
+			max-height: 93px;
+			overflow: hidden;
+			text-overflow: ellipsis;
 		}
 		hr {
 			width: 100px;
@@ -188,7 +199,7 @@ textarea:disabled {
 		.blog-description {
 			font-size: 13px;
 			font-weight: 400;
-			line-height: 32px;
+			line-height: 24px;
 			height: 125px;
 		}
 		.author-info {
@@ -235,6 +246,7 @@ textarea:disabled {
 }
 
 .tabs {
+	cursor: pointer;
 	span {
 		align-items: center;
 		border-bottom-color: #b9b9b9;
@@ -258,9 +270,12 @@ textarea:disabled {
 footer {
 	margin-top: 20px;
 	.content {
+		justify-content: space-between;
+		text-align: center;
+		align-items: center;
 		.social {
-			float: right;
 			color: $white;
+			flex-direction: column;
 			span {
 				margin: 0px 20px;
 			}
@@ -635,3 +650,34 @@ footer {
 	margin-top: 5%;
 }
 //search page end
+
+// comment start
+.comment-container {
+	margin-top: 2%;
+	.title-area {
+		display: flex;
+		align-items: baseline;
+		justify-content: center;
+		hr {
+			width: 40%;
+			margin: 0px 14px;
+		}
+	}
+	.main-section {
+		margin-top: 3%;
+		.name-date {
+			align-items: baseline;
+			justify-content: space-between;
+		}
+		.content-crud {
+			display: flex;
+			.comment {
+				line-height: 32px;
+			}
+			.edit-delete {
+				margin-left: 2%;
+			}
+		}
+	}
+}
+// comment end

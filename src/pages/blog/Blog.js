@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import AuthorInfo from "../../components/molecules/authorInfo";
+import Comments from "../../components/molecules/comments";
 import ImageCard from "../../components/molecules/imageCard";
 import BlogContent from "../../components/organisms/Blog/BlogContent";
 import LikeSaveShare from "../../components/organisms/Blog/LikeSaveShare";
@@ -38,6 +39,7 @@ function Blog(props) {
 					<div className="column is-1"></div>
 					<div className="column is-10">
 						{authorInfo && <AuthorInfo userInfo={authorInfo} />}
+						<Comments />
 					</div>
 					<div className="column is-1"></div>
 				</div>

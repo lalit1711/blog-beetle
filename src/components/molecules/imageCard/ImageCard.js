@@ -17,7 +17,7 @@ function ImageCard({ blogInfo, height = 250, date = false }) {
 	}, [blogInfo.authorId]);
 
 	return (
-		<div class="card " style={{ height: height }}>
+		<div class="card image-card-border" style={{ height: height }}>
 			<div class="card-content is-paddingless" style={{ height: "100%" }}>
 				<div
 					className="image-card"

@@ -25,7 +25,8 @@ function LargeBlogCard({ blogInfo }) {
 						BlogReader.coverImgSrc(blogInfo) ||
 						"https://cdn.pixabay.com/photo/2021/05/01/09/59/city-6220689_960_720.jpg"
 					})`,
-					marginRight: 40
+					marginRight: 40,
+					borderRadius: 4
 				}}>
 				<span
 					className="tag is-dark"
