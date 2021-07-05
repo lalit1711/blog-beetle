@@ -82,3 +82,14 @@ export const requestDataUserLike = value => {
 		}
 	};
 };
+
+export const requestDataUserLikesBlog = (blogId, userId) => {
+	return {
+		offset: 0,
+		limit: 100,
+		skip: 0,
+		where: {
+			and: [{ blogId: blogId }, { userId: userId }]
+		}
+	};
+};

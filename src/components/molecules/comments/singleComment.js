@@ -9,7 +9,7 @@ import { AuthenticatorContext } from "../../../context/authenticatorContext";
 function SingleComment({ comment, authorId, handleDelete }) {
 	const { user } = useContext(AuthenticatorContext);
 	const [commentUser, setCommentUser] = useState(null);
-	console.log(commentUser);
+
 	useEffect(() => {
 		_getUserInfo(comment.userId).then(res => {
 			setCommentUser(res.data);

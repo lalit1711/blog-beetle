@@ -1,32 +1,31 @@
-import React, { Fragment, useContext, useState } from "react";
-import {
-	FaBookmark,
-	FaFacebook,
-	FaGithub,
-	FaLinkedin,
-	FaThumbsUp,
-	FaTwitter
-} from "react-icons/fa";
+import React, { Fragment, useContext, useEffect, useState } from "react";
+import { FaFacebook, FaLinkedin, FaTwitter } from "react-icons/fa";
 import { FiBookmark } from "react-icons/fi";
-import { AiOutlineLike } from "react-icons/ai";
+import { AiFillLike, AiOutlineLike } from "react-icons/ai";
 import { Link, useHistory, useLocation } from "react-router-dom";
 import { AuthenticatorContext } from "../../../context/authenticatorContext";
-import { _deleteBlog } from "../../../pages/blog/services";
+import {
+	_deleteBlog,
+	_getLikeCount,
+	_likeBlog,
+	_revokeLike
+} from "../../../pages/blog/services";
 import ConfirmationBox from "../../molecules/confirmationBox";
 import {
-	EmailShareButton,
 	FacebookShareButton,
 	LinkedinShareButton,
 	TwitterShareButton
 } from "react-share";
+import axios from "axios";
+import { requestDataUserLikesBlog } from "../../../helpers/util";
 
 function LikeSaveShare({ blogInfo }) {
 	const [openConfirmationBox, setOpenConfirmationBox] = useState(false);
 	const history = useHistory();
 	const location = useLocation();
 	const { user } = useContext(AuthenticatorContext);
-
-	console.log(location);
+	const [likeId, setLikeId] = useState(0);
+	const [count, setCount] = useState(0);
 
 	const deleteBlog = async () => {
 		await _deleteBlog(blogInfo.id);
@@ -34,6 +33,40 @@ function LikeSaveShare({ blogInfo }) {
 	};
 
 	const handleDelete = () => setOpenConfirmationBox(true);
+
+	const handleLike = (like = true) => {
+		const data = {
+			userId: user.id,
+			blogId: blogInfo.id,
+			active: 1
+		};
+		_likeBlog(data).then(res => setLikeId(res.data.id));
+	};
+
+	useEffect(() => {
+		if (!blogInfo) return;
+		_getLikeCount(blogInfo.id).then(res => setCount(res.data.count));
+	}, [likeId, blogInfo]);
+
+	const handleLikeDelete = () => {
+		_revokeLike(likeId).then(res => setLikeId(0));
+	};
+
+	useEffect(() => {
+		if (!user || !blogInfo || user === 1 || blogInfo === "") return;
+		axios
+			.get(
+				"/blog-likes?filter=" +
+					encodeURIComponent(
+						JSON.stringify(requestDataUserLikesBlog(blogInfo.id, user.id))
+					)
+			)
+			.then(res => {
+				if (res.data.length) {
+					setLikeId(res.data[0].id);
+				}
+			});
+	}, [user, blogInfo]);
 
 	const closeConfirmationBox = () => setOpenConfirmationBox(false);
 	return (
@@ -60,7 +93,12 @@ function LikeSaveShare({ blogInfo }) {
 						) : (
 							<Fragment>
 								<span>
-									<AiOutlineLike />
+									{likeId ? (
+										<AiFillLike onClick={handleLikeDelete} />
+									) : (
+										<AiOutlineLike onClick={handleLike} />
+									)}
+									<span className="count">{count}</span>
 								</span>
 								<span>
 									<FiBookmark />
