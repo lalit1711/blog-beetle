@@ -9,6 +9,10 @@ import LatestBlogs from "../../components/organisms/Blog/LatestBlogs";
 import TrendingBlogs from "../../components/organisms/Blog/TrendingBlogs";
 import { AuthenticatorContext } from "../../context/authenticatorContext";
 import SuggestedBlogs from "../../components/organisms/Blog/SuggestedBlogs";
+import TrendingLoader from "../../components/organisms/loader/TrendingLoader";
+import LatestLoader from "../../components/organisms/loader/LatestLoader";
+import { Fragment } from "react";
+import SuggestedLoader from "../../components/organisms/loader/SuggestedLoader";
 
 function LandingPage() {
 	const [blogsList, setBlogsList] = useState([]);
@@ -25,16 +29,26 @@ function LandingPage() {
 		<div className="landing-page">
 			<div className="container">
 				<div style={{ marginTop: "5%" }}>
-					<TrendingBlogs blogsList={blogsList} />
+					{!load ? <TrendingBlogs blogsList={blogsList} /> : <TrendingLoader />}
 				</div>
 				<div style={{ marginTop: "5%" }}>
-					<LatestBlogs blogsList={blogsList} />
+					{!load ? <LatestBlogs blogsList={blogsList} /> : <LatestLoader />}
 				</div>
 				<div style={{ margin: "1% 0%" }}>
-					{user && user.interests && <SuggestedBlogs userId={user.id} />}
+					{!load ? (
+						<Fragment>
+							{user && user.interests && (
+								<SuggestedBlogs
+									userId={user.id}
+									categories={user.interests.split(",")}
+								/>
+							)}
+						</Fragment>
+					) : (
+						<SuggestedLoader />
+					)}
 				</div>
 			</div>
-			<Loader load={load} />
 		</div>
 	);
 }

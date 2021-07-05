@@ -5,7 +5,7 @@ function Footer() {
 		<footer className="footer">
 			<div className="content is-flex-desktop">
 				<strong className=" has-text-white">
-					Copyright &#169; Born to Blog. 2021
+					Copyright &#169; Blog Beetle. 2021
 				</strong>
 
 				<strong className=" social ">

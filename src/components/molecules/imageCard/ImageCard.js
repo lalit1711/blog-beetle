@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import dateformat from "dateformat";
 import PropTypes from "prop-types";
 import DEFAULT_CATEGORY_INFO from "./constants/ImageCategory.default";
 import { FaClock, FaUser } from "react-icons/fa";
@@ -43,14 +44,17 @@ function ImageCard({ blogInfo, height = 250, date = false }) {
 
 					<hr />
 					<Link to={`/author/${BlogReader.authorId(blogInfo)}`}>
-						<span className="subtitle has-text-white has-text-weight-bold">
+						<span className="has-text-white is-size-6">
 							<FaUser /> {authorInfo && authorInfo.fullName}
 						</span>
 						{date && (
 							<span
 								className="subtitle has-text-white "
 								style={{ marginLeft: 20 }}>
-								<FaClock /> {new Date(blogInfo.createdAt).toDateString()}
+								<FaClock />{" "}
+								<span className="is-size-6">
+									{dateformat(blogInfo.createdAt, "mediumDate")}
+								</span>
 							</span>
 						)}
 					</Link>

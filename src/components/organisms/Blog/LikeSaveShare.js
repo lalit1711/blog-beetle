@@ -1,22 +1,32 @@
 import React, { Fragment, useContext, useState } from "react";
 import {
 	FaBookmark,
-	FaEdit,
 	FaFacebook,
 	FaGithub,
+	FaLinkedin,
 	FaThumbsUp,
-	FaTrash,
 	FaTwitter
 } from "react-icons/fa";
-import { Link, useHistory } from "react-router-dom";
+import { FiBookmark } from "react-icons/fi";
+import { AiOutlineLike } from "react-icons/ai";
+import { Link, useHistory, useLocation } from "react-router-dom";
 import { AuthenticatorContext } from "../../../context/authenticatorContext";
 import { _deleteBlog } from "../../../pages/blog/services";
 import ConfirmationBox from "../../molecules/confirmationBox";
+import {
+	EmailShareButton,
+	FacebookShareButton,
+	LinkedinShareButton,
+	TwitterShareButton
+} from "react-share";
 
 function LikeSaveShare({ blogInfo }) {
 	const [openConfirmationBox, setOpenConfirmationBox] = useState(false);
 	const history = useHistory();
+	const location = useLocation();
 	const { user } = useContext(AuthenticatorContext);
+
+	console.log(location);
 
 	const deleteBlog = async () => {
 		await _deleteBlog(blogInfo.id);
@@ -30,39 +40,47 @@ function LikeSaveShare({ blogInfo }) {
 		<Fragment>
 			<div className="like-save-share-section">
 				<div className="social-section" style={{ margin: "20px 0px" }}>
-					{user && user.id === blogInfo.authorId ? (
-						<Fragment>
-							<Link to={`/edit-blog/${blogInfo.id}`}>
-								<span>
-									<img src="/icons/edit.svg" alt="search-img" />
-								</span>
-							</Link>
+					{user ? (
+						user.id === blogInfo.authorId ? (
+							<Fragment>
+								<Link to={`/edit-blog/${blogInfo.id}`}>
+									<span>
+										<img src="/icons/edit.svg" alt="search-img" />
+									</span>
+								</Link>
 
-							<span>
-								<img src="/icons/trash.svg" alt="search-img" />
-							</span>
-						</Fragment>
-					) : (
-						<Fragment>
-							<span>
-								<FaThumbsUp />
-							</span>
-							<span>
-								<FaBookmark />
-							</span>
-						</Fragment>
-					)}
+								<span>
+									<img
+										src="/icons/trash.svg"
+										alt="search-img"
+										onClick={handleDelete}
+									/>
+								</span>
+							</Fragment>
+						) : (
+							<Fragment>
+								<span>
+									<AiOutlineLike />
+								</span>
+								<span>
+									<FiBookmark />
+								</span>
+							</Fragment>
+						)
+					) : null}
 				</div>
 				<div className="social-section" style={{ margin: "20px 0px" }}>
-					<span>
+					<FacebookShareButton url={`https://localhost/${location.pathname}`}>
 						<FaFacebook />
-					</span>
-					<span>
+					</FacebookShareButton>
+
+					<TwitterShareButton url={`https://localhost/${location.pathname}`}>
 						<FaTwitter />
-					</span>
-					<span>
-						<FaGithub />
-					</span>
+					</TwitterShareButton>
+
+					<LinkedinShareButton url={`https://localhost/${location.pathname}`}>
+						<FaLinkedin />
+					</LinkedinShareButton>
 				</div>
 			</div>
 			<ConfirmationBox

@@ -58,6 +58,11 @@ textarea:disabled {
 
 .image-card-border {
 	box-shadow: none;
+	svg {
+		width: 15px;
+		height: 15px;
+		vertical-align: unset;
+	}
 }
 
 .textarea {
@@ -175,6 +180,9 @@ textarea:disabled {
 	overflow: hidden;
 	max-width: 100%;
 	height: 69px;
+	img {
+		display: none;
+	}
 }
 
 .large-blog-card {
@@ -290,6 +298,9 @@ footer {
 			max-height: 2.75rem !important;
 		}
 	}
+	.search-image {
+		height: 30px;
+	}
 }
 
 @media screen and (min-width: 1024px) {
@@ -310,6 +321,7 @@ footer {
 .is-42x42 {
 	height: 42px;
 	width: 42px;
+	cursor: pointer;
 }
 
 .user-search {
@@ -511,7 +523,7 @@ footer {
 }
 .blog-content {
 	.card-title {
-		font-size: 50px;
+		font-size: 30px;
 	}
 }
 
@@ -648,6 +660,12 @@ footer {
 // search page
 .search-container {
 	margin-top: 5%;
+	.no-item-message {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		min-height: 100px;
+	}
 }
 //search page end
 
@@ -665,19 +683,40 @@ footer {
 	}
 	.main-section {
 		margin-top: 3%;
-		.name-date {
-			align-items: baseline;
-			justify-content: space-between;
-		}
-		.content-crud {
-			display: flex;
-			.comment {
-				line-height: 32px;
+		.single-comment {
+			.name-date {
+				align-items: baseline;
+				justify-content: space-between;
 			}
-			.edit-delete {
-				margin-left: 2%;
+			.user-image {
+				height: 70px;
+				width: 70px;
+				min-height: 70px;
+				min-width: 70px;
+			}
+			.content-crud {
+				display: flex;
+				justify-content: space-between;
+				.comment {
+					line-height: 32px;
+				}
+				.edit-delete {
+					margin-left: 2%;
+					visibility: hidden;
+					img {
+						cursor: pointer;
+					}
+				}
+			}
+			&:hover {
+				background-color: whitesmoke;
+				border: 4px;
+			}
+			&:hover .edit-delete {
+				visibility: visible;
 			}
 		}
 	}
 }
+
 // comment end

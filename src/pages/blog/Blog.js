@@ -4,6 +4,7 @@ import Comments from "../../components/molecules/comments";
 import ImageCard from "../../components/molecules/imageCard";
 import BlogContent from "../../components/organisms/Blog/BlogContent";
 import LikeSaveShare from "../../components/organisms/Blog/LikeSaveShare";
+import SuggestedBlogs from "../../components/organisms/Blog/SuggestedBlogs";
 import { _getUserInfo } from "../login/services";
 import { _getBlogById } from "./services";
 
@@ -39,7 +40,20 @@ function Blog(props) {
 					<div className="column is-1"></div>
 					<div className="column is-10">
 						{authorInfo && <AuthorInfo userInfo={authorInfo} />}
-						<Comments />
+						<Comments
+							blogId={content.id}
+							authorId={authorInfo && authorInfo.id}
+						/>
+					</div>
+					<div className="column is-1"></div>
+				</div>
+				<div className="columns mt-5" style={{ textAlign: "center" }}>
+					<div className="column is-1"></div>
+					<div className="column is-10">
+						<SuggestedBlogs
+							categories={[content.categories]}
+							landingPage={false}
+						/>
 					</div>
 					<div className="column is-1"></div>
 				</div>

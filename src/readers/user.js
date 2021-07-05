@@ -7,7 +7,7 @@ const interests = _property("interests");
 const bio = _property("bio");
 const socialLinks = _property("socialLinks");
 
-export default {
+const UserReader = {
 	id,
 	imgSrc,
 	fullName,
@@ -15,3 +15,4 @@ export default {
 	bio,
 	socialLinks
 };
+export default UserReader;
