@@ -20,14 +20,10 @@ function ImageCard({ blogInfo, height = 250, date = false }) {
 	return (
 		<div class="card image-card-border" style={{ height: height }}>
 			<div class="card-content is-paddingless" style={{ height: "100%" }}>
-				<div
-					className="image-card"
-					style={{
-						backgroundImage: `url(${DEFAULT_CATEGORY_INFO.coverImageSrc})`
-					}}></div>
+				<div className="image-card has-background-dark"></div>
 				<div class="content image-card-content">
 					<span
-						className="tag is-dark"
+						className="tag "
 						style={{
 							background:
 								BlogReader.categories(blogInfo) &&

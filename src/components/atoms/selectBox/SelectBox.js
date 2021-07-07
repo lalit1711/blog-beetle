@@ -6,7 +6,7 @@ function componentName({ ...props }) {
 		<Select
 			id="select-box"
 			classNamePrefix="select"
-			placeholder="please select"
+			placeholder="Category"
 			{...props}
 		/>
 	);

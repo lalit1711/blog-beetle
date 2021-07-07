@@ -9,6 +9,7 @@ import { IMG_SRC } from "../../../constants/user";
 
 function Navbar(props) {
 	const [isLoggedIn, setIsLoggedIn] = useState(false);
+	const [showSearch, setShowSearch] = useState(false);
 	const [isDropDownOpen, setIsDropDownOpen] = useState(false);
 	const [key, setKey] = useState("");
 	const { user, userLoggedIn } = useContext(AuthenticatorContext);
@@ -61,33 +62,46 @@ function Navbar(props) {
 			<div id="navbarBasicExample" className="navbar-menu">
 				<div className="navbar-end">
 					{location.pathname.indexOf("search") === -1 && (
-						<div className="navbar-item">
-							<div className="field">
-								<p className={`control is-large ${"has-icons-left"} `}>
-									<input
-										className="input is-small"
-										type="text"
-										placeholder="Search"
-										value={key}
-										onChange={e => {
-											setKey(e.target.value);
-										}}
-										onKeyDown={e => {
-											if (e.keyCode === 13) searchKey();
-										}}
-									/>
-
-									<span className="icon is-small is-left">
-										<i>
-											<img
-												src="/icons/akar-icons_search.svg"
-												alt="search-icon"
+						<Fragment>
+							{showSearch ? (
+								<div className="navbar-item">
+									<div className="field">
+										<p className={`control is-large ${"has-icons-left"} `}>
+											<input
+												className="input is-small"
+												type="text"
+												placeholder="Search"
+												value={key}
+												onChange={e => {
+													setKey(e.target.value);
+												}}
+												onKeyDown={e => {
+													if (e.keyCode === 13) searchKey();
+												}}
+												autoFocus
+												onBlur={() => setShowSearch(false)}
 											/>
-										</i>
-									</span>
-								</p>
-							</div>
-						</div>
+
+											<span className="icon is-small is-left">
+												<i>
+													<img
+														src="/icons/akar-icons_search.svg"
+														alt="search-icon"
+													/>
+												</i>
+											</span>
+										</p>
+									</div>
+								</div>
+							) : (
+								<img
+									className="is-42x42 mt-3"
+									src="/icons/akar-icons_search.svg"
+									alt="search-icon"
+									onClick={() => setShowSearch(true)}
+								/>
+							)}
+						</Fragment>
 					)}
 					{!isLoggedIn ? (
 						<div className="navbar-item">

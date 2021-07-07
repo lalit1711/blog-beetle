@@ -168,6 +168,9 @@ textarea:disabled {
 .blog-author-card {
 	font-size: 13px;
 	color: $grey2;
+	justify-content: space-between;
+	width: 100%;
+
 	svg {
 		margin-right: 5px;
 	}
@@ -182,6 +185,12 @@ textarea:disabled {
 	height: 69px;
 	img {
 		display: none;
+	}
+	br {
+		display: none;
+	}
+	p {
+		margin-bottom: 0px !important;
 	}
 }
 
@@ -212,7 +221,6 @@ textarea:disabled {
 		}
 		.author-info {
 			color: $grey2;
-			margin-top: 20px;
 			font-size: 13px;
 			font-weight: 400;
 		}
@@ -237,7 +245,6 @@ textarea:disabled {
 			color: $grey;
 			margin-left: 15px;
 			font-size: 12px;
-			margin-top: 12px;
 		}
 	}
 	.blog-description {
@@ -453,7 +460,7 @@ footer {
 .create-blog {
 	.actions {
 		margin-top: 10px;
-		display: flex;
+		text-align: center;
 		align-items: center;
 		flex-direction: column;
 
@@ -462,6 +469,9 @@ footer {
 		}
 	}
 	.is-large {
+		border-bottom: 1px solid;
+	}
+	.is-medium {
 		border-bottom: 1px solid;
 	}
 	.select-box-area {
@@ -499,8 +509,10 @@ footer {
 
 	p,
 	li {
-		line-height: 36px;
-		font-size: 17px;
+		line-height: 2.4rem;
+		font-size: 1.2rem;
+		color: rgba(50, 50, 50, 1);
+		margin-bottom: 2rem !important;
 	}
 	h2,
 	strong {
@@ -525,11 +537,19 @@ footer {
 	.card-title {
 		font-size: 30px;
 	}
+	.author-time-info {
+		justify-content: space-evenly;
+	}
 }
 
 .like-save-share-section {
 	display: flex;
 	justify-content: space-between;
+}
+.like-save-share-column {
+	flex-direction: column;
+	align-items: center;
+	margin-top: 20px;
 }
 .suggested-blog-section {
 	display: flex;
@@ -705,6 +725,7 @@ footer {
 					visibility: hidden;
 					img {
 						cursor: pointer;
+						height: 28px;
 					}
 				}
 			}

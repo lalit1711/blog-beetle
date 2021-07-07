@@ -37,3 +37,11 @@ export const _revokeLike = function (id) {
 		url
 	});
 };
+
+export const _removeSavedBlog = function (id) {
+	const url = `/saved-blogs/${id}`;
+	return axios({
+		method: "DELETE",
+		url
+	});
+};
