@@ -22,6 +22,25 @@ export const requestData = value => {
 	};
 };
 
+export const requestDataComment = value => {
+	return {
+		offset: 0,
+		limit: 100,
+		skip: 0,
+
+		where: {
+			...value
+		},
+		fields: {
+			id: true,
+			comment: true,
+			userId: true,
+			createdAt: true,
+			blogId: true
+		}
+	};
+};
+
 export const requestDataLike = value => {
 	return {
 		offset: 0,
@@ -60,6 +79,17 @@ export const requestDataUserLike = value => {
 			fullName: true,
 			bio: true,
 			imgSrc: true
+		}
+	};
+};
+
+export const requestDataUserLikesBlog = (blogId, userId) => {
+	return {
+		offset: 0,
+		limit: 100,
+		skip: 0,
+		where: {
+			and: [{ blogId: blogId }, { userId: userId }]
 		}
 	};
 };

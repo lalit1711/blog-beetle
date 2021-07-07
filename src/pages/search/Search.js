@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { useLocation } from "react-router";
 import Tabs from "../../components/atoms/tabs/Tabs";
 import BlogSearch from "../../components/organisms/search/BlogSearch";
 import UsersSearch from "../../components/organisms/search/UserSearch";
@@ -12,14 +13,23 @@ function Search() {
 	const [searchedBlogs, setSearchedBlogs] = useState([]);
 	const [loader, setLoader] = useState(false);
 	// const { user } = useContext(AuthenticatorContext);
-	// const params = useParams();
+	const location = useLocation();
 
 	useEffect(() => {
-		searchKey();
+		const query = location.search.split("=")[1];
+		if (query) {
+			setKey(query);
+			searchKey(query);
+		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, []);
+
+	useEffect(() => {
+		searchKey(key);
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [activeTab]);
 
-	const searchKey = () => {
+	const searchKey = key => {
 		if (!key.trim()) return null;
 		setLoader(true);
 		if (activeTab === 0) {
@@ -63,8 +73,9 @@ function Search() {
 									setKey(e.target.value);
 								}}
 								onKeyDown={e => {
-									if (e.keyCode === 13) searchKey();
+									if (e.keyCode === 13) searchKey(key);
 								}}
+								autoFocus
 							/>
 							{!loader && (
 								<span className="icon is-small is-right">
@@ -77,7 +88,7 @@ function Search() {
 					</div>
 					<div className="columns">
 						<div
-							className="column is-10 is-offset-1"
+							className="column  "
 							style={{
 								marginTop: "2%"
 							}}>

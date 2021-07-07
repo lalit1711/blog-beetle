@@ -9,7 +9,7 @@ function TrendingBlogs({ blogsList }) {
 
 			{blogsList.length ? (
 				<div className="column is-10">
-					<div className="title">Trending blogs</div>
+					{/* <div className="title">Trending blogs</div> */}
 					<div className="columns">
 						<div className="column is-8 ">
 							<ImageCard blogInfo={blogsList[0]} />

@@ -3,20 +3,27 @@ import React from "react";
 function Footer() {
 	return (
 		<footer className="footer">
-			<div className="content ">
-				<p>
-					<strong className="has-text-left has-text-white">
-						Copyright &#169; Born to Blog. 2021
-					</strong>
+			<div className="content is-flex-desktop">
+				<strong className=" has-text-white">
+					Copyright &#169; Blog Beetle. 2021
+				</strong>
 
-					<strong className="has-text-right social">
-						<span>TWITTER</span>
-						<span>FACEBOOK</span>
-						<span>LINKEDIN</span>
-						<span>INSTAGRAM</span>
-						<span>GITHUB</span>
-					</strong>
-				</p>
+				<strong className=" social ">
+					<div className="columns is-multiline is-marginless">
+						<div className="column is-3">
+							<span>TWITTER</span>
+						</div>
+						<div className="column is-3">
+							<span>FACEBOOK</span>
+						</div>
+						<div className="column is-3">
+							<span>LINKEDIN</span>
+						</div>
+						<div className="column is-3">
+							<span>INSTAGRAM</span>
+						</div>
+					</div>
+				</strong>
 			</div>
 		</footer>
 	);

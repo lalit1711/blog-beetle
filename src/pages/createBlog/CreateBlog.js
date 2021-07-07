@@ -9,6 +9,7 @@ import { _createAndEditBlog } from "./services";
 
 function CreateBlog(props) {
 	const [title, setTitle] = useState("");
+	const [subTitle, setSubTitle] = useState("");
 	const [value, setValue] = useState("");
 	const [category, setCategory] = useState(null);
 	const [list, setList] = useState([]);
@@ -48,21 +49,23 @@ function CreateBlog(props) {
 			} else {
 				setEdit(data);
 				setTitle(data.title);
+				setSubTitle(data.subTitle);
 				setValue(data.blogContent);
 				setCategory({ label: data.categories, value: data.categories });
 			}
 		}
 	};
 
-	const handleBlog = () => {
+	const handleBlog = (publish = "1") => {
 		setLoader(true);
 		const dataToSend = {
 			authorId: user.id,
 			title: title,
 			coverImgSrc: "",
-			subTitle: "",
+			subTitle: subTitle,
 			categories: category && category.label,
-			blogContent: value
+			blogContent: value,
+			published: publish
 		};
 		const url = isEdit ? `/blogs/${isEdit.id}` : `/blogs`;
 		const method = isEdit ? "PUT" : "POST";
@@ -71,7 +74,7 @@ function CreateBlog(props) {
 				setLoader(false);
 				if (isEdit) props.history.push(`/blog/${isEdit.id}`);
 				else {
-					props.history.push(`/blog/${res.data.id}`);
+					if (publish === "1") props.history.push(`/blog/${res.data.id}`);
 				}
 			})
 			.catch(err => {
@@ -96,6 +99,13 @@ function CreateBlog(props) {
 								value={title}
 								onChange={e => setTitle(e.target.value)}
 							/>
+							<input
+								type="text"
+								className="input is-medium mt-5"
+								placeholder="Subtitle"
+								value={subTitle}
+								onChange={e => setSubTitle(e.target.value)}
+							/>
 							<div className="select-box-area">
 								<SelectBox
 									options={list}
@@ -110,11 +120,20 @@ function CreateBlog(props) {
 					</div>
 				</div>
 			</div>
-			<div className="column is-2 actions">
-				<Button onClick={handleBlog} loading={loader} disabled={loader}>
+			<div className="column is-2 actions is-flex-desktop">
+				<Button
+					onClick={() => handleBlog("0")}
+					loading={loader}
+					disabled={loader}>
 					Save
 				</Button>
-				{/* <Button outlined={false}>Publish</Button> */}
+				<Button
+					outlined={false}
+					disabled={isEdit || loader}
+					loading={loader}
+					onClick={() => handleBlog("1")}>
+					{isEdit ? "Published" : "Publish"}
+				</Button>
 				<Button type="is-light" onClick={() => setValue("")}>
 					Cancel
 				</Button>

@@ -17,11 +17,6 @@ function BriefCard({ blogInfo }) {
 
 	return (
 		<div className="brief-card ">
-			<div
-				className="blog-image"
-				style={{
-					background: `url(${DEFAULT_CATEGORY_INFO.coverImageSrc})`
-				}}></div>
 			<div className="blog-info">
 				<div className="blog-description">
 					<Link to={`/blog/${BlogReader.id(blogInfo)}`}>

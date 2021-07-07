@@ -6,7 +6,7 @@ import BlogReader from "../../../readers/blog";
 import { AuthenticatorContext } from "../../../context/authenticatorContext";
 import { _getFilterBlogs } from "../../../pages/landingPage/services";
 
-function SuggestedBlogs() {
+function SuggestedBlogs({ landingPage = true, categories = [] }) {
 	const [blogsList, setBlogsList] = useState([]);
 	const { user } = useContext(AuthenticatorContext);
 
@@ -14,13 +14,17 @@ function SuggestedBlogs() {
 		_getFilterBlogs(
 			"/blogs?filter=" +
 				encodeURIComponent(JSON.stringify(requestData(getFilterObject())))
-		).then(res => setBlogsList(res.data.filter(o => o.authorId !== user.id)));
+		).then(res =>
+			setBlogsList(
+				landingPage ? res.data.filter(o => o.authorId !== user.id) : res.data
+			)
+		);
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [user]);
 
 	const getFilterObject = () => {
 		if (user)
-			return user.interests.split(",").map(o => {
+			return categories.map(o => {
 				return { categories: o };
 			});
 	};

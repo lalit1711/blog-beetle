@@ -4,15 +4,19 @@ import LargeBlogCard from "../../molecules/largeBlogCard";
 
 function BlogSearch({ blogsList }) {
 	return (
-		<div style={{ marginTop: "5%" }}>
-			{_map(blogsList, blog => (
+		<div style={{ margin: 10, marginTop: "5%" }}>
+			{blogsList.length > 0 ? (
 				<Fragment>
-					<LargeBlogCard blogInfo={blog} />
-					<br />
-					<hr />
-					<br />
+					{_map(blogsList, blog => (
+						<Fragment>
+							<LargeBlogCard blogInfo={blog} />
+							<hr />
+						</Fragment>
+					))}
 				</Fragment>
-			))}
+			) : (
+				<div className="no-item-message">Nothing to display</div>
+			)}
 		</div>
 	);
 }
