@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useLocation, useParams } from "react-router";
+import { useLocation } from "react-router";
 import Tabs from "../../components/atoms/tabs/Tabs";
 import BlogSearch from "../../components/organisms/search/BlogSearch";
 import UsersSearch from "../../components/organisms/search/UserSearch";
@@ -21,6 +21,7 @@ function Search() {
 			setKey(query);
 			searchKey(query);
 		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
 	useEffect(() => {

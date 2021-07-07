@@ -1,10 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 // components import
 import { _getAllBlogs } from "./services";
-import Loader from "../../common/Loader";
-
-// blog reader
-
 import LatestBlogs from "../../components/organisms/Blog/LatestBlogs";
 import TrendingBlogs from "../../components/organisms/Blog/TrendingBlogs";
 import { AuthenticatorContext } from "../../context/authenticatorContext";

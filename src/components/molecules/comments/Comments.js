@@ -16,6 +16,7 @@ function Comments({ blogId, authorId }) {
 
 	useEffect(() => {
 		getComments();
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [blogId]);
 
 	const getComments = () => {

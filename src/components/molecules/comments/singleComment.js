@@ -23,14 +23,16 @@ function SingleComment({ comment, authorId, handleDelete }) {
 						<div
 							className="user-image"
 							style={{
-								backgroundImage: `url(${commentUser.imgSrc || IMG_SRC})`
+								backgroundImage: `url(${
+									UserReader.imgSrc(commentUser) || IMG_SRC
+								})`
 							}}></div>
 					</div>
 					<div className="column ">
 						<div className="name-date is-flex">
-							<Link to={`/author/${commentUser.id}`}>
+							<Link to={`/author/${UserReader.id(commentUser)}`}>
 								<div className="subtitle has-text-dark has-text-weight-semibold">
-									{commentUser.fullName}
+									{UserReader.fullName(commentUser)}
 								</div>
 							</Link>
 							<div className="date ">

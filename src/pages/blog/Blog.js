@@ -16,7 +16,6 @@ import categories from "../../constants/categories";
 function Blog(props) {
 	const [content, setContent] = useState("");
 	const [authorInfo, setAuthorInfo] = useState(null);
-	const [triggered, setTriggered] = useState(false);
 	const [loader, setLoader] = useState(false);
 
 	useEffect(() => {
@@ -38,15 +37,7 @@ function Blog(props) {
 		<div>
 			<div className="container">
 				<div className="columns create-blog">
-					<div className="column is-2">
-						{" "}
-						{/* <LikeSaveShare
-							blogInfo={content}
-							fixed={true}
-							setTriggered={setTriggered}
-							triggered
-						/> */}
-					</div>
+					<div className="column is-2"></div>
 					<div className="column is-8">
 						<div className="hero is-small blog-content mt-5">
 							<div className="hero-body has-text-centered">
@@ -80,11 +71,7 @@ function Blog(props) {
 							</div>
 						</div>
 						<BlogContent content={content.blogContent} />
-						<LikeSaveShare
-							blogInfo={content}
-							setTriggered={setTriggered}
-							triggered
-						/>
+						<LikeSaveShare blogInfo={content} triggered />
 					</div>
 				</div>
 				<hr />
