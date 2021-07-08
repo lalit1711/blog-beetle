@@ -6,10 +6,15 @@ import BlogReader from "../../../readers/blog";
 import { AuthenticatorContext } from "../../../context/authenticatorContext";
 import { _getFilterBlogs } from "../../../pages/landingPage/services";
 
-function SuggestedBlogs({ landingPage = true, categories = [] }) {
+function SuggestedBlogs({
+	landingPage = true,
+	categories = [],
+	title = true,
+	fullWidth = false
+}) {
 	const [blogsList, setBlogsList] = useState([]);
 	const { user } = useContext(AuthenticatorContext);
-
+	console.log(categories);
 	useEffect(() => {
 		_getFilterBlogs(
 			"/blogs?filter=" +
@@ -20,7 +25,7 @@ function SuggestedBlogs({ landingPage = true, categories = [] }) {
 			)
 		);
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [user]);
+	}, [user, categories]);
 
 	const getFilterObject = () => {
 		if (user)
@@ -31,14 +36,14 @@ function SuggestedBlogs({ landingPage = true, categories = [] }) {
 
 	return (
 		<div className="columns">
-			<div className="column is-1"></div>
-			<div className="column is-10">
-				<div className="title">Suggested blogs</div>
+			{!fullWidth && <div className="column is-1"></div>}
+			<div className="column ">
+				{title && <div className="title">Suggested blogs</div>}
 				<div className="columns is-multiline">
 					{_map(blogsList, renderBlogCard)}
 				</div>
 			</div>
-			<div className="column is-1"></div>
+			{!fullWidth && <div className="column is-1"></div>}
 		</div>
 	);
 }

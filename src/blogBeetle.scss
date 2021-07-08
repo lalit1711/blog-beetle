@@ -2,6 +2,7 @@
 
 // Google fonts import
 @import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap");
 
 // Set BLogBeetle's colors
 $green: #1a8917;
@@ -16,7 +17,7 @@ $skyblue: #6cc2f2;
 $red: #fa4d4d;
 
 // Update global variables
-$family-sans-serif: "Montserrat", sans-serif;
+$font-family: "Montserrat, sans-serif";
 $grey-dark: $grey2;
 $grey-light: $grey;
 $primary: $green2;

@@ -405,13 +405,23 @@ footer {
 	}
 }
 .social-section {
+	display: flex;
+	align-items: center;
 	margin-top: 50px;
+	color: $primary;
+	img {
+		height: 30px;
+	}
 	span {
-		margin: 0 10px;
+		margin: 0 5px;
 	}
 	svg {
 		height: 30px;
 		width: 30px;
+	}
+
+	button {
+		min-width: 40px !important;
 	}
 }
 
@@ -454,6 +464,10 @@ footer {
 			height: 30px;
 		}
 	}
+}
+
+.blog-title {
+	font-size: 3rem;
 }
 
 // Create blog Start
@@ -637,6 +651,9 @@ footer {
 .author-page {
 	.tab-section {
 		margin-top: 3%;
+	}
+	.social-section {
+		color: $white;
 	}
 	.main-section {
 		margin-top: 5%;

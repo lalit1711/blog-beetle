@@ -18,7 +18,7 @@ function BlogCard({ blogInfo }) {
 	}, [blogInfo.authorId]);
 	return (
 		<Link to={`/blog/${BlogReader.id(blogInfo)}`}>
-			<div className="card" style={{ height: 250 }}>
+			<div className="card" style={{ height: 270 }}>
 				<div className="card-content">
 					<div className="content blog-card">
 						<span
