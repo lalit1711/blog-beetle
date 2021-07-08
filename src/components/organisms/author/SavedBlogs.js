@@ -1,77 +1,70 @@
 import React, { useEffect, useState } from "react";
 import _map from "lodash/map";
-import LargeBlogCard from "../../molecules/largeBlogCard";
+import BlogCard from "../../molecules/blogCard";
 import axios from "axios";
 import { reset } from "aphrodite";
+import { requestDataSavedBlog } from "../../../helpers/util";
+import { useParams } from "react-router";
 
 function SavedBlogs() {
 	const [blogList, setBlogsList] = useState([]);
+	const params = useParams();
+	const userId = params.id;
 
-	const requestDataSavedBlog={
-		"offset": 0,
-		"limit": 100,
-		"skip": 0,
-		"where": {
-		  "userId": "7c2313cb-4f15-49d1-a2e1-9f6c5f72862d",
-		  "active": 1
-		},
-		"fields": {
-		  "id": true,
-		  "userId": true,
-		  "blogId": true,
-		  "active": true,
-		  "createdAt": true,
-		  "updatedAt": true
-		}
-	  }
-
-
-	
 	useEffect(() => {
-		axios.get("/saved-blogs?filter=" + encodeURIComponent(JSON.stringify(requestDataSavedBlog))).then(res => {
-			console.log("----savedBlogs----",res.data)
-			const requestData=getSavedBlogRequestData(res.data.map(item=>item.blogId))
-			axios.get("/blogs?filter=" + encodeURIComponent(JSON.stringify(requestData))).then(res =>setBlogsList(res.data))
-		});
+		axios
+			.get(
+				"/saved-blogs?filter=" +
+					encodeURIComponent(JSON.stringify(requestDataSavedBlog(userId)))
+			)
+			.then(res => {
+				console.log("----savedBlogs----", res.data);
+				const requestData = getSavedBlogRequestData(
+					res.data.map(item => item.blogId)
+				);
+				axios
+					.get(
+						"/blogs?filter=" + encodeURIComponent(JSON.stringify(requestData))
+					)
+					.then(res => setBlogsList(res.data));
+			});
 	}, []);
 
-	return <div className="authors-blogs">
-		{_map(blogList, blog => {
-			return (
-				<div className="blog">
-					<LargeBlogCard blogInfo={blog} />
-					<hr />
-				</div>
-			);
-		})}
-	</div>
+	return (
+		<div className="authors-blogs columns is-multiline">
+			{_map(blogList, blog => {
+				return (
+					<div className="column is-4">
+						<BlogCard blogInfo={blog} />
+					</div>
+				);
+			})}
+		</div>
+	);
 }
 
-
-
-
-function getSavedBlogRequestData (blogIdArray){
+function getSavedBlogRequestData(blogIdArray) {
 	return {
-		"offset": 0,
-		"limit": 100,
-		"skip": 0,
-		
-		"where": {
-		  "id": {"inq":blogIdArray}
+		offset: 0,
+		limit: 100,
+		skip: 0,
+
+		where: {
+			id: { inq: blogIdArray }
 		},
-		"fields": {
-		  "id": true,
-		  "title": true,
-		  "coverImgSrc": true,
-		  "subTitle": true,
-		  "authorId": true,
-		  "blogContent": true,
-		  "published": true,
-		  "categories": true,
-		  "createdAt": true,
-		  "updatedAt": true
+		fields: {
+			id: true,
+			title: true,
+			coverImgSrc: true,
+			subTitle: true,
+			authorId: true,
+			blogContent: true,
+			published: true,
+			categories: true,
+			createdAt: true,
+			updatedAt: true
 		}
-	  }
+	};
 }
 
 export default SavedBlogs;

@@ -7,9 +7,7 @@ import UserReader from "../../../readers/user";
 function AuthorBanner({ userInfo }) {
 	return (
 		<section className="hero is-medium is-dark author-banner">
-			<div
-				className="hero-body"
-				style={{ backgroundImage: `url(${userInfo.cover})` }}>
+			<div className="hero-body">
 				<div className="hero-cover-image"></div>
 
 				<div

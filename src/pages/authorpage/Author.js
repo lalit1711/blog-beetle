@@ -1,4 +1,6 @@
-import React, { useContext, useState } from "react";
+import axios from "axios";
+import React, { useContext, useEffect, useState } from "react";
+import Skeleton from "react-loading-skeleton";
 import { useParams } from "react-router";
 import Tabs from "../../components/atoms/tabs/Tabs";
 import AuthorBanner from "../../components/molecules/authorBanner";
@@ -11,6 +13,7 @@ import { AuthenticatorContext } from "../../context/authenticatorContext";
 function AuthorPage() {
 	const [activeTab, setActiveTab] = useState(0);
 	const { user } = useContext(AuthenticatorContext);
+	const [authorInfo, setAuthorInfo] = useState(null);
 	const params = useParams();
 
 	const tabOptions = [
@@ -19,32 +22,40 @@ function AuthorPage() {
 		{ title: "Saved Blogs", index: 2 },
 		{ title: "Drafts", index: 3 }
 	];
-	return (
-		<div className="author-page">
-			<AuthorBanner userInfo={user} />
-			<div className="main-container ">
-				<div className="columns">
-					<div className="column is-2"></div>
-					<div className="column is-8">
-						<div className="tab-section">
-							{!user ||
-								(user && params.id === user.id && (
-									<Tabs
-										tabOptions={tabOptions}
-										active={activeTab}
-										setActiveTab={setActiveTab}
-									/>
-								))}
+
+	useEffect(() => {
+		axios.get(`/users/${params.id}`).then(res => setAuthorInfo(res.data));
+	}, [params.id]);
+	if (authorInfo)
+		return (
+			<div className="author-page">
+				<AuthorBanner userInfo={authorInfo} />
+				<div className="main-container ">
+					<div className="columns">
+						<div className="column is-2"></div>
+						<div className="column is-8">
+							<div className="tab-section">
+								{!user ||
+									(user && params.id === user.id && (
+										<Tabs
+											tabOptions={tabOptions}
+											active={activeTab}
+											setActiveTab={setActiveTab}
+										/>
+									))}
+							</div>
+							<div className="main-section">
+								{getActiveTabComponent(activeTab)}
+							</div>
 						</div>
-						<div className="main-section">
-							{getActiveTabComponent(activeTab)}
-						</div>
+						<div className="column is-2"></div>
 					</div>
-					<div className="column is-2"></div>
 				</div>
 			</div>
-		</div>
-	);
+		);
+	else {
+		return <Skeleton height={400} />;
+	}
 }
 
 const getActiveTabComponent = active => {
