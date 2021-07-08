@@ -259,6 +259,9 @@ textarea:disabled {
 		}
 	}
 }
+hr {
+	margin: 0.5rem 0;
+}
 
 .tabs {
 	cursor: pointer;
@@ -661,7 +664,7 @@ footer {
 	.authors-blogs {
 		.blog {
 			hr {
-				margin: 5% 0px;
+				margin: 2% 0px;
 			}
 		}
 	}
