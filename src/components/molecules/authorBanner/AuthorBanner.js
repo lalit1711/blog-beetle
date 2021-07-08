@@ -6,7 +6,7 @@ import UserReader from "../../../readers/user";
 
 function AuthorBanner({ userInfo }) {
 	return (
-		<section className="hero is-medium is-dark author-banner">
+		<section className="hero is-small is-dark author-banner">
 			<div className="hero-body">
 				<div className="hero-cover-image"></div>
 
