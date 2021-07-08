@@ -12,7 +12,8 @@ function BlogsOfAuthor() {
 		"skip": 0,
 
 		"where": {
-			"authorId": "7c2313cb-4f15-49d1-a2e1-9f6c5f72862d"
+			"authorId": "7c2313cb-4f15-49d1-a2e1-9f6c5f72862d",
+			 "published":1
 		},
 		"fields": {
 			"id": true,

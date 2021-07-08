@@ -17,6 +17,7 @@ function AuthorProfile() {
 	const [linkedIn, setLinkedIn] = useState(false);
 	const [bio, setBio] = useState(false);
 	const [socialLinks, setSocialLinks] = useState("");
+	const [interests, setInterests] = useState("");
 
 	useEffect(() => {
 		axios.get("/users/" + userId).then(res => setUserData(res.data));
@@ -29,6 +30,9 @@ function AuthorProfile() {
 				setSocialLinks(JSON.parse(userData.socialLinks));
 			}
 			setBio(userData.bio)
+			if (userData.interests) {
+				setInterests(userData.interests)
+			}
 		}
 	}, [userData]);
 
@@ -38,6 +42,10 @@ function AuthorProfile() {
 		setTwitter(socialLinks.twitter ? socialLinks.twitter : '')
 		setLinkedIn(socialLinks.linkedIn ? socialLinks.linkedIn : '')
 	}, [socialLinks])
+
+	useEffect(() => {
+		console.log("--interestchanged--", interests)
+	}, [interests])
 
 
 	function capitalizeFirstLetter(string) {
@@ -68,6 +76,11 @@ function AuthorProfile() {
 					reqData.bio = enteredFieldValue;
 				}
 				break;
+			case "interests":
+				{
+					reqData.interests = enteredFieldValue;
+				}
+				break;
 
 			default: {
 			}
@@ -87,6 +100,7 @@ function AuthorProfile() {
 	};
 	// -----------------------------------------------------------------------------------------------
 
+	console.log("====INTRESTS", interests)
 	return (
 		<div className="columns is-mobile">
 			<div className="author-profile column is-10 is-offset-1">
@@ -176,14 +190,16 @@ function AuthorProfile() {
 					<div className="field">
 						<label className="label">Interests</label>
 						<div className="control">
-							<SelectBox isMulti isDisabled={activeBox !== 2} />
+							{interests ? <SelectBox inputData={interests} setInterests={setInterests} isMulti isDisabled={activeBox !== 2} /> : ''}
 							<div className="is-help">Max 3 interests</div>
 						</div>
 					</div>
 					<div className="actions is-flex">
 						{activeBox === 2 ? (
 							<Fragment>
-								<Button>Save</Button>
+								<Button onClick={()=>{
+									updateProfileTextField(interests,"interests")
+								}}>Save</Button>
 								<Button type="light" onClick={() => setActiveBox(-1)}>
 									Cancel
 								</Button>
@@ -196,7 +212,7 @@ function AuthorProfile() {
 					</div>
 				</div>
 				<div className="form-control is-flex-desktop">
-					<UploadFile />
+					{/* <UploadFile /> */}
 				</div>
 				<div className="form-control is-flex-desktop">
 					<div className="field">
