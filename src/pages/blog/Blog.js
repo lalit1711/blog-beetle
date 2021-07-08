@@ -7,6 +7,7 @@ import LikeSaveShare from "../../components/organisms/Blog/LikeSaveShare";
 import SuggestedBlogs from "../../components/organisms/Blog/SuggestedBlogs";
 import BlogLoader from "../../components/organisms/loader/BlogLoader";
 import { _getUserInfo } from "../login/services";
+import ImageCard from "../../components/molecules/imageCard";
 import { _getBlogById } from "./services";
 import { Link } from "react-router-dom";
 import { FaClock, FaUser } from "react-icons/fa";
