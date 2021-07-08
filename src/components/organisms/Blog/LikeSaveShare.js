@@ -153,13 +153,13 @@ function LikeSaveShare({
 							</Fragment>
 						) : (
 							<Fragment>
+								<span className="count has-text-info">{count}</span>
 								<span>
 									{likeId ? (
 										<AiFillLike onClick={handleLikeDelete} />
 									) : (
 										<AiOutlineLike onClick={handleLike} />
 									)}
-									<span className="count">{count}</span>
 								</span>
 								<span>
 									{saveId ? (

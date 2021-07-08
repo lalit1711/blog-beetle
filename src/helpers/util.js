@@ -93,3 +93,73 @@ export const requestDataUserLikesBlog = (blogId, userId) => {
 		}
 	};
 };
+
+export const requestBlogDataForUser = id => {
+	return {
+		offset: 0,
+		limit: 100,
+		skip: 0,
+
+		where: {
+			authorId: id,
+			published: 1
+		},
+		fields: {
+			id: true,
+			title: true,
+			coverImgSrc: true,
+			subTitle: true,
+			authorId: true,
+			blogContent: true,
+			published: true,
+			categories: true,
+			createdAt: true,
+			updatedAt: true
+		}
+	};
+};
+
+export const requestDataSavedBlog = id => {
+	return {
+		offset: 0,
+		limit: 100,
+		skip: 0,
+		where: {
+			userId: id,
+			active: 1
+		},
+		fields: {
+			id: true,
+			userId: true,
+			blogId: true,
+			active: true,
+			createdAt: true,
+			updatedAt: true
+		}
+	};
+};
+
+export const requestDataForDrafts = id => {
+	return {
+		offset: 0,
+		limit: 100,
+		skip: 0,
+
+		where: {
+			authorId: id,
+			published: 0
+		},
+		fields: {
+			id: true,
+			title: true,
+			coverImgSrc: true,
+			subTitle: true,
+			authorId: true,
+			blogContent: true,
+			published: true,
+			categories: true,
+			createdAt: true,
+			updatedAt: true
+		}
+	};
+};

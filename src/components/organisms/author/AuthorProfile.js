@@ -4,10 +4,11 @@ import Button from "../../atoms/button";
 import SelectBox from "../../atoms/selectBox";
 import axios from "../../../config/axios";
 import Swal from "sweetalert2";
-
-const userId = "7c2313cb-4f15-49d1-a2e1-9f6c5f72862d";
+import { useParams } from "react-router";
 
 function AuthorProfile() {
+	const params = useParams();
+	const userId = params.id;
 	const [activeBox, setActiveBox] = useState(-1);
 	const [userData, setUserData] = useState(false);
 	const [fullName, setFullName] = useState(false);
@@ -29,24 +30,23 @@ function AuthorProfile() {
 			if (userData.socialLinks !== "") {
 				setSocialLinks(JSON.parse(userData.socialLinks));
 			}
-			setBio(userData.bio)
+			setBio(userData.bio);
 			if (userData.interests) {
-				setInterests(userData.interests)
+				setInterests(userData.interests);
 			}
 		}
 	}, [userData]);
 
 	useEffect(() => {
-		setFacebook(socialLinks.facebook ? socialLinks.facebook : '')
-		setGithub(socialLinks.github ? socialLinks.github : '')
-		setTwitter(socialLinks.twitter ? socialLinks.twitter : '')
-		setLinkedIn(socialLinks.linkedIn ? socialLinks.linkedIn : '')
-	}, [socialLinks])
+		setFacebook(socialLinks.facebook ? socialLinks.facebook : "");
+		setGithub(socialLinks.github ? socialLinks.github : "");
+		setTwitter(socialLinks.twitter ? socialLinks.twitter : "");
+		setLinkedIn(socialLinks.linkedIn ? socialLinks.linkedIn : "");
+	}, [socialLinks]);
 
 	useEffect(() => {
-		console.log("--interestchanged--", interests)
-	}, [interests])
-
+		console.log("--interestchanged--", interests);
+	}, [interests]);
 
 	function capitalizeFirstLetter(string) {
 		return string.charAt(0).toUpperCase() + string.slice(1);
@@ -65,10 +65,10 @@ function AuthorProfile() {
 				break;
 			case "socialLinks":
 				{
-					reqData.socialLinks = socialLinks
+					reqData.socialLinks = socialLinks;
 					reqData.socialLinks[socialLinkName] = enteredFieldValue;
 					reqData.socialLinks = JSON.stringify(reqData.socialLinks);
-					console.log(reqData.socialLinks)
+					console.log(reqData.socialLinks);
 				}
 				break;
 			case "bio":
@@ -100,7 +100,7 @@ function AuthorProfile() {
 	};
 	// -----------------------------------------------------------------------------------------------
 
-	console.log("====INTRESTS", interests)
+	console.log("====INTRESTS", interests);
 	return (
 		<div className="columns is-mobile">
 			<div className="author-profile column is-10 is-offset-1">
@@ -129,7 +129,6 @@ function AuthorProfile() {
 											fullName,
 											"fullName"
 										);
-
 									}}>
 									Save
 								</Button>
@@ -158,7 +157,7 @@ function AuthorProfile() {
 								className="textarea has-fixed-size"
 								placeholder="Enter your bio"
 								disabled={activeBox !== 1}
-								onChange={(e) => {
+								onChange={e => {
 									setBio(e.target.value);
 								}}
 								value={bio ? bio : ""}
@@ -169,12 +168,12 @@ function AuthorProfile() {
 					<div className="actions is-flex">
 						{activeBox === 1 ? (
 							<Fragment>
-								<Button onClick={() => {
-									updateProfileTextField(
-										bio,
-										"bio"
-									);
-								}}>Save</Button>
+								<Button
+									onClick={() => {
+										updateProfileTextField(bio, "bio");
+									}}>
+									Save
+								</Button>
 								<Button type="light" onClick={() => setActiveBox(-1)}>
 									Cancel
 								</Button>
@@ -190,16 +189,28 @@ function AuthorProfile() {
 					<div className="field">
 						<label className="label">Interests</label>
 						<div className="control">
-							{interests ? <SelectBox inputData={interests} setInterests={setInterests} isMulti isDisabled={activeBox !== 2} /> : ''}
+							{interests ? (
+								<SelectBox
+									inputData={interests}
+									setInterests={setInterests}
+									isMulti
+									isDisabled={activeBox !== 2}
+								/>
+							) : (
+								""
+							)}
 							<div className="is-help">Max 3 interests</div>
 						</div>
 					</div>
 					<div className="actions is-flex">
 						{activeBox === 2 ? (
 							<Fragment>
-								<Button onClick={()=>{
-									updateProfileTextField(interests,"interests")
-								}}>Save</Button>
+								<Button
+									onClick={() => {
+										updateProfileTextField(interests, "interests");
+									}}>
+									Save
+								</Button>
 								<Button type="light" onClick={() => setActiveBox(-1)}>
 									Cancel
 								</Button>
@@ -223,7 +234,9 @@ function AuthorProfile() {
 								type="text"
 								placeholder="Enter your facebook id"
 								disabled={activeBox !== 4}
-								onChange={(e) => { setFacebook(e.target.value) }}
+								onChange={e => {
+									setFacebook(e.target.value);
+								}}
 								value={facebook ? facebook : ""}
 							/>
 						</div>
@@ -231,7 +244,12 @@ function AuthorProfile() {
 					<div className="actions is-flex">
 						{activeBox === 4 ? (
 							<Fragment>
-								<Button onClick={(e) => { updateProfileTextField(facebook, "socialLinks", "facebook") }}>Save</Button>
+								<Button
+									onClick={e => {
+										updateProfileTextField(facebook, "socialLinks", "facebook");
+									}}>
+									Save
+								</Button>
 								<Button type="light" onClick={() => setActiveBox(-1)}>
 									Cancel
 								</Button>
@@ -252,17 +270,22 @@ function AuthorProfile() {
 								type="text"
 								placeholder="Enter your GitHub"
 								disabled={activeBox !== 5}
-								onChange={(e) => { setGithub(e.target.value) }}
-								value={github ? github : ''}
+								onChange={e => {
+									setGithub(e.target.value);
+								}}
+								value={github ? github : ""}
 							/>
 						</div>
 					</div>
 					<div className="actions is-flex">
 						{activeBox === 5 ? (
 							<Fragment>
-								<Button onClick={() => {
-									updateProfileTextField(github, "socialLinks", "github")
-								}}>Save</Button>
+								<Button
+									onClick={() => {
+										updateProfileTextField(github, "socialLinks", "github");
+									}}>
+									Save
+								</Button>
 								<Button type="light" onClick={() => setActiveBox(-1)}>
 									Cancel
 								</Button>
@@ -283,7 +306,9 @@ function AuthorProfile() {
 								type="text"
 								placeholder="Enter your Twitter"
 								disabled={activeBox !== 6}
-								onChange={(e) => { setTwitter(e.target.value) }}
+								onChange={e => {
+									setTwitter(e.target.value);
+								}}
 								value={twitter ? twitter : ""}
 							/>
 						</div>
@@ -291,7 +316,12 @@ function AuthorProfile() {
 					<div className="actions is-flex">
 						{activeBox === 6 ? (
 							<Fragment>
-								<Button onClick={(e) => { updateProfileTextField(twitter, "socialLinks", "twitter") }}>Save</Button>
+								<Button
+									onClick={e => {
+										updateProfileTextField(twitter, "socialLinks", "twitter");
+									}}>
+									Save
+								</Button>
 								<Button type="light" onClick={() => setActiveBox(-1)}>
 									Cancel
 								</Button>
@@ -312,7 +342,9 @@ function AuthorProfile() {
 								type="text"
 								placeholder="Enter your Linkedin"
 								disabled={activeBox !== 7}
-								onChange={(e) => { setLinkedIn(e.target.value) }}
+								onChange={e => {
+									setLinkedIn(e.target.value);
+								}}
 								value={linkedIn ? linkedIn : ""}
 							/>
 						</div>
@@ -320,7 +352,12 @@ function AuthorProfile() {
 					<div className="actions is-flex">
 						{activeBox === 7 ? (
 							<Fragment>
-								<Button onClick={(e) => { updateProfileTextField(linkedIn, "socialLinks", "linkedIn") }}>Save</Button>
+								<Button
+									onClick={e => {
+										updateProfileTextField(linkedIn, "socialLinks", "linkedIn");
+									}}>
+									Save
+								</Button>
 								<Button type="light" onClick={() => setActiveBox(-1)}>
 									Cancel
 								</Button>

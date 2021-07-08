@@ -64,7 +64,7 @@ function Comments({ blogId, authorId }) {
 				{user && (
 					<div className="write-comment columns mt-5">
 						<div className="form-control column is-10 is-offset-1 is-flex-desktop">
-							<div style={{ width: "100%" }}>
+							<div style={{ width: "100%" }} className="mb-2">
 								<textarea
 									className="textarea has-fixed-size"
 									placeholder="Add Comment"

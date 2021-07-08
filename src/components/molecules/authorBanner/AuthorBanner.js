@@ -1,21 +1,19 @@
 import React from "react";
 import { FaFacebook, FaGithub, FaTwitter } from "react-icons/fa";
 import { Link } from "react-router-dom";
-
+import { IMG_SRC } from "../../../constants/user";
 import UserReader from "../../../readers/user";
 
 function AuthorBanner({ userInfo }) {
 	return (
-		<section className="hero is-medium is-dark author-banner">
-			<div
-				className="hero-body"
-				style={{ backgroundImage: `url(${userInfo.cover})` }}>
+		<section className="hero is-small is-light author-banner">
+			<div className="hero-body">
 				<div className="hero-cover-image"></div>
 
 				<div
 					className="user-image is-rounded"
 					style={{
-						backgroundImage: `url(${UserReader.imgSrc(userInfo)})`
+						backgroundImage: `url(${UserReader.imgSrc(userInfo) || IMG_SRC})`
 					}}></div>
 
 				<p className="title">
@@ -24,7 +22,7 @@ function AuthorBanner({ userInfo }) {
 					</Link>
 				</p>
 				<hr />
-				<p className="subtitle">{userInfo.bio}</p>
+				<p className="subtitle has-text-centered">{userInfo.bio}</p>
 				<div className="social-section" style={{ margin: "20px 0px" }}>
 					<span>
 						<FaFacebook />

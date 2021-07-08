@@ -42,10 +42,11 @@ function Blog(props) {
 					<div className="column is-8">
 						<div className="hero is-small blog-content mt-5">
 							<div className="hero-body has-text-centered">
-								<p className="title">{content.title}</p>
+								<p className="title blog-title">{content.title}</p>
 								{content.subTitle && (
 									<p className="subtitle mt-3">{content.subTitle}</p>
 								)}
+
 								<div className="author-time-info is-flex">
 									<span
 										className="tag is-dark"

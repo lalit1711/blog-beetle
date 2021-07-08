@@ -7,6 +7,7 @@ import categories from "../../../constants/categories";
 import { FaUser } from "react-icons/fa";
 import { _getAuthorInfo } from "../../../services/services";
 import LikeSaveShare from "../../organisms/Blog/LikeSaveShare";
+import blog from "../../../readers/blog";
 
 function BlogCard({ blogInfo }) {
 	const [authorInfo, setAuthorInfo] = useState(null);
@@ -17,7 +18,7 @@ function BlogCard({ blogInfo }) {
 	}, [blogInfo.authorId]);
 	return (
 		<Link to={`/blog/${BlogReader.id(blogInfo)}`}>
-			<div className="card" style={{ height: 250 }}>
+			<div className="card" style={{ height: 270 }}>
 				<div className="card-content">
 					<div className="content blog-card">
 						<span
@@ -33,7 +34,9 @@ function BlogCard({ blogInfo }) {
 						<span className="card-title">{BlogReader.title(blogInfo)}</span>
 						<hr />
 						<span className="blog-description">
-							{ReactHtmlParser(BlogReader.blogContent(blogInfo))}
+							{blogInfo.subTitle
+								? blogInfo.subTitle
+								: ReactHtmlParser(BlogReader.blogContent(blogInfo))}
 						</span>
 						<span className="blog-author-card has-text-weight-bold is-uppercase is-flex">
 							<span>

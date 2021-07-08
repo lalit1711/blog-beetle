@@ -1,7 +1,7 @@
 import axios from "axios";
 import React, { useContext, useEffect, useState } from "react";
+import Select from "react-select";
 import Button from "../../components/atoms/button";
-import SelectBox from "../../components/atoms/selectBox";
 import Editor from "../../components/organisms/Editor";
 import { AuthenticatorContext } from "../../context/authenticatorContext";
 import { _getBlogById } from "../blog/services";
@@ -15,6 +15,7 @@ function CreateBlog(props) {
 	const [list, setList] = useState([]);
 	const [loader, setLoader] = useState(false);
 	const [isEdit, setEdit] = useState(false);
+	const [isPublished, setIsPublished] = useState("0");
 	const { user } = useContext(AuthenticatorContext);
 
 	useEffect(() => {
@@ -52,6 +53,7 @@ function CreateBlog(props) {
 				setSubTitle(data.subTitle);
 				setValue(data.blogContent);
 				setCategory({ label: data.categories, value: data.categories });
+				setIsPublished(data.published);
 			}
 		}
 	};
@@ -82,6 +84,7 @@ function CreateBlog(props) {
 				alert("Oops! something went wrong");
 			});
 	};
+	console.log("id", category);
 
 	return (
 		<div className="columns create-blog">
@@ -107,10 +110,13 @@ function CreateBlog(props) {
 								onChange={e => setSubTitle(e.target.value)}
 							/>
 							<div className="select-box-area">
-								<SelectBox
+								<Select
+									id="select-box"
 									options={list}
-									value={category}
+									classNamePrefix="select"
+									placeholder="Category"
 									onChange={e => setCategory(e)}
+									value={category}
 								/>
 							</div>
 						</div>
@@ -122,17 +128,17 @@ function CreateBlog(props) {
 			</div>
 			<div className="column is-2 actions is-flex-desktop">
 				<Button
-					onClick={() => handleBlog("0")}
+					onClick={() => handleBlog(isPublished)}
 					loading={loader}
 					disabled={loader}>
 					Save
 				</Button>
 				<Button
 					outlined={false}
-					disabled={isEdit || loader}
+					disabled={loader || isPublished === "1"}
 					loading={loader}
 					onClick={() => handleBlog("1")}>
-					{isEdit ? "Published" : "Publish"}
+					{isPublished === "0" ? "Publish" : "Published"}
 				</Button>
 				<Button type="is-light" onClick={() => setValue("")}>
 					Cancel
