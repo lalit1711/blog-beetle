@@ -41,9 +41,7 @@ function renderLargeCard(blog) {
 	return (
 		<div className="column is-11" key={blog.id}>
 			<LargeBlogCard blogInfo={blog} />
-			<br />
 			<hr />
-			<br />
 		</div>
 	);
 }
@@ -51,7 +49,7 @@ function renderBriefCard(blog) {
 	return (
 		<div className="column " key={blog.id}>
 			<BriefCard blogInfo={blog} />
-			<br />
+			<hr />
 		</div>
 	);
 }
