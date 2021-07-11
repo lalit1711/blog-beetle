@@ -12,14 +12,14 @@ function AuthorBanner({ userInfo }) {
 			<div className="hero-body">
 				<div className="hero-cover-image"></div>
 				<div
-					className="user-image is-rounded"
+					className="user-image is-rounded scaleAnimate"
 					style={{
-						backgroundImage: `url(${UserReader.imgSrc(userInfo) || IMG_SRC})`, display: 'flex', justifyContent: 'center', alignItems: 'center'
+						backgroundImage: `url(${UserReader.imgSrc(userInfo) || IMG_SRC})`,height:'6em',width:'6em'
 					}}>
 
 				</div>
 
-				<p className="title">
+				<p style={{marginTop:'12px'}} className="title">
 					<Link to={`/author/${userInfo.id}`}>
 						{UserReader.fullName(userInfo) || userInfo.name}
 					</Link>

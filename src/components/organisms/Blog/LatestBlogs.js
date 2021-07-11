@@ -18,15 +18,13 @@ function LatestBlogs({ blogsList }) {
 			<div className="column is-1"></div>
 			{blogsList.length ? (
 				<div className="column is-10">
-					<div className="title" style={{ marginBottom: 50 }}>
-						Latest blogs
-					</div>
+					<h1 style={{ textAlign: "center", fontSize: '25px', fontWeight: "bold",marginBottom:'50px' }}> <span style={{ fontSize: '45px', color: '#a3ce20', textDecoration: 'underline'}}>L</span>atest blog posts</h1>
 					<div className="columns">
 						<div className="column is-9">
 							{_map(sectionOne, renderLargeCard)}
 						</div>
 						<div className="column vl">
-							<div className="subtitle">More Blogs</div>
+						<h1 style={{ textAlign: "center", fontSize: '25px', fontWeight: "bold",marginBottom:'50px' }}> <span style={{ fontSize: '45px', color: '#a3ce20', textDecoration: 'underline'}}>M</span>ore blogs</h1>
 							{_map(sectionTwo, renderBriefCard)}
 						</div>
 					</div>

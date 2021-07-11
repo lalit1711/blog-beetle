@@ -14,7 +14,7 @@ const ReactLottie = ({ keyIndex = 0 }) => {
         loop: true,
         autoplay: true,
         style: {
-            height: keyIndex===1?"340px":'180px',
+            height: keyIndex === 1 ? "340px" : '180px',
             marginTop: 0
         },
         interactivity: {
@@ -31,7 +31,7 @@ const ReactLottie = ({ keyIndex = 0 }) => {
 
     const { View } = useLottie(options);
 
-    return (<>{View}</>)
+    return (<div draggable="true">{View}</div>)
 
 }
 
