@@ -105,6 +105,9 @@ function AuthorProfile() {
 		<div className="columns is-mobile">
 			<div className="author-profile column is-10 is-offset-1">
 				<div className="form-control is-flex-desktop">
+					<UploadFile userId={userId} />
+				</div>
+				<div className="form-control is-flex-desktop">
 					<div className="field">
 						<label className="label">Name</label>
 						<div className="control">
@@ -221,9 +224,6 @@ function AuthorProfile() {
 							</Button>
 						)}
 					</div>
-				</div>
-				<div className="form-control is-flex-desktop">
-					{/* <UploadFile /> */}
 				</div>
 				<div className="form-control is-flex-desktop">
 					<div className="field">
@@ -374,14 +374,34 @@ function AuthorProfile() {
 	);
 }
 
-const UploadFile = () => {
+const UploadFile = ({ userId }) => {
 	async function onChange(e) {
 		console.log("trigger");
 		const file = e.target.files[0];
 		try {
-			const result = await Storage.put(file.name, file, {
-				contentType: "image/png" // contentType is optional
-			});
+			let formData = new FormData();
+			formData.append("sampleFile", file);
+			let result = await axios.post("http://3.7.98.9:5000/upload", formData, {
+			})
+			if (result.data.status) {
+				let fileLocation = result.data.fileData.Location;
+				let bodyData = {
+					imgSrc: fileLocation
+				}
+				let response = await axios.patch("/users?where=" + encodeURIComponent(JSON.stringify({ id: userId })), bodyData)
+				console.log("==response===", response)
+				if (response.data.count > 0) {
+					Swal.fire({
+						icon: 'success',
+						timer: 2000,
+						title:'Profile Pic Updated Successfully'
+					}).then(res=>{
+						window.location.reload();
+					})
+				}
+
+			}
+
 			console.log(result);
 		} catch (error) {
 			console.log("Error uploading file: ", error);
