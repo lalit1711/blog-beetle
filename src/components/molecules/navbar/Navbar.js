@@ -4,7 +4,7 @@ import Button from "../../atoms/button/Button";
 import { Link, useHistory, useLocation } from "react-router-dom";
 import { AuthenticatorContext } from "../../../context/authenticatorContext";
 import Auth from "@aws-amplify/auth";
-import blogBeetleLogo from ".././../../assets/beetle.png";
+import blogBeetleLogo from ".././../../assets/beetle.jpg";
 import { IMG_SRC } from "../../../constants/user";
 
 function Navbar(props) {
@@ -54,7 +54,7 @@ function Navbar(props) {
 					<img
 						src={blogBeetleLogo}
 						alt="blog-beetle"
-						style={{ height: "80px", width: "60px" }}
+						style={{ height: "80px", width: "50px",borderRadius:'50%',objectFit:'cover' }}
 					/>
 				</Link>
 			</div>

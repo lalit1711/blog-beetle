@@ -4,6 +4,7 @@ import { StyleSheet, css } from "aphrodite";
 import Button from "../../components/atoms/button";
 import { Link } from "react-router-dom";
 import { _createUser, _signUp } from "./services";
+import beetleLogo from "../../assets/beetle.jpg"
 
 function SignUp(props) {
 	const [email, setEmail] = useState("");
@@ -47,8 +48,8 @@ function SignUp(props) {
 			<div class="modal-content">
 				<div className="columns is-mobile">
 					<div className="column is-three-fifths is-offset-one-fifth container">
-						<figure class="image is-128x128">
-							<img src="/logo.png" alt="logo" />
+						<figure class="image ">
+							<img src={beetleLogo} alt="logo" style={{ objectFit: "cover", borderRadius: '50%', height: '120px', width: '120px' }} />
 						</figure>
 						<div className="form-container">
 							<form onSubmit={handleSubmit}>
