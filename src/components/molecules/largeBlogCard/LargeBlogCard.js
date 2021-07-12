@@ -20,23 +20,24 @@ function LargeBlogCard({ blogInfo }) {
 	return (
 		<div className="large-blog-card columns">
 			<div className="blog-info column  is-paddingless " style={{ margin: 10 }}>
-				<Link to={`/blog/${BlogReader.id(blogInfo)}`}>
+				<Link to={`/blog/${BlogReader.id(blogInfo)}`} className="">
 					<div className="title has-text-black">
 						{BlogReader.title(blogInfo)}
+						<span
+							className="tag is-dark ml-4"
+							style={{
+								background:
+									BlogReader.categories(blogInfo) &&
+									categories[BlogReader.categories(blogInfo).trim()] &&
+									categories[BlogReader.categories(blogInfo).trim()].color
+							}}>
+							{BlogReader.categories(blogInfo)}
+						</span>
 					</div>
 				</Link>
-				<span
-					className="tag is-dark mt-3"
-					style={{
-						background:
-							BlogReader.categories(blogInfo) &&
-							categories[BlogReader.categories(blogInfo).trim()] &&
-							categories[BlogReader.categories(blogInfo).trim()].color
-					}}>
-					{BlogReader.categories(blogInfo)}
-				</span>
+
 				<hr />
-				<div className="blog-description">
+				<div className="blog-description mb-5">
 					{ReactHtmlParser(BlogReader.blogContent(blogInfo))}
 				</div>
 				<Link to={`/author/${blogInfo.authorId}`}>

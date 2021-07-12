@@ -8,6 +8,9 @@ button {
 	font-size: 18px;
 	min-width: 90px;
 }
+.card {
+	border-radius: 4px !important;
+}
 
 input[type="text"] {
 	box-shadow: none;
@@ -111,7 +114,6 @@ textarea:disabled {
 }
 
 .image-card {
-	filter: blur(2px);
 	height: 100%;
 	background-position: center;
 	background-repeat: no-repeat;
@@ -401,6 +403,7 @@ footer {
 				font-weight: 600;
 			}
 		}
+
 		hr {
 			width: 50%;
 			margin-bottom: 30px;
@@ -430,9 +433,11 @@ footer {
 
 #select-box {
 	.select__control {
+		font-family: "Montserrat";
 		border: none;
-		border-bottom: 1px solid $black;
+		border-bottom: 0.1rem solid $black !important;
 		border-radius: 0;
+		font-weight: 500;
 	}
 	.css-1527syg-multiValue {
 	}
@@ -444,9 +449,10 @@ footer {
 		padding: 1px 10px 1px 7px;
 		border-radius: 10%;
 	}
-	.select__control--is_focused {
+	.select__control--is-focused {
 		border: none;
 		box-shadow: none;
+		border-bottom: 0.1rem solid $black !important;
 	}
 	.select__control--is-disabled {
 		background-color: $white;
@@ -471,6 +477,7 @@ footer {
 
 .blog-title {
 	font-size: 3rem;
+	text-align: left;
 }
 
 // Create blog Start
@@ -761,3 +768,13 @@ footer {
 }
 
 // comment end
+
+// Responsive
+
+@media only screen and (max-width: 600px) {
+	.user-main {
+		flex-direction: column;
+	}
+}
+
+//

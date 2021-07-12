@@ -7,12 +7,11 @@ import LikeSaveShare from "../../components/organisms/Blog/LikeSaveShare";
 import SuggestedBlogs from "../../components/organisms/Blog/SuggestedBlogs";
 import BlogLoader from "../../components/organisms/loader/BlogLoader";
 import { _getUserInfo } from "../login/services";
-import ImageCard from "../../components/molecules/imageCard";
 import { _getBlogById } from "./services";
 import { Link } from "react-router-dom";
 import { FaClock, FaUser } from "react-icons/fa";
-import dateformat from "dateformat";
 import categories from "../../constants/categories";
+import ReactTimeAgo from "react-time-ago";
 
 function Blog(props) {
 	const [content, setContent] = useState("");
@@ -24,7 +23,10 @@ function Blog(props) {
 		setLoader(true);
 		_getBlogById(blogId)
 			.then(res => {
-				setContent({ ...tempData, ...res.data });
+				setContent(res.data);
+				// TODO: Enable this condition by fixing code in BE
+				// if (res.data.published === "0" && user.id !== res.data.authorId)
+				// 	props.history.push("/");
 				_getUserInfo(res.data.authorId).then(res => {
 					setAuthorInfo(res.data);
 					setLoader(false);
@@ -42,7 +44,7 @@ function Blog(props) {
 					<div className="column is-8">
 						<div className="hero is-small blog-content mt-5">
 							<div className="hero-body has-text-centered">
-								<p className="title blog-title">{content.title}</p>
+								<p className="title blog-title ">{content.title}</p>
 								{content.subTitle && (
 									<p className="subtitle mt-3">{content.subTitle}</p>
 								)}
@@ -66,12 +68,17 @@ function Blog(props) {
 									<span className="subtitle " style={{ marginLeft: 20 }}>
 										<FaClock style={{ height: 16 }} />{" "}
 										<span className="is-size-6">
-											{dateformat(content.createdAt, "mediumDate")}
+											{content && content.createdAt ? (
+												<ReactTimeAgo date={content.createdAt} locale="en-US" />
+											) : (
+												"Not Published"
+											)}
 										</span>
 									</span>
 								</div>
 							</div>
 						</div>
+
 						<BlogContent content={content.blogContent} />
 						<LikeSaveShare blogInfo={content} triggered />
 					</div>
@@ -102,16 +109,5 @@ function Blog(props) {
 		</div>
 	);
 }
-
-const tempData = {
-	cover:
-		"https://cdn.pixabay.com/photo/2021/05/01/09/59/city-6220689_960_720.jpg",
-	title: "How to hack NASA with HTML",
-	authorName: "Ranchor Das",
-	url: "/howtohack",
-	authorId: "007",
-	categoryName: "Food",
-	description: `Nostrud fugiat cupidatat consequat anim aliquip officia. Nostrud non eu nisi tempor ad. Culpa do velit minim dolore cupidatat tempor deserunt in officia. Adipisicing excepteur fugiat voluptate duis deserunt commodo nostrud ad do et culpa ad adipisicing fugiat. Consequat proident voluptate fugiat irure ullamco ipsum cillum proident aliqua incididunt non nisi consequat.`
-};
 
 export default Blog;

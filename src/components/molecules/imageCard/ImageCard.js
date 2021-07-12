@@ -8,7 +8,7 @@ import BlogReader from "../../../readers/blog";
 import categories from "../../../constants/categories";
 import { _getAuthorInfo } from "../../../services/services";
 
-function ImageCard({ blogInfo, height = 270, date = false }) {
+function ImageCard({ blogInfo, height = 270, date = true }) {
 	const [authorInfo, setAuthorInfo] = useState(null);
 
 	useEffect(() => {

@@ -4,10 +4,10 @@ import ReactHtmlParser from "react-html-parser";
 
 import BlogReader from "../../../readers/blog";
 import categories from "../../../constants/categories";
-import { FaUser } from "react-icons/fa";
+import { FaClock, FaUser } from "react-icons/fa";
 import { _getAuthorInfo } from "../../../services/services";
 import LikeSaveShare from "../../organisms/Blog/LikeSaveShare";
-import blog from "../../../readers/blog";
+import dateformat from "dateformat";
 
 function BlogCard({ blogInfo }) {
 	const [authorInfo, setAuthorInfo] = useState(null);
@@ -17,10 +17,10 @@ function BlogCard({ blogInfo }) {
 		});
 	}, [blogInfo.authorId]);
 	return (
-		<Link to={`/blog/${BlogReader.id(blogInfo)}`}>
-			<div className="card" style={{ height: 270 }}>
-				<div className="card-content">
-					<div className="content blog-card">
+		<div className="card" style={{ height: 270 }}>
+			<div className="card-content">
+				<div className="content blog-card">
+					<div className="before-heading author-time-info is-flex">
 						<span
 							className="tag is-info"
 							style={{
@@ -31,30 +31,42 @@ function BlogCard({ blogInfo }) {
 							}}>
 							{BlogReader.categories(blogInfo) || "Unknown"}
 						</span>
-						<span className="card-title">{BlogReader.title(blogInfo)}</span>
-						<hr />
-						<span className="blog-description">
-							{blogInfo.subTitle
-								? blogInfo.subTitle
-								: ReactHtmlParser(BlogReader.blogContent(blogInfo))}
+						<span className="subtitle " style={{ marginLeft: 20 }}>
+							<FaClock style={{ height: 16 }} />{" "}
+							<span className="is-size-6">
+								{dateformat(blogInfo.createdAt, "mediumDate")}
+							</span>
 						</span>
-						<span className="blog-author-card has-text-weight-bold is-uppercase is-flex">
+					</div>
+
+					<span className="card-title ">
+						<Link
+							to={`/blog/${BlogReader.id(blogInfo)}`}
+							className="has-text-black">
+							<span>{BlogReader.title(blogInfo)}</span>
+						</Link>
+					</span>
+
+					<hr />
+					<span className="blog-description">
+						{blogInfo.subTitle
+							? blogInfo.subTitle
+							: ReactHtmlParser(BlogReader.blogContent(blogInfo))}
+					</span>
+					<span className="blog-author-card has-text-weight-bold is-uppercase is-flex mt-4">
+						<Link to={`author/${blogInfo.authorId}`} className="has-text-dark">
 							<span>
 								<FaUser />
 								{authorInfo && authorInfo.fullName}
 							</span>
-							<span>
-								<LikeSaveShare
-									blogInfo={blogInfo}
-									fixed={true}
-									onlyView={true}
-								/>
-							</span>
+						</Link>
+						<span>
+							<LikeSaveShare blogInfo={blogInfo} fixed={true} onlyView={true} />
 						</span>
-					</div>
+					</span>
 				</div>
 			</div>
-		</Link>
+		</div>
 	);
 }
 

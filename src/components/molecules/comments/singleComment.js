@@ -1,10 +1,10 @@
 import React, { useContext, useEffect, useState } from "react";
-import dateformat from "dateformat";
 import UserReader from "../../../readers/user";
 import { IMG_SRC } from "../../../constants/user";
 import { _getUserInfo } from "../../../pages/login/services";
 import { Link } from "react-router-dom";
 import { AuthenticatorContext } from "../../../context/authenticatorContext";
+import ReactTimeAgo from "react-time-ago";
 
 function SingleComment({ comment, authorId, handleDelete }) {
 	const { user } = useContext(AuthenticatorContext);
@@ -21,7 +21,7 @@ function SingleComment({ comment, authorId, handleDelete }) {
 				<div className="columns single-comment">
 					<div className="column is-1">
 						<div
-							className="user-image"
+							className="user-image is-hidden-touch"
 							style={{
 								backgroundImage: `url(${
 									UserReader.imgSrc(commentUser) || IMG_SRC
@@ -36,7 +36,7 @@ function SingleComment({ comment, authorId, handleDelete }) {
 								</div>
 							</Link>
 							<div className="date ">
-								{dateformat(comment.createdAt, "mediumDate")}
+								<ReactTimeAgo date={comment.createdAt} locale="en-US" />
 							</div>
 						</div>
 						<div className="content-crud is-flex-desktop">
