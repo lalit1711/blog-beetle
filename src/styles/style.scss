@@ -11,6 +11,9 @@ button {
 .card {
 	border-radius: 4px !important;
 }
+.column {
+	padding: 1rem !important;
+}
 
 input[type="text"] {
 	box-shadow: none;
@@ -561,9 +564,10 @@ footer {
 	.card-title {
 		font-size: 30px;
 	}
-	.author-time-info {
-		justify-content: space-evenly;
-	}
+}
+.author-time-info {
+	justify-content: space-between;
+	width: 100%;
 }
 
 .like-save-share-section {

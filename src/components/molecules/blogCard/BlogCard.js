@@ -7,7 +7,7 @@ import categories from "../../../constants/categories";
 import { FaClock, FaUser } from "react-icons/fa";
 import { _getAuthorInfo } from "../../../services/services";
 import LikeSaveShare from "../../organisms/Blog/LikeSaveShare";
-import dateformat from "dateformat";
+import ReactTimeAgo from "react-time-ago";
 
 function BlogCard({ blogInfo }) {
 	const [authorInfo, setAuthorInfo] = useState(null);
@@ -34,7 +34,7 @@ function BlogCard({ blogInfo }) {
 						<span className="subtitle " style={{ marginLeft: 20 }}>
 							<FaClock style={{ height: 16 }} />{" "}
 							<span className="is-size-6">
-								{dateformat(blogInfo.createdAt, "mediumDate")}
+								<ReactTimeAgo date={blogInfo.createdAt} locale="en-US" />
 							</span>
 						</span>
 					</div>
