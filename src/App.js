@@ -8,9 +8,11 @@ import ErrorBoundary from "./pages/ErrorBoundary";
 
 function App() {
 	return (
-		<ErrorBoundary>
-			<RouteController />
-		</ErrorBoundary>
+		<div>
+			<ErrorBoundary>
+				<RouteController />
+			</ErrorBoundary>
+		</div>
 	);
 }
 

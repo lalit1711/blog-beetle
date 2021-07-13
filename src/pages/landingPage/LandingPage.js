@@ -24,13 +24,13 @@ function LandingPage() {
 	return (
 		<div className="landing-page">
 			<div className="container">
-				<div style={{ marginTop: "5%" }}>
+				<div className="mt-10">
 					{!load ? <TrendingBlogs blogsList={blogsList} /> : <TrendingLoader />}
 				</div>
-				<div style={{ marginTop: "5%" }}>
+				<div className="mt-10">
 					{!load ? <LatestBlogs blogsList={blogsList} /> : <LatestLoader />}
 				</div>
-				<div style={{ margin: "1% 0%" }}>
+				<div className="mt-3">
 					{!load ? (
 						<Fragment>
 							{user && user.interests && (

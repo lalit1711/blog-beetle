@@ -60,9 +60,9 @@ function BlogCard({ blogInfo }) {
 								{authorInfo && authorInfo.fullName}
 							</span>
 						</Link>
-						<span>
-							<LikeSaveShare blogInfo={blogInfo} fixed={true} onlyView={true} />
-						</span>
+						<div className="card-like-and-save">
+							<LikeSaveShare blogInfo={blogInfo} fixed={true} />
+						</div>
 					</span>
 				</div>
 			</div>

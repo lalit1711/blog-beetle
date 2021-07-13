@@ -40,16 +40,17 @@ function LargeBlogCard({ blogInfo }) {
 				<div className="blog-description mb-5">
 					{ReactHtmlParser(BlogReader.blogContent(blogInfo))}
 				</div>
-				<Link to={`/author/${blogInfo.authorId}`}>
-					<div className="author-info is-uppercase is-flex blog-author-card">
+
+				<div className="author-info is-uppercase is-flex blog-author-card">
+					<Link to={`/author/${blogInfo.authorId}`}>
 						<span>
 							<FaUser /> {authorInfo && authorInfo.fullName}
 						</span>
-						<span>
-							<LikeSaveShare blogInfo={blogInfo} fixed={true} onlyView={true} />
-						</span>
-					</div>
-				</Link>
+					</Link>
+					<span>
+						<LikeSaveShare blogInfo={blogInfo} fixed={true} />
+					</span>
+				</div>
 			</div>
 		</div>
 	);
