@@ -9,6 +9,7 @@ import TrendingLoader from "../../components/organisms/loader/TrendingLoader";
 import LatestLoader from "../../components/organisms/loader/LatestLoader";
 import { Fragment } from "react";
 import SuggestedLoader from "../../components/organisms/loader/SuggestedLoader";
+import ReactLottie from "../../animation/LottieReact";
 
 function LandingPage() {
 	const [blogsList, setBlogsList] = useState([]);
@@ -43,6 +44,7 @@ function LandingPage() {
 					) : (
 						<SuggestedLoader />
 					)}
+					<ReactLottie />
 				</div>
 			</div>
 		</div>

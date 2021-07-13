@@ -5,6 +5,7 @@ import Button from "../../components/atoms/button";
 import { Link } from "react-router-dom";
 import { _getUserInfo, _signIn } from "./services";
 import { AuthenticatorContext } from "../../context/authenticatorContext";
+import beetleLogo from "./../../assets/beetle.jpg"
 
 function LogIn(props) {
 	const [username, setUsername] = useState("");
@@ -50,8 +51,8 @@ function LogIn(props) {
 			<div class="modal-content">
 				<div className="columns is-mobile">
 					<div className="column is-three-fifths is-offset-one-fifth container">
-						<figure class="image is-128x128">
-							<img src="/logo.png" alt="logo" />
+						<figure class="image">
+							<img src={beetleLogo} alt="logo" style={{objectFit:"cover",borderRadius:'50%',height:'120px',width:'120px'}} />
 						</figure>
 						<div className="form-container">
 							<form onSubmit={handleSubmit}>

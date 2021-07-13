@@ -55,3 +55,34 @@ $footer-padding: 40px;
 
 @import "./node_modules/bulma/bulma";
 @import "./styles/style.scss";
+
+/* width */
+::-webkit-scrollbar {
+	width: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+	background: #f1f1f1;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+	background: #a3ce20;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+	background: #555;
+}
+
+.scaleAnimate:hover {
+	transform: scale(1.3);
+	transition: 0.3s all ease-in;
+	border: 3px solid #a3ce20;
+}
+
+.scaleAnimateMain:hover {
+	transform: scale(1.3);
+	transition: 0.3s all ease-in;
+}
