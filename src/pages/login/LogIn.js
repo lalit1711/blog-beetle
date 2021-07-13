@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { flipInY } from "react-animations";
+import { zoomIn } from "react-animations";
 import { StyleSheet, css } from "aphrodite";
 import Button from "../../components/atoms/button";
 import { Link } from "react-router-dom";
@@ -16,7 +16,7 @@ function LogIn(props) {
 
 	const styles = StyleSheet.create({
 		bounce: {
-			animationName: flipInY,
+			animationName: zoomIn,
 			animationDuration: "0.5s"
 		}
 	});
@@ -47,12 +47,12 @@ function LogIn(props) {
 
 	return (
 		<div className={`modal is-active sign-up-log-in  ${css(styles.bounce)}`}>
-			<div class="modal-background"></div>
+			<div style={{ backgroundColor: '#d5ead5' }} class="modal-background"></div>
 			<div class="modal-content">
 				<div className="columns is-mobile">
 					<div className="column is-three-fifths is-offset-one-fifth container">
 						<figure class="image">
-							<img src={beetleLogo} alt="logo" style={{objectFit:"cover",borderRadius:'50%',height:'120px',width:'120px'}} />
+							<img src={beetleLogo} alt="logo" style={{ objectFit: "cover", borderRadius: '50%', height: '120px', width: '120px' }} />
 						</figure>
 						<div className="form-container">
 							<form onSubmit={handleSubmit}>
@@ -61,6 +61,7 @@ function LogIn(props) {
 									<div className="control">
 										<input
 											className="input"
+											style={{ backgroundColor: '#d5ead5' }}
 											type="email"
 											placeholder="Enter your email"
 											value={username}
@@ -72,6 +73,7 @@ function LogIn(props) {
 									<label className="label">Password</label>
 									<div className="control">
 										<input
+											style={{ backgroundColor: '#d5ead5' }}
 											className="input"
 											type="password"
 											placeholder="Enter your password"

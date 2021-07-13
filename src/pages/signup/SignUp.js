@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { flipInY } from "react-animations";
+import { zoomIn } from "react-animations";
 import { StyleSheet, css } from "aphrodite";
 import Button from "../../components/atoms/button";
 import { Link } from "react-router-dom";
@@ -15,8 +15,8 @@ function SignUp(props) {
 
 	const styles = StyleSheet.create({
 		bounce: {
-			animationName: flipInY,
-			animationDuration: "0.5s"
+			animationName: zoomIn,
+			animationDuration: "0.4s"
 		}
 	});
 
@@ -44,7 +44,7 @@ function SignUp(props) {
 
 	return (
 		<div className={`modal is-active sign-up-log-in  ${css(styles.bounce)}`}>
-			<div class="modal-background"></div>
+			<div style={{ backgroundColor: '#d5ead5' }} class="modal-background"></div>
 			<div class="modal-content">
 				<div className="columns is-mobile">
 					<div className="column is-three-fifths is-offset-one-fifth container">
@@ -57,6 +57,7 @@ function SignUp(props) {
 									<label className="label">Name</label>
 									<div className="control">
 										<input
+											style={{ backgroundColor: '#d5ead5' }}
 											className="input"
 											type="text"
 											placeholder="Enter your name"
@@ -69,6 +70,7 @@ function SignUp(props) {
 									<label className="label">Email</label>
 									<div className="control">
 										<input
+											style={{ backgroundColor: '#d5ead5' }}
 											className="input"
 											type="email"
 											placeholder="Enter your email"
@@ -81,6 +83,7 @@ function SignUp(props) {
 									<label className="label">Password</label>
 									<div className="control">
 										<input
+											style={{ backgroundColor: '#d5ead5' }}
 											className="input"
 											type="password"
 											placeholder="Enter your password"

@@ -42,7 +42,7 @@ function BlogCard({ blogInfo }) {
 					<span className="card-title ">
 						<Link
 							to={`/blog/${BlogReader.id(blogInfo)}`}
-							className="has-text-black">
+							className="has-text-black titleBlogCard">
 							<span>{BlogReader.title(blogInfo)}</span>
 						</Link>
 					</span>
@@ -53,7 +53,7 @@ function BlogCard({ blogInfo }) {
 							? blogInfo.subTitle
 							: ReactHtmlParser(BlogReader.blogContent(blogInfo))}
 					</span>
-					<span className="blog-author-card has-text-weight-bold is-uppercase is-flex mt-4">
+					<span className="blog-author-card has-text-weight-bold is-uppercase is-flex mt-4 ">
 						<Link to={`author/${blogInfo.authorId}`} className="has-text-dark">
 							<span>
 								<FaUser />

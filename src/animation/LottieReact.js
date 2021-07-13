@@ -14,8 +14,9 @@ const ReactLottie = ({ keyIndex = 0 }) => {
         loop: true,
         autoplay: true,
         style: {
-            height: keyIndex === 1 ? "340px" : '180px',
-            marginTop: 0
+            height: keyIndex === 1 ? "160px" : '180px',
+            marginTop: 0,
+            width:'250px'
         },
         interactivity: {
             mode: "cursor",

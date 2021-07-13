@@ -3,6 +3,7 @@
 // Google fonts import
 @import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@300&display=swap");
 
 // Set BLogBeetle's colors
 $green: #1a8917;
@@ -85,4 +86,88 @@ $footer-padding: 40px;
 .scaleAnimateMain:hover {
 	transform: scale(1.3);
 	transition: 0.3s all ease-in;
+}
+
+// ========================================== Animation =================================================================
+
+.animateLikeButton {
+	animation: shake 0.82s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+}
+@keyframes shake {
+	10% {
+		transform: translate3d(-1px, 0, 0);
+		transform: rotate(90deg);
+	}
+
+	20%,
+	80% {
+		transform: translate3d(2px, 0, 0);
+	}
+
+	30%,
+	50%,
+	70% {
+		transform: translate3d(-4px, 0, 0);
+		transform: scale(1.2);
+	}
+
+	40%,
+	60% {
+		transform: translate3d(4px, 0, 0);
+		transform: scale(1.6);
+	}
+}
+
+.animateSaveButton {
+	animation: scale 0.4s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+}
+
+@keyframes scale {
+	40%,
+	60% {
+		transform: scale(1.6);
+	}
+}
+
+.pulsate {
+	animation: pulse 4s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+	animation-iteration-count: infinite;
+}
+
+@keyframes pulse {
+	0% {
+		color: #001f3f;
+	}
+	20% {
+		color: #0c335a;
+	}
+	30% {
+		color: #3b094e;
+	}
+	40% {
+		color: #09341a;
+	}
+	60% {
+		color: #198443;
+	}
+	80% {
+		color: #167190;
+	}
+	90% {
+		color: #93197c;
+	}
+	100% {
+		color: #3d1d1c;
+	}
+}
+
+* {
+	font-family: "Quicksand", sans-serif;
+	font-weight: 800;
+	letter-spacing: -0.5px;
+}
+
+span::first-letter {
+	color: #a3ce20;
+	text-decoration: underline;
 }

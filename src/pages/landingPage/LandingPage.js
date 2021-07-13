@@ -26,6 +26,9 @@ function LandingPage() {
 		<div className="landing-page">
 			<div className="container">
 				<div className="mt-10">
+
+					<h1 style={{ textAlign: "center", fontSize: '25px', fontWeight: "bold", marginBottom: '50px' }}> <span style={{ fontSize: '45px', color: '#a3ce20', textDecoration: 'underline' }}>T</span>rending</h1>
+
 					{!load ? <TrendingBlogs blogsList={blogsList} /> : <TrendingLoader />}
 				</div>
 				<div className="mt-10">

@@ -55,7 +55,7 @@ function Navbar(props) {
 					<img
 						src={blogBeetleLogo}
 						alt="blog-beetle"
-						style={{ height: "80px", width: "50px",borderRadius:'50%',objectFit:'cover' }}
+						style={{ height: "80px", width: "45px",borderRadius:'50%',objectFit:'cover' }}
 					/>
 				</Link>
 

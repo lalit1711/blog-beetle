@@ -176,16 +176,16 @@ function LikeSaveShare({
 								<span className="count has-text-info">{count}</span>
 								<span>
 									{likeId ? (
-										<AiFillLike onClick={handleLikeDelete} />
+										<AiFillLike style={{cursor:'pointer'}} className="animateLikeButton" onClick={handleLikeDelete} />
 									) : (
-										<AiOutlineLike onClick={handleLike} />
+										<AiOutlineLike style={{cursor:'pointer'}}  onClick={handleLike} />
 									)}
 								</span>
 								<span>
 									{saveId ? (
-										<BsBookmarkFill onClick={handleSavedDelete} />
+										<BsBookmarkFill style={{cursor:'pointer'}} className="animateSaveButton" onClick={handleSavedDelete} />
 									) : (
-										<BsBookmark onClick={handleSave} />
+										<BsBookmark style={{cursor:'pointer'}} onClick={handleSave} />
 									)}
 								</span>
 							</Fragment>
