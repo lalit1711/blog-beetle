@@ -15,7 +15,7 @@ const ReactLottie = ({ keyIndex = 0 }) => {
         loop: true,
         autoplay: true,
         style: {
-            height: keyIndex === 2 ? "80vh" : (keyIndex === 1 ? "160px" : '180px'),
+            height: keyIndex === 2 ? "500px" : (keyIndex === 1 ? "160px" : '180px'),
             marginTop: 0,
             // width: '250px'
         },

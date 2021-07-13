@@ -81,7 +81,7 @@ function CreateBlog(props) {
 			})
 			.catch(err => {
 				setLoader(false);
-				alert("Oops! something went wrong");
+				// alert("Oops! something went wrong");
 			});
 	};
 	console.log("id", category);
