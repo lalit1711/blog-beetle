@@ -9,7 +9,9 @@ import {
 	_getLikeCount,
 	_likeBlog,
 	_removeSavedBlog,
-	_revokeLike
+	_revokeLike,
+	_reLike,
+	_getCurrentUserContextLikes
 } from "../../../pages/blog/services";
 import ConfirmationBox from "../../molecules/confirmationBox";
 import {
@@ -24,7 +26,7 @@ function LikeSaveShare({
 	blogInfo,
 	fixed = false,
 	triggered = false,
-	setTriggered = () => {},
+	setTriggered = () => { },
 	onlyView = false
 }) {
 	const [openConfirmationBox, setOpenConfirmationBox] = useState(false);
@@ -48,12 +50,15 @@ function LikeSaveShare({
 	// find out weather loggedIn user has liked the blog or not
 	useEffect(() => {
 		if (!user || !blogInfo || user === 1 || blogInfo === "" || onlyView) return;
+
+		// alert("USERID:"+user.id)
+
 		axios
 			.get(
 				"/blog-likes?filter=" +
-					encodeURIComponent(
-						JSON.stringify(requestDataUserLikesBlog(blogInfo.id, user.id))
-					)
+				encodeURIComponent(
+					JSON.stringify(requestDataUserLikesBlog(blogInfo.id, user.id))
+				)
 			)
 			.then(res => {
 				if (res.data.length) {
@@ -61,17 +66,16 @@ function LikeSaveShare({
 				}
 			});
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [user, blogInfo, triggered]);
+	}, [user, blogInfo, triggered,likeId]);
 
 	// find out weather loggedIn user has liked the blog or not
 	useEffect(() => {
 		if (!user || !blogInfo || user === 1 || blogInfo === "" || onlyView) return;
-		axios
-			.get(
+		axios.get( 
 				"/saved-blogs?filter=" +
-					encodeURIComponent(
-						JSON.stringify(requestDataUserLikesBlog(blogInfo.id, user.id))
-					)
+				encodeURIComponent(
+					JSON.stringify(requestDataUserLikesBlog(blogInfo.id, user.id))
+				)
 			)
 			.then(res => {
 				if (res.data.length) {
@@ -89,15 +93,31 @@ function LikeSaveShare({
 	const handleDelete = () => setOpenConfirmationBox(true);
 
 	const handleLike = () => {
-		const data = {
+		const userBlogInfo={
 			userId: user.id,
 			blogId: blogInfo.id,
-			active: 1
+		}
+		const data = {
+			where: userBlogInfo
 		};
-		_likeBlog(data).then(res => {
-			setLikeId(res.data.id);
-			setTriggered(!triggered);
-		});
+
+		_getCurrentUserContextLikes(data).then(res => {
+			if (res.data.length === 0) {
+				_likeBlog(userBlogInfo).then(res => {
+					setLikeId(res.data.id);
+					setTriggered(!triggered);
+				});
+			}
+			if(res.data.length>0){
+				if(res.data[0].active){
+				}
+				else{
+					_reLike(userBlogInfo).then(respp=>{
+						setLikeId(1)
+					})
+				}
+			}
+		})
 	};
 
 	const handleSave = () => {
@@ -112,9 +132,12 @@ function LikeSaveShare({
 	};
 
 	const handleLikeDelete = () => {
-		_revokeLike(likeId).then(res => {
+		const data = {
+			userId: user.id,
+			blogId: blogInfo.id,
+		};
+		_revokeLike(data).then(res => {
 			setLikeId(0);
-			setTriggered(!triggered);
 		});
 	};
 

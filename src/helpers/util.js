@@ -89,7 +89,7 @@ export const requestDataUserLikesBlog = (blogId, userId) => {
 		limit: 100,
 		skip: 0,
 		where: {
-			and: [{ blogId: blogId }, { userId: userId }]
+			and: [{ blogId: blogId }, { userId: userId },{active:1}]
 		}
 	};
 };
