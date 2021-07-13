@@ -26,7 +26,7 @@ function LatestBlogs({ blogsList }) {
 						<div
 							className="vl is-hidden-touch"
 							style={{ height: "auto" }}></div>
-						<div className="column ">
+						<div className="column ispaddingless">
 							<div className="subtitle column ispaddingless">More Blogs</div>
 							{_map(sectionTwo, renderBriefCard)}
 						</div>
@@ -48,7 +48,7 @@ function renderLargeCard(blog) {
 }
 function renderBriefCard(blog) {
 	return (
-		<div className="column is-paddingless" key={blog.id}>
+		<div className=" mt-5" key={blog.id}>
 			<BriefCard blogInfo={blog} />
 			<hr />
 		</div>

@@ -25,17 +25,13 @@ function LandingPage() {
 	return (
 		<div className="landing-page">
 			<div className="container">
-				<h1 style={{ textAlign: "center", fontSize: '45px', fontWeight: "bold" }}> <span style={{ fontSize: '70px', color: '#a3ce20',textDecoration:'underline' }}>W</span>elcome to BlogBeetle</h1>
-				<ReactLottie keyIndex={1} />
-				<hr style={{marginTop:'-40px'}}/>
-				<h1 style={{ textAlign: "center", fontSize: '25px', fontWeight: "bold" }}> <span style={{ fontSize: '40px', color: '#a3ce20',textDecoration:'underline' }}>O</span>ur trending blog posts</h1>
-				<div style={{ marginTop: "5%" }}>
+				<div className="mt-10">
 					{!load ? <TrendingBlogs blogsList={blogsList} /> : <TrendingLoader />}
 				</div>
-				<div style={{ marginTop: "8%" }}>
+				<div className="mt-10">
 					{!load ? <LatestBlogs blogsList={blogsList} /> : <LatestLoader />}
 				</div>
-				<div style={{ margin: "1% 0%" }}>
+				<div className="mt-3">
 					{!load ? (
 						<Fragment>
 							{user && user.interests && (

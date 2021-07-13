@@ -7,6 +7,7 @@ import { Link } from "react-router-dom";
 import BlogReader from "../../../readers/blog";
 import categories from "../../../constants/categories";
 import { _getAuthorInfo } from "../../../services/services";
+import ReactTimeAgo from "react-time-ago";
 
 function ImageCard({ blogInfo, height = 270, date = true }) {
 	const [authorInfo, setAuthorInfo] = useState(null);
@@ -39,7 +40,9 @@ function ImageCard({ blogInfo, height = 270, date = true }) {
 					</Link>
 
 					<hr />
-					<Link to={`/author/${BlogReader.authorId(blogInfo)}`}>
+					<Link
+						to={`/author/${BlogReader.authorId(blogInfo)}`}
+						className="author-time-info is-flex">
 						<span className="has-text-white is-size-6">
 							<FaUser /> {authorInfo && authorInfo.fullName}
 						</span>
@@ -49,7 +52,7 @@ function ImageCard({ blogInfo, height = 270, date = true }) {
 								style={{ marginLeft: 20 }}>
 								<FaClock />{" "}
 								<span className="is-size-6">
-									{dateformat(blogInfo.createdAt, "mediumDate")}
+									<ReactTimeAgo date={blogInfo.createdAt} locale="en-US" />
 								</span>
 							</span>
 						)}

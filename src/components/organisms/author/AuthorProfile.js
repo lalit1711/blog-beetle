@@ -381,25 +381,30 @@ const UploadFile = ({ userId }) => {
 		try {
 			let formData = new FormData();
 			formData.append("sampleFile", file);
-			let result = await axios.post("http://3.7.98.9:5000/upload", formData, {
-			})
+			let result = await axios.post(
+				"http://3.7.98.9:5000/upload",
+				formData,
+				{}
+			);
 			if (result.data.status) {
 				let fileLocation = result.data.fileData.Location;
 				let bodyData = {
 					imgSrc: fileLocation
-				}
-				let response = await axios.patch("/users?where=" + encodeURIComponent(JSON.stringify({ id: userId })), bodyData)
+				};
+				let response = await axios.patch(
+					"/users?where=" + encodeURIComponent(JSON.stringify({ id: userId })),
+					bodyData
+				);
 				// console.log("==response===", response)
 				if (response.data.count > 0) {
 					Swal.fire({
-						icon: 'success',
+						icon: "success",
 						timer: 2000,
-						title:'Profile Pic Updated Successfully'
-					}).then(res=>{
+						title: "Profile Pic Updated Successfully"
+					}).then(res => {
 						window.location.reload();
-					})
+					});
 				}
-
 			}
 
 			// console.log(result);

@@ -129,10 +129,7 @@ function LikeSaveShare({
 
 	return (
 		<Fragment>
-			<div
-				className={`like-save-share-section ${
-					fixed && !onlyView && "like-save-share-column"
-				}`}>
+			<div className={`like-save-share-section `}>
 				<div className={`${!onlyView && "social-section"}`}>
 					{user && !onlyView ? (
 						user.id === blogInfo.authorId ? (
