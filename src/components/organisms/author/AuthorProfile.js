@@ -100,7 +100,6 @@ function AuthorProfile() {
 	};
 	// -----------------------------------------------------------------------------------------------
 
-	console.log("====INTRESTS", interests);
 	return (
 		<div className="columns is-mobile">
 			<div className="author-profile column is-10 is-offset-1">
