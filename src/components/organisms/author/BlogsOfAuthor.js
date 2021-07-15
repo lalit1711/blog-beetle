@@ -17,7 +17,7 @@ function BlogsOfAuthor() {
 					encodeURIComponent(JSON.stringify(requestBlogDataForUser(params.id)))
 			)
 			.then(res => setBlogsList(res.data));
-	}, []);
+	}, [params.id]);
 	return (
 		<div className="authors-blogs">
 			{_map(blogList, blog => {
@@ -31,27 +31,5 @@ function BlogsOfAuthor() {
 		</div>
 	);
 }
-
-const requestData = {
-	offset: 0,
-	limit: 100,
-	skip: 0,
-
-	where: {
-		authorId: "7c2313cb-4f15-49d1-a2e1-9f6c5f72862d"
-	},
-	fields: {
-		id: true,
-		title: true,
-		coverImgSrc: true,
-		subTitle: true,
-		authorId: true,
-		blogContent: true,
-		published: true,
-		categories: true,
-		createdAt: true,
-		updatedAt: true
-	}
-};
 
 export default BlogsOfAuthor;

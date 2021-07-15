@@ -18,12 +18,14 @@ export default class ErrorBoundary extends Component {
 	}
 
 	render() {
-		console.log(this.state);
 		if (this.state.hasError) {
 			// You can render any custom fallback UI
-			return <div style={{height:'100vh',width:'100vw',background:'#f1f2f2'}}><ReactLottie keyIndex={2} />
-			{/* <h1 style={{ fontSize: '40px', fontWeight: 'bolder', textAlign: 'center' }}>Oops something went terribly wrong!</h1> */}
-			</div>;
+			return (
+				<div style={{ height: "100vh", width: "100vw", background: "#f1f2f2" }}>
+					<ReactLottie keyIndex={2} />
+					{/* <h1 style={{ fontSize: '40px', fontWeight: 'bolder', textAlign: 'center' }}>Oops something went terribly wrong!</h1> */}
+				</div>
+			);
 		}
 
 		return this.props.children;
