@@ -12,9 +12,12 @@ const data = JSON.stringify({
 });
 function AuthorInfo({ userInfo }) {
 	const { fullName, id, imgSrc, bio } = userInfo;
-	const { facebook, github, twitter, linkedIn } = JSON.parse(
-		userInfo.socialLinks || data
-	);
+	const {
+		facebook = null,
+		github = null,
+		twitter = null,
+		linkedIn = null
+	} = JSON.parse(userInfo.socialLinks || data);
 	return (
 		<div>
 			<section className="hero author-info-hero">

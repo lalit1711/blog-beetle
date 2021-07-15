@@ -12,9 +12,12 @@ const data = JSON.stringify({
 	linkedIn: ""
 });
 function AuthorBanner({ userInfo }) {
-	const { facebook, github, twitter, linkedIn } = JSON.parse(
-		userInfo.socialLinks || data
-	);
+	const {
+		facebook = null,
+		github = null,
+		twitter = null,
+		linkedIn = null
+	} = JSON.parse(userInfo.socialLinks || data);
 
 	return (
 		<section className="hero is-small is-light author-banner">
