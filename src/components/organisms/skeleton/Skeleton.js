@@ -24,6 +24,11 @@ function Skeleton({ children, ...rest }) {
 		userLoggedIn();
 	}, []);
 
+	const updateLocalStorage = data => {
+		localStorage.setItem("user", JSON.stringify(data));
+		userLoggedIn();
+	};
+
 	const userLoggedIn = () => {
 		const user = localStorage.getItem("user");
 		if (user) {
@@ -33,7 +38,8 @@ function Skeleton({ children, ...rest }) {
 		}
 	};
 	return (
-		<AuthenticatorContext.Provider value={{ user, userLoggedIn }}>
+		<AuthenticatorContext.Provider
+			value={{ user, userLoggedIn, updateLocalStorage }}>
 			<Navbar />
 			<div style={{ minHeight: "37em" }}>{children}</div>
 			<Footer />

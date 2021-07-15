@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import _map from "lodash/map";
 import BlogCard from "../../molecules/blogCard";
 import axios from "axios";
-import { reset } from "aphrodite";
 import { requestDataSavedBlog } from "../../../helpers/util";
 import { useParams } from "react-router";
 import SuggestedLoader from "../loader/SuggestedLoader";
@@ -21,7 +20,6 @@ function SavedBlogs() {
 					encodeURIComponent(JSON.stringify(requestDataSavedBlog(userId)))
 			)
 			.then(res => {
-				console.log("----savedBlogs----", res.data);
 				const requestData = getSavedBlogRequestData(
 					res.data.map(item => item.blogId)
 				);
@@ -34,7 +32,7 @@ function SavedBlogs() {
 						setLoader(false);
 					});
 			});
-	}, []);
+	}, [userId]);
 
 	if (!loader)
 		return (

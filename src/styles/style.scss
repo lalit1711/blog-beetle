@@ -383,6 +383,15 @@ footer {
 	}
 }
 
+.user-profile-img {
+	height: 100px;
+	width: 100px;
+	border-radius: 50%;
+	background-size: cover !important;
+	background-repeat: no-repeat !important;
+	cursor: pointer;
+}
+
 .modal {
 	.card {
 		text-align: center;

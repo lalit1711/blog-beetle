@@ -14,7 +14,7 @@ function SuggestedBlogs({
 }) {
 	const [blogsList, setBlogsList] = useState([]);
 	const { user } = useContext(AuthenticatorContext);
-	console.log(categories);
+
 	useEffect(() => {
 		_getFilterBlogs(
 			"/blogs?filter=" +
@@ -38,7 +38,7 @@ function SuggestedBlogs({
 		<div className="columns">
 			{!fullWidth && <div className="column is-1"></div>}
 			<div className="column ">
-				{title && <h1 style={{ textAlign: "center", fontSize: '25px', fontWeight: "bold",marginBottom:'50px' }}> <span style={{ fontSize: '45px', color: '#a3ce20', textDecoration: 'underline'}}>S</span>uggested blog posts</h1>}
+				{title && <h1>Suggested blog posts</h1>}
 				<div className="columns is-multiline">
 					{_map(blogsList, renderBlogCard)}
 				</div>

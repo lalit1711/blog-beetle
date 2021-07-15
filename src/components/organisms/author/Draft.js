@@ -17,7 +17,7 @@ function Draft() {
 					encodeURIComponent(JSON.stringify(requestDataForDrafts(userId)))
 			)
 			.then(res => setBlogsList(res.data));
-	}, []);
+	}, [userId]);
 	return (
 		<div className="authors-blogs">
 			{_map(blogList, blog => {

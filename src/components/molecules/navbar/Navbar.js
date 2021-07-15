@@ -55,11 +55,16 @@ function Navbar(props) {
 					<img
 						src={blogBeetleLogo}
 						alt="blog-beetle"
-						style={{ height: "80px", width: "45px",borderRadius:'50%',objectFit:'cover' }}
+						style={{
+							height: "80px",
+							width: "45px",
+							borderRadius: "50%",
+							objectFit: "cover"
+						}}
 					/>
 				</Link>
 
-				<a
+				<span
 					role="button"
 					className="navbar-burger"
 					aria-label="menu"
@@ -69,12 +74,12 @@ function Navbar(props) {
 					<span aria-hidden="true"></span>
 					<span aria-hidden="true"></span>
 					<span aria-hidden="true"></span>
-				</a>
+				</span>
 			</div>
 
 			<div className={`navbar-menu navbar-end ${showBurger && "is-active"}`}>
 				<div className="navbar-end">
-					<a className="navbar-item">
+					<span className="navbar-item">
 						{location.pathname.indexOf("search") === -1 && (
 							<Fragment>
 								{showSearch ? (
@@ -117,7 +122,7 @@ function Navbar(props) {
 								)}
 							</Fragment>
 						)}
-					</a>
+					</span>
 					{!isLoggedIn ? (
 						<div className="navbar-item">
 							<Link to="/login">
@@ -131,7 +136,7 @@ function Navbar(props) {
 							</Link>
 							<div className="navbar-item mr-6">
 								<div className="navbar-item has-dropdown is-hoverable">
-									<a className="navbar-link is-hidden-touch">
+									<span className="navbar-link is-hidden-touch">
 										<figure className="image is-42x42 mt-3  ">
 											<img
 												className="is-rounded"
@@ -139,7 +144,7 @@ function Navbar(props) {
 												alt="user-profile"
 											/>
 										</figure>
-									</a>
+									</span>
 
 									<div className="navbar-dropdown is-right">
 										<span className="navbar-item">
