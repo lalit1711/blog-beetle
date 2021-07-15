@@ -5,9 +5,15 @@ import { IMG_SRC } from "../../../constants/user";
 import UserReader from "../../../readers/user";
 // import editIcon from "../../../../public/icons/edit.svg"
 
+const data = JSON.stringify({
+	facebook: "",
+	github: "",
+	twitter: "",
+	linkedIn: ""
+});
 function AuthorBanner({ userInfo }) {
 	const { facebook, github, twitter, linkedIn } = JSON.parse(
-		userInfo.socialLinks
+		userInfo.socialLinks || data
 	);
 
 	return (
