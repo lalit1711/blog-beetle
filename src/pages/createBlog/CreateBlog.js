@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useContext, useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import Select from "react-select";
 import Button from "../../components/atoms/button";
 import Editor from "../../components/organisms/Editor";
@@ -84,7 +85,18 @@ function CreateBlog(props) {
 				// alert("Oops! something went wrong");
 			});
 	};
-	console.log("id", category);
+
+	const shouldDisabledPublishButton = (button = "published") => {
+		if (!title.trim()) return true;
+		if (!category) return true;
+	};
+
+	const clearAllValues = () => {
+		setValue("");
+		setTitle("");
+		setSubTitle("");
+		setCategory(null);
+	};
 
 	return (
 		<div className="columns create-blog">
@@ -130,19 +142,24 @@ function CreateBlog(props) {
 				<Button
 					onClick={() => handleBlog(isPublished)}
 					loading={loader}
-					disabled={loader}>
+					disabled={loader || shouldDisabledPublishButton()}>
 					Save
 				</Button>
 				<Button
 					outlined={false}
-					disabled={loader || isPublished === "1"}
+					disabled={
+						loader || isPublished === "1" || shouldDisabledPublishButton()
+					}
 					loading={loader}
 					onClick={() => handleBlog("1")}>
 					{isPublished === "0" ? "Publish" : "Published"}
 				</Button>
-				<Button type="is-light" onClick={() => setValue("")}>
-					Cancel
+				<Button type="is-light" onClick={clearAllValues}>
+					Clear
 				</Button>
+				<Link to="/">
+					<Button type="is-danger">Cancel</Button>
+				</Link>
 			</div>
 		</div>
 	);

@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useContext, useEffect, useState } from "react";
+import { FaUserSecret } from "react-icons/fa";
 import Skeleton from "react-loading-skeleton";
 import { useParams } from "react-router";
 import Tabs from "../../components/atoms/tabs/Tabs";
@@ -12,8 +13,9 @@ import { AuthenticatorContext } from "../../context/authenticatorContext";
 
 function AuthorPage() {
 	const [activeTab, setActiveTab] = useState(0);
-	const { user } = useContext(AuthenticatorContext);
+	const { user, updateLocalStorage } = useContext(AuthenticatorContext);
 	const [authorInfo, setAuthorInfo] = useState(null);
+	const [updateData, setUpdateData] = useState(false);
 	const params = useParams();
 
 	const tabOptions = [
@@ -24,8 +26,14 @@ function AuthorPage() {
 	];
 
 	useEffect(() => {
-		axios.get(`/users/${params.id}`).then(res => setAuthorInfo(res.data));
-	}, [params.id]);
+		axios.get(`/users/${params.id}`).then(res => {
+			setAuthorInfo(res.data);
+			if (params.id === user.id) {
+				updateLocalStorage(res.data);
+			}
+		});
+	}, [params.id, updateData]);
+
 	if (authorInfo)
 		return (
 			<div className="author-page">
@@ -45,7 +53,12 @@ function AuthorPage() {
 									))}
 							</div>
 							<div className="main-section">
-								{getActiveTabComponent(activeTab)}
+								{getActiveTabComponent(
+									activeTab,
+									updateData,
+									setUpdateData,
+									authorInfo
+								)}
 							</div>
 						</div>
 						<div className="column is-2"></div>
@@ -58,13 +71,24 @@ function AuthorPage() {
 	}
 }
 
-const getActiveTabComponent = active => {
+const getActiveTabComponent = (
+	active,
+	updateData,
+	setUpdateData,
+	authorInfo
+) => {
 	switch (active) {
 		case 0:
 			return <BlogsOfAuthor />;
 
 		case 1:
-			return <AuthorProfile />;
+			return (
+				<AuthorProfile
+					updateData={updateData}
+					setUpdateData={setUpdateData}
+					authorInfo={authorInfo}
+				/>
+			);
 
 		case 2:
 			return <SavedBlogs />;

@@ -1,11 +1,14 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { FaFacebook, FaGithub, FaTwitter } from "react-icons/fa";
+import { FaFacebook, FaGithub, FaLinkedin, FaTwitter } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { IMG_SRC } from "../../../constants/user";
 
 function AuthorInfo({ userInfo }) {
-	const { fullName, id, imgSrc, bio, socialLinks } = userInfo;
+	const { fullName, id, imgSrc, bio } = userInfo;
+	const { facebook, github, twitter, linkedIn } = JSON.parse(
+		userInfo.socialLinks
+	);
 	return (
 		<div>
 			<section className="hero author-info-hero">
@@ -23,19 +26,37 @@ function AuthorInfo({ userInfo }) {
 					</div>
 					<hr />
 					<p className="">{bio}</p>
-					{socialLinks && (
-						<div className="social-section">
-							<span>
-								<FaFacebook />
-							</span>
-							<span>
-								<FaTwitter />
-							</span>
-							<span>
-								<FaGithub />
-							</span>
-						</div>
-					)}
+
+					<div className="social-section">
+						{facebook && (
+							<a href={facebook} target="_blank">
+								<span>
+									<FaFacebook />
+								</span>
+							</a>
+						)}
+						{twitter && (
+							<a href={twitter} target="_blank">
+								<span>
+									<FaTwitter />
+								</span>
+							</a>
+						)}
+						{github && (
+							<a href={github} target="_blank">
+								<span>
+									<FaGithub />
+								</span>
+							</a>
+						)}
+						{linkedIn && (
+							<a href={linkedIn} target="_blank">
+								<span>
+									<FaLinkedin />
+								</span>
+							</a>
+						)}
+					</div>
 				</div>
 			</section>
 		</div>

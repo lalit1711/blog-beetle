@@ -31,12 +31,14 @@ function BlogCard({ blogInfo }) {
 							}}>
 							{BlogReader.categories(blogInfo) || "Unknown"}
 						</span>
-						<span className="subtitle " style={{ marginLeft: 20 }}>
-							<FaClock style={{ height: 16 }} />{" "}
-							<span className="is-size-6">
-								<ReactTimeAgo date={blogInfo.createdAt} locale="en-US" />
+						{blogInfo.createdAt && (
+							<span className="subtitle " style={{ marginLeft: 20 }}>
+								<FaClock style={{ height: 16 }} />{" "}
+								<span className="is-size-6">
+									<ReactTimeAgo date={blogInfo.createdAt} locale="en-US" />
+								</span>
 							</span>
-						</span>
+						)}
 					</div>
 
 					<span className="card-title ">

@@ -19,10 +19,10 @@ function ImageCard({ blogInfo, height = 270, date = true }) {
 	}, [blogInfo.authorId]);
 
 	return (
-		<div class="card image-card-border" style={{ height: height }}>
-			<div class="card-content is-paddingless" style={{ height: "100%" }}>
+		<div className="card image-card-border" style={{ height: height }}>
+			<div className="card-content is-paddingless" style={{ height: "100%" }}>
 				<div className="image-card has-background-dark"></div>
-				<div class="content image-card-content">
+				<div className="content image-card-content">
 					<span
 						className="tag "
 						style={{
@@ -46,7 +46,7 @@ function ImageCard({ blogInfo, height = 270, date = true }) {
 						<span className="has-text-white is-size-6">
 							<FaUser /> {authorInfo && authorInfo.fullName}
 						</span>
-						{date && (
+						{date && blogInfo.createdAt && (
 							<span
 								className="subtitle has-text-white "
 								style={{ marginLeft: 20 }}>

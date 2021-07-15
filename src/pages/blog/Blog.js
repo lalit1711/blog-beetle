@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import AuthorInfo from "../../components/molecules/authorInfo";
 import Comments from "../../components/molecules/comments";
 import BlogContent from "../../components/organisms/Blog/BlogContent";
@@ -12,11 +12,13 @@ import { Link } from "react-router-dom";
 import { FaClock, FaUser } from "react-icons/fa";
 import categories from "../../constants/categories";
 import ReactTimeAgo from "react-time-ago";
+import { AuthenticatorContext } from "../../context/authenticatorContext";
 
 function Blog(props) {
 	const [content, setContent] = useState("");
 	const [authorInfo, setAuthorInfo] = useState(null);
 	const [loader, setLoader] = useState(false);
+	const { user } = useContext(AuthenticatorContext);
 
 	useEffect(() => {
 		const blogId = props.match.params.id;
@@ -95,16 +97,18 @@ function Blog(props) {
 					</div>
 					<div className="column is-1"></div>
 				</div>
-				<div className="columns mt-5" style={{ textAlign: "center" }}>
-					<div className="column is-1"></div>
-					<div className="column is-10">
-						<SuggestedBlogs
-							categories={[content.categories]}
-							landingPage={false}
-						/>
+				{user && (
+					<div className="columns mt-5" style={{ textAlign: "center" }}>
+						<div className="column is-1"></div>
+						<div className="column is-10">
+							<SuggestedBlogs
+								categories={[content.categories]}
+								landingPage={false}
+							/>
+						</div>
+						<div className="column is-1"></div>
 					</div>
-					<div className="column is-1"></div>
-				</div>
+				)}
 			</div>
 		</div>
 	);

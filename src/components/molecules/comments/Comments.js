@@ -55,6 +55,7 @@ function Comments({ blogId, authorId }) {
 				<div className="read-comment ">
 					{_map(comments, comment => (
 						<SingleComment
+							key={comment.id}
 							comment={comment}
 							authorId={authorId}
 							handleDelete={handleDelete}

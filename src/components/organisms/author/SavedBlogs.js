@@ -21,7 +21,6 @@ function SavedBlogs() {
 					encodeURIComponent(JSON.stringify(requestDataSavedBlog(userId)))
 			)
 			.then(res => {
-				console.log("----savedBlogs----", res.data);
 				const requestData = getSavedBlogRequestData(
 					res.data.map(item => item.blogId)
 				);

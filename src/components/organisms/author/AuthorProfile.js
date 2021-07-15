@@ -5,8 +5,9 @@ import SelectBox from "../../atoms/selectBox";
 import axios from "../../../config/axios";
 import Swal from "sweetalert2";
 import { useParams } from "react-router";
+import UploadFile from "./UploadFile";
 
-function AuthorProfile() {
+function AuthorProfile({ updateData, setUpdateData, authorInfo }) {
 	const params = useParams();
 	const userId = params.id;
 	const [activeBox, setActiveBox] = useState(-1);
@@ -21,8 +22,8 @@ function AuthorProfile() {
 	const [interests, setInterests] = useState("");
 
 	useEffect(() => {
-		axios.get("/users/" + userId).then(res => setUserData(res.data));
-	}, []);
+		setUserData(authorInfo);
+	}, [authorInfo]);
 
 	useEffect(() => {
 		if (userData) {
@@ -44,9 +45,7 @@ function AuthorProfile() {
 		setLinkedIn(socialLinks.linkedIn ? socialLinks.linkedIn : "");
 	}, [socialLinks]);
 
-	useEffect(() => {
-		// console.log("--interestchanged--", interests);
-	}, [interests]);
+	useEffect(() => {}, [interests]);
 
 	function capitalizeFirstLetter(string) {
 		return string.charAt(0).toUpperCase() + string.slice(1);
@@ -68,7 +67,6 @@ function AuthorProfile() {
 					reqData.socialLinks = socialLinks;
 					reqData.socialLinks[socialLinkName] = enteredFieldValue;
 					reqData.socialLinks = JSON.stringify(reqData.socialLinks);
-					// console.log(reqData.socialLinks);
 				}
 				break;
 			case "bio":
@@ -93,6 +91,7 @@ function AuthorProfile() {
 					title: capitalizeFirstLetter(fieldName) + " Updated Successfully!",
 					timer: 2000
 				});
+				setUpdateData(!updateData);
 			} else {
 				Swal.fire({ icon: "warning", title: "Update Failed !", timer: 2000 });
 			}
@@ -100,13 +99,9 @@ function AuthorProfile() {
 	};
 	// -----------------------------------------------------------------------------------------------
 
-	// console.log("====INTRESTS", interests);
 	return (
 		<div className="columns is-mobile">
 			<div className="author-profile column is-10 is-offset-1">
-				<div className="form-control is-flex-desktop">
-					<UploadFile userId={userId} />
-				</div>
 				<div className="form-control is-flex-desktop">
 					<div className="field">
 						<label className="label">Name</label>
@@ -224,6 +219,13 @@ function AuthorProfile() {
 							</Button>
 						)}
 					</div>
+				</div>
+				<div className="form-control is-flex-desktop">
+					<UploadFile
+						userData={userData}
+						updateData={updateData}
+						setUpdateData={setUpdateData}
+					/>
 				</div>
 				<div className="form-control is-flex-desktop">
 					<div className="field">
@@ -373,69 +375,5 @@ function AuthorProfile() {
 		</div>
 	);
 }
-
-const UploadFile = ({ userId }) => {
-	async function onChange(e) {
-		// console.log("trigger");
-		const file = e.target.files[0];
-		try {
-			let formData = new FormData();
-			formData.append("sampleFile", file);
-			let result = await axios.post(
-				"http://3.7.98.9:5000/upload",
-				formData,
-				{}
-			);
-			if (result.data.status) {
-				let fileLocation = result.data.fileData.Location;
-				let bodyData = {
-					imgSrc: fileLocation
-				};
-				let response = await axios.patch(
-					"/users?where=" + encodeURIComponent(JSON.stringify({ id: userId })),
-					bodyData
-				);
-				// console.log("==response===", response)
-				if (response.data.count > 0) {
-					Swal.fire({
-						icon: "success",
-						timer: 2000,
-						title: "Profile Pic Updated Successfully"
-					}).then(res => {
-						window.location.reload();
-					});
-				}
-			}
-
-			// console.log(result);
-		} catch (error) {
-			console.log("Error uploading file: ", error);
-		}
-	}
-
-	return (
-		<div className="field">
-			<label className="label">Photo</label>
-			<div className="control">
-				<div className="file is-small is-boxed">
-					<label className="file-label">
-						<input
-							className="file-input"
-							type="file"
-							name="resume"
-							onChange={onChange}
-						/>
-						<span className="file-cta">
-							<span className="file-icon">
-								<i className="fas fa-upload"></i>
-							</span>
-							<span className="file-label">Upload Image</span>
-						</span>
-					</label>
-				</div>
-			</div>
-		</div>
-	);
-};
 
 export default AuthorProfile;
