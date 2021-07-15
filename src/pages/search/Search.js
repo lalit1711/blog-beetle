@@ -56,6 +56,7 @@ function Search() {
 		}
 	};
 
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	const delayFunction = useCallback(deBouncingFunction(searchKey, 500), []);
 
 	const tabOptions = [

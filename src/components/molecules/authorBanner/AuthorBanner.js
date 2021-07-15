@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { FaFacebook, FaGithub, FaLinkedin, FaTwitter } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { IMG_SRC } from "../../../constants/user";
@@ -31,28 +31,28 @@ function AuthorBanner({ userInfo }) {
 				<p className="subtitle has-text-centered">{userInfo.bio}</p>
 				<div className="social-section" style={{ margin: "20px 0px" }}>
 					{facebook && (
-						<a href={facebook} target="_blank">
+						<a href={facebook} target="_blank" rel="noreferrer">
 							<span>
 								<FaFacebook />
 							</span>
 						</a>
 					)}
 					{twitter && (
-						<a href={twitter} target="_blank">
+						<a href={twitter} target="_blank" rel="noreferrer">
 							<span>
 								<FaTwitter />
 							</span>
 						</a>
 					)}
 					{github && (
-						<a href={github} target="_blank">
+						<a href={github} target="_blank" rel="noreferrer">
 							<span>
 								<FaGithub />
 							</span>
 						</a>
 					)}
 					{linkedIn && (
-						<a href={linkedIn} target="_blank">
+						<a href={linkedIn} target="_blank" rel="noreferrer">
 							<span>
 								<FaLinkedin />
 							</span>

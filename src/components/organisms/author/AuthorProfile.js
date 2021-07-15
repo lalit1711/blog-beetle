@@ -123,10 +123,7 @@ function AuthorProfile({ updateData, setUpdateData, authorInfo }) {
 							<Fragment>
 								<Button
 									onClick={async e => {
-										let res = await updateProfileTextField(
-											fullName,
-											"fullName"
-										);
+										await updateProfileTextField(fullName, "fullName");
 									}}>
 									Save
 								</Button>

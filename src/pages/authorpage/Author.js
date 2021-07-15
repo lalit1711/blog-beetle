@@ -1,6 +1,5 @@
 import axios from "axios";
 import React, { useContext, useEffect, useState } from "react";
-import { FaUserSecret } from "react-icons/fa";
 import Skeleton from "react-loading-skeleton";
 import { useParams } from "react-router";
 import Tabs from "../../components/atoms/tabs/Tabs";
@@ -32,6 +31,7 @@ function AuthorPage() {
 				updateLocalStorage(res.data);
 			}
 		});
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [params.id, updateData]);
 
 	if (authorInfo)

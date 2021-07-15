@@ -29,28 +29,28 @@ function AuthorInfo({ userInfo }) {
 
 					<div className="social-section">
 						{facebook && (
-							<a href={facebook} target="_blank">
+							<a href={facebook} target="_blank" rel="noreferrer">
 								<span>
 									<FaFacebook />
 								</span>
 							</a>
 						)}
 						{twitter && (
-							<a href={twitter} target="_blank">
+							<a href={twitter} target="_blank" rel="noreferrer">
 								<span>
 									<FaTwitter />
 								</span>
 							</a>
 						)}
 						{github && (
-							<a href={github} target="_blank">
+							<a href={github} target="_blank" rel="noreferrer">
 								<span>
 									<FaGithub />
 								</span>
 							</a>
 						)}
 						{linkedIn && (
-							<a href={linkedIn} target="_blank">
+							<a href={linkedIn} target="_blank" rel="noreferrer">
 								<span>
 									<FaLinkedin />
 								</span>

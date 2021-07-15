@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import dateformat from "dateformat";
 import PropTypes from "prop-types";
 import DEFAULT_CATEGORY_INFO from "./constants/ImageCategory.default";
 import { FaClock, FaUser } from "react-icons/fa";
