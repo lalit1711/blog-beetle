@@ -47,11 +47,11 @@ function LogIn(props) {
 
 	return (
 		<div className={`modal is-active sign-up-log-in  ${css(styles.bounce)}`}>
-			<div style={{ backgroundColor: '#d5ead5' }} class="modal-background"></div>
-			<div class="modal-content">
+			<div style={{ backgroundColor: '#d5ead5' }} className="modal-background"></div>
+			<div className="modal-content">
 				<div className="columns is-mobile">
 					<div className="column is-three-fifths is-offset-one-fifth container">
-						<figure class="image">
+						<figure className="image">
 							<img src={beetleLogo} alt="logo" style={{ objectFit: "cover", borderRadius: '50%', height: '120px', width: '120px' }} />
 						</figure>
 						<div className="form-container">
@@ -100,7 +100,7 @@ function LogIn(props) {
 				</div>
 			</div>
 			<button
-				class="modal-close is-large"
+				className="modal-close is-large"
 				aria-label="close"
 				onClick={goBack}></button>
 		</div>
