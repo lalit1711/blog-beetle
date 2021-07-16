@@ -2,10 +2,11 @@ import React from "react";
 import bloggerAnimation from "./blogger.json";
 import beetleAnimation from "./beetle.json";
 import ERROR from "./error.json";
+import NDA from "./NDA.json";
 import { useLottie } from "lottie-react";
 
 const ReactLottie = ({ keyIndex = 0 }) => {
-	const chooseJson = [bloggerAnimation, beetleAnimation, ERROR];
+	const chooseJson = [bloggerAnimation, beetleAnimation, ERROR, NDA];
 	const options = {
 		animationData: chooseJson[keyIndex],
 		loop: true,
