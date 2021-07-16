@@ -5,10 +5,19 @@ import { IMG_SRC } from "../../../constants/user";
 import UserReader from "../../../readers/user";
 // import editIcon from "../../../../public/icons/edit.svg"
 
+const data = JSON.stringify({
+	facebook: "",
+	github: "",
+	twitter: "",
+	linkedIn: ""
+});
 function AuthorBanner({ userInfo }) {
-	const { facebook, github, twitter, linkedIn } = JSON.parse(
-		userInfo.socialLinks
-	);
+	const {
+		facebook = null,
+		github = null,
+		twitter = null,
+		linkedIn = null
+	} = JSON.parse(userInfo.socialLinks || data);
 
 	return (
 		<section className="hero is-small is-light author-banner">
