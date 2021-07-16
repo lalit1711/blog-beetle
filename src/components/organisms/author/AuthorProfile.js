@@ -95,6 +95,8 @@ function AuthorProfile({ updateData, setUpdateData, authorInfo }) {
 			} else {
 				Swal.fire({ icon: "warning", title: "Update Failed !", timer: 2000 });
 			}
+		}).catch(err=>{
+			Swal.fire({ icon: "error", title:err.message, timer: 2000 });
 		});
 	};
 	// -----------------------------------------------------------------------------------------------
