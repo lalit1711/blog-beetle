@@ -30,10 +30,9 @@ function SuggestedBlogs({
 	}, [user, categories, triggered]);
 
 	const getFilterObject = () => {
-		if (user)
-			return categories.map(o => {
-				return { categories: o };
-			});
+		return categories.map(o => {
+			return { categories: o };
+		});
 	};
 
 	return (

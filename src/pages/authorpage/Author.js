@@ -27,7 +27,7 @@ function AuthorPage() {
 	useEffect(() => {
 		_getAuthorInfo(params.id).then(res => {
 			setAuthorInfo(res.data);
-			if (params.id === user.id) {
+			if (user && params.id === user.id) {
 				updateLocalStorage(res.data);
 			}
 		});

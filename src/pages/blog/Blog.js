@@ -26,7 +26,7 @@ function Blog(props) {
 		_getBlogById(blogId)
 			.then(res => {
 				setContent(res.data);
-				// TODO: Enable this condition by fixing code in BE
+
 				if (res.data.published === "0" && user.id !== res.data.authorId)
 					props.history.push("/");
 				_getUserInfo(res.data.authorId).then(res => {
@@ -35,6 +35,7 @@ function Blog(props) {
 				});
 			})
 			.catch(err => props.history.push("/"));
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [props.history, props.match.params.id]);
 
 	if (loader) return <BlogLoader />;
