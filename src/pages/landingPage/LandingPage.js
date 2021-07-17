@@ -30,7 +30,7 @@ function LandingPage() {
 			setLoad(true);
 			_getAllBlogs().then(res => {
 				setBlogsList(res.data.filter(e => e.published === "1"));
-				setLoad(false);
+				// setLoad(false);
 			});
 			//------------------------Latest Blog Fetch------------------------
 			let requestData = {
@@ -52,12 +52,10 @@ function LandingPage() {
 				}
 			};
 
-			setLoad(true);
 			_getFilterBlogs(
 				"/blogs?filter=" + encodeURIComponent(JSON.stringify(requestData))
 			).then(res => {
 				setLatestBlogsList(res.data.filter(e => e.published === "1"));
-				setLoad(false);
 			});
 		}
 	}, [showWelcomeMessage, triggered]);
@@ -90,6 +88,7 @@ function LandingPage() {
 			let sortedBlogsBasedOnLikes = BlogListWithCount.sort(compare);
 			console.log(sortedBlogsBasedOnLikes);
 			setMostLikedBlogs(sortedBlogsBasedOnLikes);
+			setLoad(false);
 		}
 	};
 
