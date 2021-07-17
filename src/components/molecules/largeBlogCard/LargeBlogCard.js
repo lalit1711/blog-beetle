@@ -18,27 +18,26 @@ function LargeBlogCard({ blogInfo, triggered, setTriggered }) {
 		});
 	}, [blogInfo.authorId]);
 	return (
-		<div className="large-blog-card columns">
+		<div className="large-blog-card columns is-paddingless ">
 			<div className="blog-info column  is-paddingless " style={{ margin: 10 }}>
 				<Link to={`/blog/${BlogReader.id(blogInfo)}`} className="">
-					<div className="title has-text-black">
+					<div className="title has-text-black mr-3">
 						{BlogReader.title(blogInfo)}
 						<Link
 							to={`/search?query=${
 								BlogReader.categories(blogInfo) || "Unknown"
-							}&2`}>
-							<span
-								className="tag is-dark ml-4"
-								style={{
-									background:
-										BlogReader.categories(blogInfo) &&
-										categories[BlogReader.categories(blogInfo).trim()] &&
-										categories[BlogReader.categories(blogInfo).trim()].color
-								}}>
-								{BlogReader.categories(blogInfo)}
-							</span>
-						</Link>
+							}&2`}></Link>
 					</div>
+					<span
+						className="tag is-dark ml-4"
+						style={{
+							background:
+								BlogReader.categories(blogInfo) &&
+								categories[BlogReader.categories(blogInfo).trim()] &&
+								categories[BlogReader.categories(blogInfo).trim()].color
+						}}>
+						{BlogReader.categories(blogInfo)}
+					</span>
 				</Link>
 
 				<hr />

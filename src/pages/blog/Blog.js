@@ -74,7 +74,7 @@ function Blog(props) {
 											<FaUser /> {authorInfo && authorInfo.fullName}
 										</span>
 									</Link>
-									<span className="subtitle " style={{ marginLeft: 20 }}>
+									<span className="subtitle ">
 										<FaClock style={{ height: 16 }} />{" "}
 										<span className="is-size-6">
 											{content &&
