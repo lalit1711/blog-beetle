@@ -68,7 +68,8 @@ function CreateBlog(props) {
 			subTitle: subTitle,
 			categories: category && category.label,
 			blogContent: value,
-			published: publish
+			published: publish,
+			createdAt:new Date().toISOString().slice(0, 19).replace('T', ' ')
 		};
 		const url = isEdit ? `/blogs/${isEdit.id}` : `/blogs`;
 		const method = isEdit ? "PUT" : "POST";
