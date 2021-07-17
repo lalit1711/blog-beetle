@@ -43,7 +43,7 @@ function Search() {
 				"/blogs?filter=" +
 					encodeURIComponent(JSON.stringify(requestDataLike(key)))
 			).then(res => {
-				setSearchedBlogs(res.data);
+				setSearchedBlogs(res.data.filter(e => e.published === "1"));
 				setLoader(false);
 			});
 		} else if (active === 1) {

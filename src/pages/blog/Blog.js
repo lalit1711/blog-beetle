@@ -27,8 +27,8 @@ function Blog(props) {
 			.then(res => {
 				setContent(res.data);
 				// TODO: Enable this condition by fixing code in BE
-				// if (res.data.published === "0" && user.id !== res.data.authorId)
-				// 	props.history.push("/");
+				if (res.data.published === "0" && user.id !== res.data.authorId)
+					props.history.push("/");
 				_getUserInfo(res.data.authorId).then(res => {
 					setAuthorInfo(res.data);
 					setLoader(false);

@@ -52,16 +52,20 @@ function Comments({ blogId, authorId }) {
 				<hr className="is-hidden-touch" />
 			</div>
 			<div className="main-section ">
-				<div className="read-comment ">
-					{_map(comments, comment => (
-						<SingleComment
-							key={comment.id}
-							comment={comment}
-							authorId={authorId}
-							handleDelete={handleDelete}
-						/>
-					))}
-				</div>
+				{comments.length ? (
+					<div className="read-comment ">
+						{_map(comments, comment => (
+							<SingleComment
+								key={comment.id}
+								comment={comment}
+								authorId={authorId}
+								handleDelete={handleDelete}
+							/>
+						))}
+					</div>
+				) : (
+					<div className="has-text-centered">No Comments</div>
+				)}
 				{user && (
 					<div className="write-comment columns mt-5">
 						<div className="form-control column is-11 is-offset-1 is-flex-desktop">

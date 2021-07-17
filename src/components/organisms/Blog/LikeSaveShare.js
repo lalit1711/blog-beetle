@@ -173,7 +173,7 @@ function LikeSaveShare({
 							</Fragment>
 						) : (
 							<Fragment>
-								<span className="count has-text-info">{count}</span>
+								<span className="count has-text-primary">{count}</span>
 								<span>
 									{likeId ? (
 										<AiFillLike
@@ -205,7 +205,7 @@ function LikeSaveShare({
 							</Fragment>
 						)
 					) : (
-						<span className="has-text-info">{count + " Likes"}</span>
+						<span className="has-text-primary">{count + " Likes"}</span>
 					)}
 				</div>
 				{!fixed && (

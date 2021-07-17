@@ -148,9 +148,15 @@ function Navbar(props) {
 
 									<div className="navbar-dropdown is-right">
 										<span className="navbar-item">
-											<Link to={`/author/${user && user.id}`}>Profile</Link>
+											<Link
+												to={`/author/${user && user.id}`}
+												className="has-text-dark">
+												Profile
+											</Link>
 										</span>
-										<span className="navbar-item" onClick={signOut}>
+										<span
+											className="navbar-item has-text-dark"
+											onClick={signOut}>
 											Log Out
 										</span>
 									</div>

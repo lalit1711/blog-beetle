@@ -12,6 +12,7 @@ import {
 	SECONDARY_BUTTON,
 	MESSAGE
 } from "./constants/confirmation.general";
+import { AiOutlineClose } from "react-icons/ai";
 
 function ConfirmationBox(props) {
 	const {
@@ -40,10 +41,12 @@ function ConfirmationBox(props) {
 					</div>
 				</div>
 			</div>
-			<button
+			<div
 				className="modal-close is-large"
 				aria-label="close"
-				onClick={onClose}></button>
+				onClick={onClose}>
+				<AiOutlineClose />
+			</div>
 		</div>
 	);
 }

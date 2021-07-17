@@ -54,7 +54,7 @@ function LandingPage() {
 			_getFilterBlogs(
 				"/blogs?filter=" + encodeURIComponent(JSON.stringify(requestData))
 			).then(res => {
-				setLatestBlogsList(res.data);
+				setLatestBlogsList(res.data.filter(e => e.published === "1"));
 				setLoad(false);
 			});
 		}

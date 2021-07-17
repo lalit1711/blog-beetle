@@ -20,11 +20,12 @@ function SuggestedBlogs({
 		_getFilterBlogs(
 			"/blogs?filter=" +
 				encodeURIComponent(JSON.stringify(requestData(getFilterObject())))
-		).then(res =>
+		).then(res => {
+			const data = res.data.filter(e => e.published === "1");
 			setBlogsList(
-				landingPage ? res.data.filter(o => o.authorId !== user.id) : res.data
-			)
-		);
+				landingPage ? data.filter(o => o.authorId !== user.id) : data
+			);
+		});
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [user, categories, triggered]);
 
