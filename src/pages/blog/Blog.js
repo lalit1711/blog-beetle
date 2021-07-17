@@ -77,7 +77,9 @@ function Blog(props) {
 									<span className="subtitle " style={{ marginLeft: 20 }}>
 										<FaClock style={{ height: 16 }} />{" "}
 										<span className="is-size-6">
-											{content && content.createdAt ? (
+											{content &&
+											content.createdAt &&
+											content.published === "1" ? (
 												<ReactTimeAgo date={content.createdAt} locale="en-US" />
 											) : (
 												"Not Published"

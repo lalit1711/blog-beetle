@@ -2,10 +2,12 @@ import React, { Fragment, useContext, useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import Button from "../../atoms/button/Button";
 import { Link, useHistory, useLocation } from "react-router-dom";
+import { BsBookmark, BsBookmarkFill } from "react-icons/bs";
 import { AuthenticatorContext } from "../../../context/authenticatorContext";
 import Auth from "@aws-amplify/auth";
 import blogBeetleLogo from ".././../../assets/beetle.jpg";
 import { IMG_SRC } from "../../../constants/user";
+import { FaSignOutAlt, FaUserAlt } from "react-icons/fa";
 
 function Navbar(props) {
 	const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -148,16 +150,26 @@ function Navbar(props) {
 
 									<div className="navbar-dropdown is-right">
 										<span className="navbar-item">
+											<FaUserAlt className="mr-2" />
 											<Link
 												to={`/author/${user && user.id}`}
 												className="has-text-dark">
 												Profile
 											</Link>
 										</span>
+										<span className="navbar-item">
+											<BsBookmarkFill className="mr-2" />
+											<Link
+												to={`/author/${user && user.id}?savedBlogs`}
+												className="has-text-dark">
+												Saved Blogs
+											</Link>
+										</span>
+
 										<span
 											className="navbar-item has-text-dark"
 											onClick={signOut}>
-											Log Out
+											<FaSignOutAlt className="mr-2" /> Log Out
 										</span>
 									</div>
 								</div>
