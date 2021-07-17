@@ -79,7 +79,7 @@ function LandingPage() {
 							.then(res => {
 								BLOG.likesCount = res.data.count;
 								resolve(BLOG);
-								setLoad(false);
+							
 							});
 					});
 				})
