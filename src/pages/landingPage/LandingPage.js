@@ -68,6 +68,7 @@ function LandingPage() {
 
 	const getMostLikedBlogContent = async (blogsList) => {
 		if (blogsList) {
+			setLoad(true)
 			let BlogsListAltered = [...blogsList]
 			let BlogListWithCount = await Promise.all(BlogsListAltered.map(BLOG => {
 				return new Promise((resolve, reject) => {
@@ -81,6 +82,7 @@ function LandingPage() {
 			let sortedBlogsBasedOnLikes = BlogListWithCount.sort(compare)
 			console.log(sortedBlogsBasedOnLikes)
 			setMostLikedBlogs(sortedBlogsBasedOnLikes)
+			setLoad(false)
 		}
 	}
 
