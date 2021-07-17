@@ -134,7 +134,9 @@ function Navbar(props) {
 					) : (
 						<Fragment>
 							<Link to="/create-blog">
-								<span className="navbar-item mt-5">Write a blog</span>
+								<span className="navbar-item mt-5 hover-color">
+									Write a blog
+								</span>
 							</Link>
 							<div className="navbar-item mr-6">
 								<div className="navbar-item has-dropdown is-hoverable">
@@ -149,25 +151,28 @@ function Navbar(props) {
 									</span>
 
 									<div className="navbar-dropdown is-right">
-										<span className="navbar-item">
-											<FaUserAlt className="mr-2" />
+										<span className="navbar-item ">
 											<Link
 												to={`/author/${user && user.id}`}
-												className="has-text-dark">
-												Profile
+												className="has-text-dark ">
+												<span className="hover-color">
+													<FaUserAlt className="mr-2" /> Profile
+												</span>
 											</Link>
 										</span>
 										<span className="navbar-item">
-											<BsBookmarkFill className="mr-2" />
 											<Link
 												to={`/author/${user && user.id}?savedBlogs`}
-												className="has-text-dark">
-												Saved Blogs
+												className="has-text-dark ">
+												<span className="hover-color">
+													<BsBookmarkFill className="mr-2" />
+													Saved Blogs
+												</span>
 											</Link>
 										</span>
 
 										<span
-											className="navbar-item has-text-dark"
+											className="navbar-item has-text-dark hover-color"
 											onClick={signOut}>
 											<FaSignOutAlt className="mr-2" /> Log Out
 										</span>
