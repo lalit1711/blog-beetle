@@ -116,7 +116,7 @@ function Navbar(props) {
 									</div>
 								) : (
 									<img
-										className="is-32x32 mt-3"
+										className="is-32x32"
 										src="/icons/akar-icons_search.svg"
 										alt="search-icon"
 										onClick={() => setShowSearch(true)}
