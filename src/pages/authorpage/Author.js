@@ -28,7 +28,7 @@ function AuthorPage() {
 	useEffect(() => {
 		const shouldShowSavedBlogs = location.search === "?savedBlogs";
 		if (shouldShowSavedBlogs) setActiveTab(2);
-	});
+	}, []);
 
 	useEffect(() => {
 		_getAuthorInfo(params.id).then(res => {

@@ -7,7 +7,7 @@ import { AuthenticatorContext } from "../../../context/authenticatorContext";
 import { _getFilterBlogs } from "../../../pages/landingPage/services";
 
 function SuggestedBlogs({
-	landingPage = true,
+	search = false,
 	categories = [],
 	title = true,
 	fullWidth = false,
@@ -35,8 +35,8 @@ function SuggestedBlogs({
 		const data = blogs
 			.filter(e => e.published === "1")
 			.filter(e => e.id !== blogId);
-
-		setBlogsList(user ? data.filter(o => o.authorId !== user.id) : data);
+		if (search) setBlogsList(data);
+		else setBlogsList(user ? data.filter(o => o.authorId !== user.id) : data);
 	};
 
 	return (

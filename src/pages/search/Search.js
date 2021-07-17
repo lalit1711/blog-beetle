@@ -142,6 +142,7 @@ const getActiveTabComponent = (active, searchedUser, searchedBlogs, key) => {
 						landingPage={false}
 						title={false}
 						fullWidth={true}
+						search={true}
 					/>
 				</div>
 			);
