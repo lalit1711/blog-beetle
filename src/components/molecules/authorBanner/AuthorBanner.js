@@ -20,7 +20,7 @@ function AuthorBanner({ userInfo }) {
 	} = JSON.parse(userInfo.socialLinks || data);
 
 	return (
-		<section className="hero is-small is-light author-banner">
+		<section className="hero is-small is-primary author-banner">
 			<div className="hero-body">
 				<div className="hero-cover-image"></div>
 				<div
@@ -38,7 +38,9 @@ function AuthorBanner({ userInfo }) {
 				</p>
 				<hr />
 				<p className="subtitle has-text-centered">{userInfo.bio}</p>
-				<div className="social-section" style={{ margin: "20px 0px" }}>
+				<div
+					className="social-section has-icon-white"
+					style={{ margin: "20px 0px" }}>
 					{facebook && (
 						<a href={facebook} target="_blank" rel="noreferrer">
 							<span>

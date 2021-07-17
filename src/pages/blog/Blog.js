@@ -52,18 +52,24 @@ function Blog(props) {
 								)}
 
 								<div className="author-time-info is-flex">
-									<span
-										className="tag is-dark"
-										style={{
-											background:
-												BlogReader.categories(content) &&
-												categories[BlogReader.categories(content).trim()] &&
-												categories[BlogReader.categories(content).trim()].color
-										}}>
-										{BlogReader.categories(content)}
-									</span>
+									<Link
+										to={`/search?query=${
+											BlogReader.categories(content) || "Unknown"
+										}&2`}>
+										<span
+											className="tag is-dark"
+											style={{
+												background:
+													BlogReader.categories(content) &&
+													categories[BlogReader.categories(content).trim()] &&
+													categories[BlogReader.categories(content).trim()]
+														.color
+											}}>
+											{BlogReader.categories(content)}
+										</span>
+									</Link>
 									<Link to={`/author/${BlogReader.authorId(content)}`}>
-										<span className=" is-size-6">
+										<span className=" is-size-6 has-text-dark">
 											<FaUser /> {authorInfo && authorInfo.fullName}
 										</span>
 									</Link>

@@ -19,23 +19,26 @@ function Search() {
 	const location = useLocation();
 
 	useEffect(() => {
-		const query = location.search.split("=")[1];
-		if (query) {
-			setKey(query);
-			searchKey(query);
+		const queries = location.search.split("=")[1];
+		const [key, tab] = queries.split("&");
+		if (key) {
+			setKey(key);
+			setActiveTab(parseInt(tab || 0));
+			searchKey(key, tab || 0);
 		}
+
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);
+	}, [location]);
 
 	useEffect(() => {
 		delayFunction(key, activeTab);
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [activeTab, key]);
 
-	const searchKey = (key, activeTab) => {
+	const searchKey = (key, active) => {
 		if (!key.trim()) return null;
 		setLoader(true);
-		if (activeTab === 0) {
+		if (active === 0) {
 			_getFilterBlogs(
 				"/blogs?filter=" +
 					encodeURIComponent(JSON.stringify(requestDataLike(key)))
@@ -43,7 +46,7 @@ function Search() {
 				setSearchedBlogs(res.data);
 				setLoader(false);
 			});
-		} else if (activeTab === 1) {
+		} else if (active === 1) {
 			_getFilterBlogs(
 				"/users?filter=" +
 					encodeURIComponent(JSON.stringify(requestDataUserLike(key)))
@@ -133,7 +136,7 @@ const getActiveTabComponent = (active, searchedUser, searchedBlogs, key) => {
 			return <UsersSearch usersList={searchedUser} />;
 		case 2:
 			return (
-				<div className="mt-5">
+				<div className="mt-5 search-section-suggested">
 					<SuggestedBlogs
 						categories={[key]}
 						landingPage={false}

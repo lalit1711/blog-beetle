@@ -6,18 +6,23 @@ import { _getAuthorsPublishedBlogs } from "../../../pages/authorpage/services";
 
 function BlogsOfAuthor() {
 	const [blogList, setBlogsList] = useState([]);
+	const [triggered, setTriggered] = useState(false);
 	const params = useParams();
 
 	useEffect(() => {
 		if (!params.id) return;
 		_getAuthorsPublishedBlogs(params.id).then(res => setBlogsList(res.data));
-	}, [params.id]);
+	}, [params.id, triggered]);
 	return (
 		<div className="authors-blogs">
 			{_map(blogList, blog => {
 				return (
 					<div className="blog" key={blog.id}>
-						<LargeBlogCard blogInfo={blog} />
+						<LargeBlogCard
+							blogInfo={blog}
+							triggered={triggered}
+							setTriggered={setTriggered}
+						/>
 						<hr />
 					</div>
 				);

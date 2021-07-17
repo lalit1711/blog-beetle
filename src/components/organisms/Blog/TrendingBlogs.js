@@ -2,7 +2,7 @@ import React from "react";
 import BlogCard from "../../molecules/blogCard";
 import ImageCard from "../../molecules/imageCard";
 
-function TrendingBlogs({ blogsList }) {
+function TrendingBlogs({ blogsList, triggered, setTriggered }) {
 	return (
 		<div className="columns trending-blogs-container ">
 			<div className="column is-1"></div>
@@ -15,19 +15,33 @@ function TrendingBlogs({ blogsList }) {
 							<ImageCard blogInfo={blogsList[0]} />
 						</div>
 						<div className="column">
-							{blogsList.length ? <BlogCard blogInfo={blogsList[1]} /> : null}
+							{blogsList.length ? (
+								<BlogCard
+									blogInfo={blogsList[1]}
+									triggered={triggered}
+									setTriggered={setTriggered}
+								/>
+							) : null}
 						</div>
 					</div>
 
 					<div className="columns">
 						{blogsList[2] && (
 							<div className="column">
-								<BlogCard blogInfo={blogsList[2]} />
+								<BlogCard
+									blogInfo={blogsList[2]}
+									triggered={triggered}
+									setTriggered={setTriggered}
+								/>
 							</div>
 						)}
 						{blogsList[3] && (
 							<div className="column">
-								<BlogCard blogInfo={blogsList[3]} />
+								<BlogCard
+									blogInfo={blogsList[3]}
+									triggered={triggered}
+									setTriggered={setTriggered}
+								/>
 							</div>
 						)}
 						{blogsList[4] && (

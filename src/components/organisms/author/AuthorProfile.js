@@ -84,26 +84,29 @@ function AuthorProfile({ updateData, setUpdateData, authorInfo }) {
 			}
 		}
 
-		axios.patch("/users/" + userId, reqData).then(res => {
-			if (res.status === 204) {
-				Swal.fire({
-					icon: "success",
-					title: capitalizeFirstLetter(fieldName) + " Updated Successfully!",
-					timer: 2000
-				});
-				setUpdateData(!updateData);
-			} else {
-				Swal.fire({ icon: "warning", title: "Update Failed !", timer: 2000 });
-			}
-		}).catch(err=>{
-			Swal.fire({ icon: "error", title:err.message, timer: 2000 });
-		});
+		axios
+			.patch("/users/" + userId, reqData)
+			.then(res => {
+				if (res.status === 204) {
+					Swal.fire({
+						icon: "success",
+						title: capitalizeFirstLetter(fieldName) + " Updated Successfully!",
+						timer: 2000
+					});
+					setUpdateData(!updateData);
+				} else {
+					Swal.fire({ icon: "warning", title: "Update Failed !", timer: 2000 });
+				}
+			})
+			.catch(err => {
+				Swal.fire({ icon: "error", title: err.message, timer: 2000 });
+			});
 	};
 	// -----------------------------------------------------------------------------------------------
 
 	return (
 		<div className="columns is-mobile">
-			<div className="author-profile column is-10 is-offset-1">
+			<div className="author-profile column ">
 				<div className="form-control is-flex-desktop">
 					<div className="field">
 						<label className="label">Name</label>

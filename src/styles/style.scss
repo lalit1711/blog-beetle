@@ -349,6 +349,11 @@ footer {
 	width: 42px;
 	cursor: pointer;
 }
+.is-32x32 {
+	height: 32px;
+	width: 32px;
+	cursor: pointer;
+}
 
 .user-search {
 	.user-info {
@@ -444,12 +449,18 @@ footer {
 		margin: 0 5px;
 	}
 	svg {
+		color: $primary;
 		height: 30px;
 		width: 30px;
 	}
 
 	button {
 		min-width: 40px !important;
+	}
+}
+.has-icon-white {
+	svg {
+		color: $white !important;
 	}
 }
 
@@ -773,7 +784,8 @@ footer {
 				.edit-delete {
 					margin-left: 2%;
 					visibility: hidden;
-					img {
+					svg {
+						color: $primary;
 						cursor: pointer;
 						height: 28px;
 					}
@@ -791,6 +803,12 @@ footer {
 }
 
 // comment end
+
+.search-section-suggested {
+	.author-name {
+		font-size: 0.5rem !important;
+	}
+}
 
 // Responsive
 

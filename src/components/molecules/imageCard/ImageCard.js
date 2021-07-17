@@ -20,18 +20,23 @@ function ImageCard({ blogInfo, height = 270, date = true }) {
 	return (
 		<div className="card image-card-border" style={{ height: height }}>
 			<div className="card-content is-paddingless" style={{ height: "100%" }}>
-				<div className="image-card has-background-dark"></div>
+				<div className="image-card has-background-primary"></div>
 				<div className="content image-card-content">
-					<span
-						className="tag "
-						style={{
-							background:
-								BlogReader.categories(blogInfo) &&
-								categories[BlogReader.categories(blogInfo).trim()] &&
-								categories[BlogReader.categories(blogInfo).trim()].color
-						}}>
-						{BlogReader.categories(blogInfo)}
-					</span>
+					<Link
+						to={`/search?query=${
+							BlogReader.categories(blogInfo) || "Unknown"
+						}&2`}>
+						<span
+							className="tag "
+							style={{
+								background:
+									BlogReader.categories(blogInfo) &&
+									categories[BlogReader.categories(blogInfo).trim()] &&
+									categories[BlogReader.categories(blogInfo).trim()].color
+							}}>
+							{BlogReader.categories(blogInfo)}
+						</span>
+					</Link>
 					<Link to={`/blog/${BlogReader.id(blogInfo)}`}>
 						<span className="card-title has-text-white">
 							{BlogReader.title(blogInfo)}

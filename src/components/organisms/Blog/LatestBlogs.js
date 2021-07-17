@@ -4,7 +4,7 @@ import _cloneDeep from "lodash/cloneDeep";
 import LargeBlogCard from "../../molecules/largeBlogCard";
 import BriefCard from "../../molecules/breifCard";
 
-function LatestBlogs({ blogsList }) {
+function LatestBlogs({ blogsList, triggered, setTriggered }) {
 	const [sectionOne, setSectionOne] = useState([]);
 	const [sectionTwo, setSectionTwo] = useState([]);
 
@@ -18,10 +18,29 @@ function LatestBlogs({ blogsList }) {
 			<div className="column is-1"></div>
 			{blogsList.length ? (
 				<div className="column is-10">
-					<h1 style={{ textAlign: "center", fontSize: '25px', fontWeight: "bold",marginBottom:'50px' }}> <span style={{ fontSize: '45px', color: '#a3ce20', textDecoration: 'underline'}}>L</span>atest blog posts</h1>
+					<h1
+						style={{
+							textAlign: "center",
+							fontSize: "25px",
+							fontWeight: "bold",
+							marginBottom: "50px"
+						}}>
+						{" "}
+						<span
+							style={{
+								fontSize: "45px",
+								color: "#a3ce20",
+								textDecoration: "underline"
+							}}>
+							L
+						</span>
+						atest blog posts
+					</h1>
 					<div className="columns">
 						<div className="column is-9">
-							{_map(sectionOne, renderLargeCard)}
+							{_map(sectionOne, o =>
+								renderLargeCard(o, triggered, setTriggered)
+							)}
 						</div>
 						<div
 							className="vl is-hidden-touch"
@@ -38,10 +57,14 @@ function LatestBlogs({ blogsList }) {
 	);
 }
 
-function renderLargeCard(blog) {
+function renderLargeCard(blog, triggered, setTriggered) {
 	return (
 		<div className="column is-11" key={blog.id}>
-			<LargeBlogCard blogInfo={blog} />
+			<LargeBlogCard
+				blogInfo={blog}
+				triggered={triggered}
+				setTriggered={setTriggered}
+			/>
 			<hr />
 		</div>
 	);

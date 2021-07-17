@@ -9,7 +9,7 @@ import { _getAuthorInfo } from "../../../services/services";
 import categories from "../../../constants/categories";
 import LikeSaveShare from "../../organisms/Blog/LikeSaveShare";
 
-function LargeBlogCard({ blogInfo }) {
+function LargeBlogCard({ blogInfo, triggered, setTriggered }) {
 	const [authorInfo, setAuthorInfo] = useState(null);
 
 	useEffect(() => {
@@ -23,16 +23,21 @@ function LargeBlogCard({ blogInfo }) {
 				<Link to={`/blog/${BlogReader.id(blogInfo)}`} className="">
 					<div className="title has-text-black">
 						{BlogReader.title(blogInfo)}
-						<span
-							className="tag is-dark ml-4"
-							style={{
-								background:
-									BlogReader.categories(blogInfo) &&
-									categories[BlogReader.categories(blogInfo).trim()] &&
-									categories[BlogReader.categories(blogInfo).trim()].color
-							}}>
-							{BlogReader.categories(blogInfo)}
-						</span>
+						<Link
+							to={`/search?query=${
+								BlogReader.categories(blogInfo) || "Unknown"
+							}&2`}>
+							<span
+								className="tag is-dark ml-4"
+								style={{
+									background:
+										BlogReader.categories(blogInfo) &&
+										categories[BlogReader.categories(blogInfo).trim()] &&
+										categories[BlogReader.categories(blogInfo).trim()].color
+								}}>
+								{BlogReader.categories(blogInfo)}
+							</span>
+						</Link>
 					</div>
 				</Link>
 
@@ -43,12 +48,17 @@ function LargeBlogCard({ blogInfo }) {
 
 				<div className="author-info is-uppercase is-flex blog-author-card">
 					<Link to={`/author/${blogInfo.authorId}`}>
-						<span>
+						<span className="has-text-dark">
 							<FaUser /> {authorInfo && authorInfo.fullName}
 						</span>
 					</Link>
 					<span>
-						<LikeSaveShare blogInfo={blogInfo} fixed={true} />
+						<LikeSaveShare
+							blogInfo={blogInfo}
+							fixed={true}
+							triggered={triggered}
+							setTriggered={setTriggered}
+						/>
 					</span>
 				</div>
 			</div>

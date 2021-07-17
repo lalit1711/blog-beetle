@@ -36,7 +36,7 @@ function AuthorInfo({ userInfo }) {
 					<hr />
 					<p className="">{bio}</p>
 
-					<div className="social-section">
+					<div className="social-section mt-5">
 						{facebook && (
 							<a href={facebook} target="_blank" rel="noreferrer">
 								<span>
