@@ -23,14 +23,13 @@ function LandingPage() {
 	useEffect(() => {
 		setTimeout(() => {
 			setShowWelcomeMessage(false);
-		}, 600);
+		}, 2000);
 	}, []);
 	useEffect(() => {
 		if (!showWelcomeMessage) {
 			setLoad(true);
 			_getAllBlogs().then(res => {
 				setBlogsList(res.data.filter(e => e.published === "1"));
-				setLoad(false);
 			});
 			//------------------------Latest Blog Fetch------------------------
 			let requestData = {
@@ -73,9 +72,9 @@ function LandingPage() {
 						axios
 							.get(
 								"/blog-likes/count?where=" +
-									encodeURIComponent(
-										JSON.stringify({ blogId: BLOG.id, active: 1 })
-									)
+								encodeURIComponent(
+									JSON.stringify({ blogId: BLOG.id, active: 1 })
+								)
 							)
 							.then(res => {
 								BLOG.likesCount = res.data.count;
