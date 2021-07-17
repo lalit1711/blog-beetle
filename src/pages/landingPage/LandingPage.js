@@ -30,7 +30,7 @@ function LandingPage() {
 			setLoad(true);
 			_getAllBlogs().then(res => {
 				setBlogsList(res.data.filter(e => e.published === "1"));
-				// setLoad(false);
+				setLoad(false);
 			});
 			//------------------------Latest Blog Fetch------------------------
 			let requestData = {
