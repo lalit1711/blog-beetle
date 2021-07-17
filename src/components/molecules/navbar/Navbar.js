@@ -114,7 +114,7 @@ function Navbar(props) {
 									</div>
 								) : (
 									<img
-										className="is-42x42 mt-3"
+										className="is-32x32 mt-3"
 										src="/icons/akar-icons_search.svg"
 										alt="search-icon"
 										onClick={() => setShowSearch(true)}
@@ -148,9 +148,15 @@ function Navbar(props) {
 
 									<div className="navbar-dropdown is-right">
 										<span className="navbar-item">
-											<Link to={`/author/${user && user.id}`}>Profile</Link>
+											<Link
+												to={`/author/${user && user.id}`}
+												className="has-text-dark">
+												Profile
+											</Link>
 										</span>
-										<span className="navbar-item" onClick={signOut}>
+										<span
+											className="navbar-item has-text-dark"
+											onClick={signOut}>
 											Log Out
 										</span>
 									</div>

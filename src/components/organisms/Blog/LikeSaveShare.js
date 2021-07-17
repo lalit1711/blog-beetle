@@ -20,13 +20,14 @@ import {
 	TwitterShareButton
 } from "react-share";
 import axios from "axios";
+import { BiMessageSquareEdit, BiTrash } from "react-icons/bi";
 import { requestDataUserLikesBlog } from "../../../helpers/util";
 
 function LikeSaveShare({
 	blogInfo,
 	fixed = false,
 	triggered = false,
-	setTriggered = () => { },
+	setTriggered = () => {},
 	onlyView = false
 }) {
 	const [openConfirmationBox, setOpenConfirmationBox] = useState(false);
@@ -42,10 +43,9 @@ function LikeSaveShare({
 		if (!blogInfo) return;
 		_getLikeCount(blogInfo.id).then(res => {
 			setCount(res.data.count);
-			setTriggered(!triggered);
 		});
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [likeId, blogInfo, triggered]);
+	}, [likeId, blogInfo]);
 
 	// find out weather loggedIn user has liked the blog or not
 	useEffect(() => {
@@ -56,9 +56,9 @@ function LikeSaveShare({
 		axios
 			.get(
 				"/blog-likes?filter=" +
-				encodeURIComponent(
-					JSON.stringify(requestDataUserLikesBlog(blogInfo.id, user.id))
-				)
+					encodeURIComponent(
+						JSON.stringify(requestDataUserLikesBlog(blogInfo.id, user.id))
+					)
 			)
 			.then(res => {
 				if (res.data.length) {
@@ -66,16 +66,17 @@ function LikeSaveShare({
 				}
 			});
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [user, blogInfo, triggered,likeId]);
+	}, [user, blogInfo, triggered, likeId]);
 
 	// find out weather loggedIn user has liked the blog or not
 	useEffect(() => {
 		if (!user || !blogInfo || user === 1 || blogInfo === "" || onlyView) return;
-		axios.get( 
+		axios
+			.get(
 				"/saved-blogs?filter=" +
-				encodeURIComponent(
-					JSON.stringify(requestDataUserLikesBlog(blogInfo.id, user.id))
-				)
+					encodeURIComponent(
+						JSON.stringify(requestDataUserLikesBlog(blogInfo.id, user.id))
+					)
 			)
 			.then(res => {
 				if (res.data.length) {
@@ -87,16 +88,20 @@ function LikeSaveShare({
 
 	const deleteBlog = async () => {
 		await _deleteBlog(blogInfo.id);
-		history.push("/");
+		if (location.pathname.indexOf("/blog/") > -1) history.push("/");
+		else {
+			setTriggered(!triggered);
+			setOpenConfirmationBox(false);
+		}
 	};
 
 	const handleDelete = () => setOpenConfirmationBox(true);
 
 	const handleLike = () => {
-		const userBlogInfo={
+		const userBlogInfo = {
 			userId: user.id,
-			blogId: blogInfo.id,
-		}
+			blogId: blogInfo.id
+		};
 		const data = {
 			where: userBlogInfo
 		};
@@ -108,16 +113,15 @@ function LikeSaveShare({
 					setTriggered(!triggered);
 				});
 			}
-			if(res.data.length>0){
-				if(res.data[0].active){
-				}
-				else{
-					_reLike(userBlogInfo).then(respp=>{
-						setLikeId(1)
-					})
+			if (res.data.length > 0) {
+				if (res.data[0].active) {
+				} else {
+					_reLike(userBlogInfo).then(respp => {
+						setLikeId(1);
+					});
 				}
 			}
-		})
+		});
 	};
 
 	const handleSave = () => {
@@ -134,7 +138,7 @@ function LikeSaveShare({
 	const handleLikeDelete = () => {
 		const data = {
 			userId: user.id,
-			blogId: blogInfo.id,
+			blogId: blogInfo.id
 		};
 		_revokeLike(data).then(res => {
 			setLikeId(0);
@@ -159,52 +163,65 @@ function LikeSaveShare({
 							<Fragment>
 								<Link to={`/edit-blog/${blogInfo.id}`}>
 									<span>
-										<img src="/icons/edit.svg" alt="search-img" />
+										<BiMessageSquareEdit />
 									</span>
 								</Link>
 
-								<span>
-									<img
-										src="/icons/trash.svg"
-										alt="search-img"
-										onClick={handleDelete}
-									/>
+								<span onClick={handleDelete}>
+									<BiTrash />
 								</span>
 							</Fragment>
 						) : (
 							<Fragment>
-								<span className="count has-text-info">{count}</span>
+								<span className="count has-text-primary">{count}</span>
 								<span>
 									{likeId ? (
-										<AiFillLike style={{cursor:'pointer'}} className="animateLikeButton" onClick={handleLikeDelete} />
+										<AiFillLike
+											style={{ cursor: "pointer" }}
+											className="animateLikeButton"
+											onClick={handleLikeDelete}
+										/>
 									) : (
-										<AiOutlineLike style={{cursor:'pointer'}}  onClick={handleLike} />
+										<AiOutlineLike
+											style={{ cursor: "pointer" }}
+											onClick={handleLike}
+										/>
 									)}
 								</span>
 								<span>
 									{saveId ? (
-										<BsBookmarkFill style={{cursor:'pointer'}} className="animateSaveButton" onClick={handleSavedDelete} />
+										<BsBookmarkFill
+											style={{ cursor: "pointer" }}
+											className="animateSaveButton"
+											onClick={handleSavedDelete}
+										/>
 									) : (
-										<BsBookmark style={{cursor:'pointer'}} onClick={handleSave} />
+										<BsBookmark
+											style={{ cursor: "pointer" }}
+											onClick={handleSave}
+										/>
 									)}
 								</span>
 							</Fragment>
 						)
 					) : (
-						<span className="has-text-info">{count + " Likes"}</span>
+						<span className="has-text-primary">{count + " Likes"}</span>
 					)}
 				</div>
 				{!fixed && (
 					<div className={`${!onlyView && "social-section"}`}>
-						<FacebookShareButton url={`https://localhost/${location.pathname}`}>
+						<FacebookShareButton
+							url={`http://3.7.98.9:4000/${location.pathname}`}>
 							<FaFacebook />
 						</FacebookShareButton>
 
-						<TwitterShareButton url={`https://localhost/${location.pathname}`}>
+						<TwitterShareButton
+							url={`http://3.7.98.9:4000/${location.pathname}`}>
 							<FaTwitter />
 						</TwitterShareButton>
 
-						<LinkedinShareButton url={`https://localhost/${location.pathname}`}>
+						<LinkedinShareButton
+							url={`http://3.7.98.9:4000/${location.pathname}`}>
 							<FaLinkedin />
 						</LinkedinShareButton>
 					</div>

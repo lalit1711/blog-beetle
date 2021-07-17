@@ -26,15 +26,16 @@ function Blog(props) {
 		_getBlogById(blogId)
 			.then(res => {
 				setContent(res.data);
-				// TODO: Enable this condition by fixing code in BE
-				// if (res.data.published === "0" && user.id !== res.data.authorId)
-				// 	props.history.push("/");
+
+				if (res.data.published === "0" && user.id !== res.data.authorId)
+					props.history.push("/");
 				_getUserInfo(res.data.authorId).then(res => {
 					setAuthorInfo(res.data);
 					setLoader(false);
 				});
 			})
 			.catch(err => props.history.push("/"));
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [props.history, props.match.params.id]);
 
 	if (loader) return <BlogLoader />;
@@ -52,18 +53,24 @@ function Blog(props) {
 								)}
 
 								<div className="author-time-info is-flex">
-									<span
-										className="tag is-dark"
-										style={{
-											background:
-												BlogReader.categories(content) &&
-												categories[BlogReader.categories(content).trim()] &&
-												categories[BlogReader.categories(content).trim()].color
-										}}>
-										{BlogReader.categories(content)}
-									</span>
+									<Link
+										to={`/search?query=${
+											BlogReader.categories(content) || "Unknown"
+										}&2`}>
+										<span
+											className="tag is-dark"
+											style={{
+												background:
+													BlogReader.categories(content) &&
+													categories[BlogReader.categories(content).trim()] &&
+													categories[BlogReader.categories(content).trim()]
+														.color
+											}}>
+											{BlogReader.categories(content)}
+										</span>
+									</Link>
 									<Link to={`/author/${BlogReader.authorId(content)}`}>
-										<span className=" is-size-6">
+										<span className=" is-size-6 has-text-dark">
 											<FaUser /> {authorInfo && authorInfo.fullName}
 										</span>
 									</Link>
@@ -97,18 +104,18 @@ function Blog(props) {
 					</div>
 					<div className="column is-1"></div>
 				</div>
-				{user && (
-					<div className="columns mt-5" style={{ textAlign: "center" }}>
-						<div className="column is-1"></div>
-						<div className="column is-10">
-							<SuggestedBlogs
-								categories={[content.categories]}
-								landingPage={false}
-							/>
-						</div>
-						<div className="column is-1"></div>
+
+				<div className="columns mt-5" style={{ textAlign: "center" }}>
+					<div className="column is-1"></div>
+					<div className="column is-10">
+						<SuggestedBlogs
+							categories={[content.categories]}
+							landingPage={false}
+							blogId={content.id}
+						/>
 					</div>
-				)}
+					<div className="column is-1"></div>
+				</div>
 			</div>
 		</div>
 	);

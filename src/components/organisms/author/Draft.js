@@ -1,9 +1,8 @@
-import axios from "axios";
 import React, { useEffect, useState } from "react";
 import _map from "lodash/map";
 import LargeBlogCard from "../../molecules/largeBlogCard";
-import { requestDataForDrafts } from "../../../helpers/util";
 import { useParams } from "react-router";
+import { _getDraftBlogs } from "../../../pages/authorpage/services";
 
 function Draft() {
 	const [blogList, setBlogsList] = useState([]);
@@ -11,12 +10,7 @@ function Draft() {
 	const userId = params.id;
 
 	useEffect(() => {
-		axios
-			.get(
-				"/blogs?filter=" +
-					encodeURIComponent(JSON.stringify(requestDataForDrafts(userId)))
-			)
-			.then(res => setBlogsList(res.data));
+		_getDraftBlogs(userId).then(res => setBlogsList(res.data));
 	}, [userId]);
 	return (
 		<div className="authors-blogs">

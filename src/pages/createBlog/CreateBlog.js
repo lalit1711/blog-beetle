@@ -155,7 +155,7 @@ function CreateBlog(props) {
 					{isPublished === "0" ? "Publish" : "Published"}
 				</Button>
 				<Button type="is-light" onClick={clearAllValues}>
-					Clear
+					Clear All
 				</Button>
 				<Link to="/">
 					<Button type="is-danger">Cancel</Button>

@@ -1,4 +1,3 @@
-import axios from "axios";
 import React, { useContext, useEffect, useState } from "react";
 import Skeleton from "react-loading-skeleton";
 import { useParams } from "react-router";
@@ -9,6 +8,7 @@ import BlogsOfAuthor from "../../components/organisms/author/BlogsOfAuthor";
 import Draft from "../../components/organisms/author/Draft";
 import SavedBlogs from "../../components/organisms/author/SavedBlogs";
 import { AuthenticatorContext } from "../../context/authenticatorContext";
+import { _getAuthorInfo } from "./services";
 
 function AuthorPage() {
 	const [activeTab, setActiveTab] = useState(0);
@@ -25,9 +25,9 @@ function AuthorPage() {
 	];
 
 	useEffect(() => {
-		axios.get(`/users/${params.id}`).then(res => {
+		_getAuthorInfo(params.id).then(res => {
 			setAuthorInfo(res.data);
-			if (params.id === user.id) {
+			if (user && params.id === user.id) {
 				updateLocalStorage(res.data);
 			}
 		});

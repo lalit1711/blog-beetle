@@ -89,7 +89,7 @@ export const requestDataUserLikesBlog = (blogId, userId) => {
 		limit: 100,
 		skip: 0,
 		where: {
-			and: [{ blogId: blogId }, { userId: userId },{active:1}]
+			and: [{ blogId: blogId }, { userId: userId }, { active: 1 }]
 		}
 	};
 };
@@ -148,6 +148,30 @@ export const requestDataForDrafts = id => {
 		where: {
 			authorId: id,
 			published: 0
+		},
+		fields: {
+			id: true,
+			title: true,
+			coverImgSrc: true,
+			subTitle: true,
+			authorId: true,
+			blogContent: true,
+			published: true,
+			categories: true,
+			createdAt: true,
+			updatedAt: true
+		}
+	};
+};
+
+export const getSavedBlogRequestData = blogIdArray => {
+	return {
+		offset: 0,
+		limit: 100,
+		skip: 0,
+
+		where: {
+			id: { inq: blogIdArray }
 		},
 		fields: {
 			id: true,

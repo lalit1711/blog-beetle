@@ -173,6 +173,10 @@ textarea:disabled {
 			margin: 0px;
 			color: $primary !important;
 		}
+		img {
+			height: 22px !important;
+			width: 22px !important;
+		}
 	}
 }
 .blog-author-card {
@@ -233,6 +237,11 @@ textarea:disabled {
 			color: $grey2;
 			font-size: 13px;
 			font-weight: 400;
+		}
+		.social-section {
+			svg {
+				height: 25px;
+			}
 		}
 	}
 }
@@ -316,6 +325,7 @@ footer {
 	width: 100%;
 	.navbar-item {
 		background-color: white !important;
+		cursor: pointer;
 		img {
 			max-height: 2.75rem !important;
 		}
@@ -343,6 +353,11 @@ footer {
 .is-42x42 {
 	height: 42px;
 	width: 42px;
+	cursor: pointer;
+}
+.is-32x32 {
+	height: 32px;
+	width: 32px;
 	cursor: pointer;
 }
 
@@ -440,12 +455,18 @@ footer {
 		margin: 0 5px;
 	}
 	svg {
+		color: $primary;
 		height: 30px;
 		width: 30px;
 	}
 
 	button {
 		min-width: 40px !important;
+	}
+}
+.has-icon-white {
+	svg {
+		color: $white !important;
 	}
 }
 
@@ -693,6 +714,9 @@ footer {
 				margin: 2% 0px;
 			}
 		}
+		.author-name {
+			font-size: 0.6rem !important;
+		}
 	}
 
 	.author-profile {
@@ -769,7 +793,8 @@ footer {
 				.edit-delete {
 					margin-left: 2%;
 					visibility: hidden;
-					img {
+					svg {
+						color: $primary;
 						cursor: pointer;
 						height: 28px;
 					}
@@ -787,6 +812,12 @@ footer {
 }
 
 // comment end
+
+.search-section-suggested {
+	.author-name {
+		font-size: 0.6rem !important;
+	}
+}
 
 // Responsive
 

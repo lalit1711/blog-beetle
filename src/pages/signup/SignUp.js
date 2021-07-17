@@ -4,7 +4,8 @@ import { StyleSheet, css } from "aphrodite";
 import Button from "../../components/atoms/button";
 import { Link } from "react-router-dom";
 import { _createUser, _signUp } from "./services";
-import beetleLogo from "../../assets/beetle.jpg"
+import beetleLogo from "../../assets/beetle.jpg";
+import { AiOutlineClose } from "react-icons/ai";
 
 function SignUp(props) {
 	const [email, setEmail] = useState("");
@@ -44,12 +45,23 @@ function SignUp(props) {
 
 	return (
 		<div className={`modal is-active sign-up-log-in  ${css(styles.bounce)}`}>
-			<div style={{ backgroundColor: '#d5ead5' }} className="modal-background"></div>
+			<div
+				style={{ backgroundColor: "#d5ead5" }}
+				className="modal-background"></div>
 			<div className="modal-content">
 				<div className="columns is-mobile">
 					<div className="column is-three-fifths is-offset-one-fifth container">
 						<figure className="image ">
-							<img src={beetleLogo} alt="logo" style={{ objectFit: "cover", borderRadius: '50%', height: '120px', width: '120px' }} />
+							<img
+								src={beetleLogo}
+								alt="logo"
+								style={{
+									objectFit: "cover",
+									borderRadius: "50%",
+									height: "120px",
+									width: "120px"
+								}}
+							/>
 						</figure>
 						<div className="form-container">
 							<form onSubmit={handleSubmit}>
@@ -57,7 +69,7 @@ function SignUp(props) {
 									<label className="label">Name</label>
 									<div className="control">
 										<input
-											style={{ backgroundColor: '#d5ead5' }}
+											style={{ backgroundColor: "#d5ead5" }}
 											className="input"
 											type="text"
 											placeholder="Enter your name"
@@ -70,7 +82,7 @@ function SignUp(props) {
 									<label className="label">Email</label>
 									<div className="control">
 										<input
-											style={{ backgroundColor: '#d5ead5' }}
+											style={{ backgroundColor: "#d5ead5" }}
 											className="input"
 											type="email"
 											placeholder="Enter your email"
@@ -83,7 +95,7 @@ function SignUp(props) {
 									<label className="label">Password</label>
 									<div className="control">
 										<input
-											style={{ backgroundColor: '#d5ead5' }}
+											style={{ backgroundColor: "#d5ead5" }}
 											className="input"
 											type="password"
 											placeholder="Enter your password"
@@ -113,10 +125,9 @@ function SignUp(props) {
 					</div>
 				</div>
 			</div>
-			<button
-				className="modal-close is-large"
-				aria-label="close"
-				onClick={goBack}></button>
+			<div className="modal-close is-large" aria-label="close" onClick={goBack}>
+				<AiOutlineClose />
+			</div>
 		</div>
 	);
 }

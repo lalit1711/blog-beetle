@@ -5,6 +5,7 @@ import { _getUserInfo } from "../../../pages/login/services";
 import { Link } from "react-router-dom";
 import { AuthenticatorContext } from "../../../context/authenticatorContext";
 import ReactTimeAgo from "react-time-ago";
+import { BiTrash } from "react-icons/bi";
 
 function SingleComment({ comment, authorId, handleDelete }) {
 	const { user } = useContext(AuthenticatorContext);
@@ -43,13 +44,7 @@ function SingleComment({ comment, authorId, handleDelete }) {
 							<div className="comment">{comment.comment}</div>
 							<div className="edit-delete">
 								{(user && authorId === user.id) ||
-									(user && user.id === comment.userId && (
-										<img
-											src="/icons/trash.svg"
-											alt="search-img"
-											onClick={() => handleDelete(comment.id)}
-										/>
-									))}
+									(user && user.id === comment.userId && <BiTrash />)}
 								{/* <img src="/icons/edit.svg" alt="search-img" /> */}
 							</div>
 						</div>
