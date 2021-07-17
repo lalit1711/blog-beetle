@@ -14,7 +14,7 @@ import axios from "axios";
 
 function LandingPage() {
 	const [blogsList, setBlogsList] = useState([]);
-	const [mostLikedBlogs, setMostLikedBlogs] = useState([])
+	const [mostLikedBlogs, setMostLikedBlogs] = useState([]);
 	const [triggered, setTriggered] = useState(false);
 	const [blogsListLatest, setLatestBlogsList] = useState([]);
 	const [load, setLoad] = useState(false);
@@ -23,7 +23,7 @@ function LandingPage() {
 	useEffect(() => {
 		setTimeout(() => {
 			setShowWelcomeMessage(false);
-		}, 2000);
+		}, 600);
 	}, []);
 	useEffect(() => {
 		if (!showWelcomeMessage) {
@@ -63,26 +63,35 @@ function LandingPage() {
 	}, [showWelcomeMessage, triggered]);
 
 	useEffect(() => {
-		getMostLikedBlogContent(blogsList)
-	}, [blogsList])
+		getMostLikedBlogContent(blogsList);
+	}, [blogsList]);
 
-	const getMostLikedBlogContent = async (blogsList) => {
+	const getMostLikedBlogContent = async blogsList => {
 		if (blogsList) {
-			let BlogsListAltered = [...blogsList]
-			let BlogListWithCount = await Promise.all(BlogsListAltered.map(BLOG => {
-				return new Promise((resolve, reject) => {
-					axios.get("/blog-likes/count?where=" + encodeURIComponent(JSON.stringify({ blogId: BLOG.id, active: 1 }))).then(res => {
-						BLOG.likesCount = res.data.count;
-						resolve(BLOG)
-					})
+			let BlogsListAltered = [...blogsList];
+			let BlogListWithCount = await Promise.all(
+				BlogsListAltered.map(BLOG => {
+					return new Promise((resolve, reject) => {
+						axios
+							.get(
+								"/blog-likes/count?where=" +
+									encodeURIComponent(
+										JSON.stringify({ blogId: BLOG.id, active: 1 })
+									)
+							)
+							.then(res => {
+								BLOG.likesCount = res.data.count;
+								resolve(BLOG);
+							});
+					});
 				})
-			}))
+			);
 
-			let sortedBlogsBasedOnLikes = BlogListWithCount.sort(compare)
-			console.log(sortedBlogsBasedOnLikes)
-			setMostLikedBlogs(sortedBlogsBasedOnLikes)
+			let sortedBlogsBasedOnLikes = BlogListWithCount.sort(compare);
+			console.log(sortedBlogsBasedOnLikes);
+			setMostLikedBlogs(sortedBlogsBasedOnLikes);
 		}
-	}
+	};
 
 	return (
 		<div className="landing-page">
@@ -91,49 +100,49 @@ function LandingPage() {
 					<WelcomeMessage />
 					<ReactLottie keyIndex={1} />
 				</>
-			) : (<div>
-				<WelcomeMessage Message={"Most liked blogs"} />
+			) : (
+				<div>
+					<WelcomeMessage Message={"Most liked blogs"} />
 					<div className="container">
-					<div className="mt-10">
-						{!load ? (
-							<TrendingBlogs
-								blogsList={mostLikedBlogs}
-								triggered={triggered}
-								setTriggered={setTriggered}
-							/>
-						) : (
-							<TrendingLoader />
-						)}
-					</div>
-					<div className="mt-10">
-						{!load ? (
-							<LatestBlogs
-								blogsList={blogsListLatest}
-								triggered={triggered}
-								setTriggered={setTriggered}
-							/>
-						) : (
-							<LatestLoader />
-						)}
-					</div>
-					<div className="mt-3">
-						{!load ? (
-							<Fragment>
-								{user && user.interests && (
-									<SuggestedBlogs
-										userId={user.id}
-										categories={user.interests.split(",")}
-									/>
-								)}
-							</Fragment>
-						) : (
-							<SuggestedLoader />
-						)}
-						<ReactLottie />
+						<div className="mt-10">
+							{!load ? (
+								<TrendingBlogs
+									blogsList={mostLikedBlogs}
+									triggered={triggered}
+									setTriggered={setTriggered}
+								/>
+							) : (
+								<TrendingLoader />
+							)}
+						</div>
+						<div className="mt-10">
+							{!load ? (
+								<LatestBlogs
+									blogsList={blogsListLatest}
+									triggered={triggered}
+									setTriggered={setTriggered}
+								/>
+							) : (
+								<LatestLoader />
+							)}
+						</div>
+						<div className="mt-3">
+							{!load ? (
+								<Fragment>
+									{user && user.interests && (
+										<SuggestedBlogs
+											userId={user.id}
+											categories={user.interests.split(",")}
+										/>
+									)}
+								</Fragment>
+							) : (
+								<SuggestedLoader />
+							)}
+							<ReactLottie />
+						</div>
 					</div>
 				</div>
-			
-			</div>
 			)}
 		</div>
 	);
@@ -164,9 +173,7 @@ const WelcomeMessage = ({ Message = "Welcome To BlogBeetle" }) => (
 export default LandingPage;
 
 function compare(a, b) {
-	if (a.likesCount < b.likesCount)
-		return 1;
-	if (a.likesCount > b.likesCount)
-		return -1;
+	if (a.likesCount < b.likesCount) return 1;
+	if (a.likesCount > b.likesCount) return -1;
 	return 0;
 }
