@@ -10,7 +10,8 @@ function SuggestedBlogs({
 	landingPage = true,
 	categories = [],
 	title = true,
-	fullWidth = false
+	fullWidth = false,
+	blogId = null
 }) {
 	const [blogsList, setBlogsList] = useState([]);
 	const [triggered, setTriggered] = useState(false);
@@ -20,12 +21,7 @@ function SuggestedBlogs({
 		_getFilterBlogs(
 			"/blogs?filter=" +
 				encodeURIComponent(JSON.stringify(requestData(getFilterObject())))
-		).then(res => {
-			const data = res.data.filter(e => e.published === "1");
-			setBlogsList(
-				landingPage ? data.filter(o => o.authorId !== user.id) : data
-			);
-		});
+		).then(res => filterBlogs(res.data));
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [user, categories, triggered]);
 
@@ -33,6 +29,14 @@ function SuggestedBlogs({
 		return categories.map(o => {
 			return { categories: o };
 		});
+	};
+
+	const filterBlogs = blogs => {
+		const data = blogs
+			.filter(e => e.published === "1")
+			.filter(e => e.id !== blogId);
+
+		setBlogsList(user ? data.filter(o => o.authorId !== user.id) : data);
 	};
 
 	return (

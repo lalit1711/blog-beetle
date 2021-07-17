@@ -7,6 +7,7 @@ import BlogReader from "../../../readers/blog";
 import categories from "../../../constants/categories";
 import { _getAuthorInfo } from "../../../services/services";
 import ReactTimeAgo from "react-time-ago";
+import LikeSaveShare from "../../organisms/Blog/LikeSaveShare";
 
 function ImageCard({ blogInfo, height = 270, date = true }) {
 	const [authorInfo, setAuthorInfo] = useState(null);
@@ -47,15 +48,15 @@ function ImageCard({ blogInfo, height = 270, date = true }) {
 					<Link
 						to={`/author/${BlogReader.authorId(blogInfo)}`}
 						className="author-time-info is-flex">
-						<span className="has-text-white is-size-6">
+						<span className="has-text-white is-size-7 is-uppercase">
 							<FaUser /> {authorInfo && authorInfo.fullName}
 						</span>
+
 						{date && blogInfo.createdAt && (
 							<span
 								className="subtitle has-text-white "
 								style={{ marginLeft: 20 }}>
-								<FaClock />{" "}
-								<span className="is-size-6">
+								<span className="is-size-7">
 									<ReactTimeAgo date={blogInfo.createdAt} locale="en-US" />
 								</span>
 							</span>

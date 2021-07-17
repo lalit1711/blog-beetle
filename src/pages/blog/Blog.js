@@ -104,18 +104,18 @@ function Blog(props) {
 					</div>
 					<div className="column is-1"></div>
 				</div>
-				{user && (
-					<div className="columns mt-5" style={{ textAlign: "center" }}>
-						<div className="column is-1"></div>
-						<div className="column is-10">
-							<SuggestedBlogs
-								categories={[content.categories]}
-								landingPage={false}
-							/>
-						</div>
-						<div className="column is-1"></div>
+
+				<div className="columns mt-5" style={{ textAlign: "center" }}>
+					<div className="column is-1"></div>
+					<div className="column is-10">
+						<SuggestedBlogs
+							categories={[content.categories]}
+							landingPage={false}
+							blogId={content.id}
+						/>
 					</div>
-				)}
+					<div className="column is-1"></div>
+				</div>
 			</div>
 		</div>
 	);

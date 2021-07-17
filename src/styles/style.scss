@@ -238,6 +238,11 @@ textarea:disabled {
 			font-size: 13px;
 			font-weight: 400;
 		}
+		.social-section {
+			svg {
+				height: 25px;
+			}
+		}
 	}
 }
 .brief-blog-heading {
@@ -709,6 +714,9 @@ footer {
 				margin: 2% 0px;
 			}
 		}
+		.author-name {
+			font-size: 0.6rem !important;
+		}
 	}
 
 	.author-profile {
@@ -807,7 +815,7 @@ footer {
 
 .search-section-suggested {
 	.author-name {
-		font-size: 0.5rem !important;
+		font-size: 0.6rem !important;
 	}
 }
 
