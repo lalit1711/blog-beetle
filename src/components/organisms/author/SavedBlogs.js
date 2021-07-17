@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from "react";
 import _map from "lodash/map";
 import BlogCard from "../../molecules/blogCard";
-import axios from "axios";
-import { requestDataSavedBlog } from "../../../helpers/util";
 import { useParams } from "react-router";
 import SuggestedLoader from "../loader/SuggestedLoader";
+import { _getSavedBlogs } from "../../../pages/authorpage/services";
 
 function SavedBlogs() {
 	const [blogList, setBlogsList] = useState([]);
@@ -14,24 +13,13 @@ function SavedBlogs() {
 
 	useEffect(() => {
 		setLoader(true);
-		axios
-			.get(
-				"/saved-blogs?filter=" +
-					encodeURIComponent(JSON.stringify(requestDataSavedBlog(userId)))
-			)
-			.then(res => {
-				const requestData = getSavedBlogRequestData(
-					res.data.map(item => item.blogId)
-				);
-				axios
-					.get(
-						"/blogs?filter=" + encodeURIComponent(JSON.stringify(requestData))
-					)
-					.then(res => {
-						setBlogsList(res.data);
-						setLoader(false);
-					});
-			});
+		_getSavedBlogs(userId).then(res => {
+			setBlogsList(res);
+			setLoader(false);
+		});
+		return () => {
+			setBlogsList([]);
+		};
 	}, [userId]);
 
 	if (!loader)
@@ -39,7 +27,7 @@ function SavedBlogs() {
 			<div className="authors-blogs columns is-multiline">
 				{_map(blogList, blog => {
 					return (
-						<div className="column is-4">
+						<div className="column is-4" key={blog.id}>
 							<BlogCard blogInfo={blog} />
 						</div>
 					);
@@ -47,30 +35,6 @@ function SavedBlogs() {
 			</div>
 		);
 	return <SuggestedLoader />;
-}
-
-function getSavedBlogRequestData(blogIdArray) {
-	return {
-		offset: 0,
-		limit: 100,
-		skip: 0,
-
-		where: {
-			id: { inq: blogIdArray }
-		},
-		fields: {
-			id: true,
-			title: true,
-			coverImgSrc: true,
-			subTitle: true,
-			authorId: true,
-			blogContent: true,
-			published: true,
-			categories: true,
-			createdAt: true,
-			updatedAt: true
-		}
-	};
 }
 
 export default SavedBlogs;

@@ -5,6 +5,7 @@ function Tabs({ tabOptions, active, setActiveTab }) {
 	function renderTabs(tab) {
 		return (
 			<li
+				key={tab.index}
 				className={`${tab.index === active && "is-active"}`}
 				onClick={() => setActiveTab(tab.index)}>
 				<span>{tab.title}</span>

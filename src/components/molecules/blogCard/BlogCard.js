@@ -4,7 +4,7 @@ import ReactHtmlParser from "react-html-parser";
 
 import BlogReader from "../../../readers/blog";
 import categories from "../../../constants/categories";
-import { FaClock, FaUser } from "react-icons/fa";
+import { FaUser } from "react-icons/fa";
 import { _getAuthorInfo } from "../../../services/services";
 import LikeSaveShare from "../../organisms/Blog/LikeSaveShare";
 import ReactTimeAgo from "react-time-ago";
@@ -33,8 +33,7 @@ function BlogCard({ blogInfo }) {
 						</span>
 						{blogInfo.createdAt && (
 							<span className="subtitle " style={{ marginLeft: 20 }}>
-								<FaClock style={{ height: 16 }} />{" "}
-								<span className="is-size-6">
+								<span className="is-size-7">
 									<ReactTimeAgo date={blogInfo.createdAt} locale="en-US" />
 								</span>
 							</span>
@@ -59,7 +58,7 @@ function BlogCard({ blogInfo }) {
 						<Link to={`author/${blogInfo.authorId}`} className="has-text-dark">
 							<span>
 								<FaUser />
-								{authorInfo && authorInfo.fullName}
+								{authorInfo && authorInfo.fullName.slice(0, 15)}
 							</span>
 						</Link>
 						<div className="card-like-and-save">
