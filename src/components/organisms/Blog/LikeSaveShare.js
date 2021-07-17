@@ -66,7 +66,7 @@ function LikeSaveShare({
 				}
 			});
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [user, blogInfo, triggered, likeId]);
+	}, [user, blogInfo, likeId]);
 
 	// find out weather loggedIn user has liked the blog or not
 	useEffect(() => {
@@ -84,7 +84,7 @@ function LikeSaveShare({
 				}
 			});
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [user, blogInfo, triggered]);
+	}, [user, blogInfo]);
 
 	const deleteBlog = async () => {
 		await _deleteBlog(blogInfo.id);
@@ -110,7 +110,6 @@ function LikeSaveShare({
 			if (res.data.length === 0) {
 				_likeBlog(userBlogInfo).then(res => {
 					setLikeId(res.data.id);
-					setTriggered(!triggered);
 				});
 			}
 			if (res.data.length > 0) {
