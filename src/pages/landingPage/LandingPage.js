@@ -30,7 +30,7 @@ function LandingPage() {
 			setLoad(true);
 			_getAllBlogs().then(res => {
 				setBlogsList(res.data.filter(e => e.published === "1"));
-				setLoad(false);
+				// setLoad(false);
 			});
 			//------------------------Latest Blog Fetch------------------------
 			let requestData = {
@@ -52,12 +52,12 @@ function LandingPage() {
 				}
 			};
 
-			setLoad(true);
+
 			_getFilterBlogs(
 				"/blogs?filter=" + encodeURIComponent(JSON.stringify(requestData))
 			).then(res => {
 				setLatestBlogsList(res.data.filter(e => e.published === "1"));
-				setLoad(false);
+	
 			});
 		}
 	}, [showWelcomeMessage, triggered]);
@@ -68,7 +68,6 @@ function LandingPage() {
 
 	const getMostLikedBlogContent = async (blogsList) => {
 		if (blogsList) {
-			setLoad(true)
 			let BlogsListAltered = [...blogsList]
 			let BlogListWithCount = await Promise.all(BlogsListAltered.map(BLOG => {
 				return new Promise((resolve, reject) => {
