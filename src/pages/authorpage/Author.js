@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import Skeleton from "react-loading-skeleton";
-import { useParams } from "react-router";
+import { useLocation, useParams } from "react-router";
 import Tabs from "../../components/atoms/tabs/Tabs";
 import AuthorBanner from "../../components/molecules/authorBanner";
 import AuthorProfile from "../../components/organisms/author/AuthorProfile";
@@ -15,6 +15,7 @@ function AuthorPage() {
 	const { user, updateLocalStorage } = useContext(AuthenticatorContext);
 	const [authorInfo, setAuthorInfo] = useState(null);
 	const [updateData, setUpdateData] = useState(false);
+	const location = useLocation();
 	const params = useParams();
 
 	const tabOptions = [
@@ -23,6 +24,11 @@ function AuthorPage() {
 		{ title: "Saved Blogs", index: 2 },
 		{ title: "Drafts", index: 3 }
 	];
+
+	useEffect(() => {
+		const shouldShowSavedBlogs = location.search === "?savedBlogs";
+		if (shouldShowSavedBlogs) setActiveTab(2);
+	});
 
 	useEffect(() => {
 		_getAuthorInfo(params.id).then(res => {
