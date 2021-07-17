@@ -1,23 +1,17 @@
 import React from "react";
 import { FaFacebook, FaGithub, FaLinkedin, FaTwitter } from "react-icons/fa";
 import { Link } from "react-router-dom";
-import { IMG_SRC } from "../../../constants/user";
+import { IMG_SRC, SOCIAL_LINKS } from "../../../constants/user";
 import UserReader from "../../../readers/user";
 // import editIcon from "../../../../public/icons/edit.svg"
 
-const data = JSON.stringify({
-	facebook: "",
-	github: "",
-	twitter: "",
-	linkedIn: ""
-});
 function AuthorBanner({ userInfo }) {
 	const {
 		facebook = null,
 		github = null,
 		twitter = null,
 		linkedIn = null
-	} = JSON.parse(userInfo.socialLinks || data);
+	} = JSON.parse(userInfo.socialLinks || SOCIAL_LINKS);
 
 	return (
 		<section className="hero is-small is-primary author-banner">

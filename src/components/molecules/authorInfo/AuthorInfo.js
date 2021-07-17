@@ -2,14 +2,8 @@ import React from "react";
 import PropTypes from "prop-types";
 import { FaFacebook, FaGithub, FaLinkedin, FaTwitter } from "react-icons/fa";
 import { Link } from "react-router-dom";
-import { IMG_SRC } from "../../../constants/user";
+import { IMG_SRC, SOCIAL_LINKS } from "../../../constants/user";
 
-const data = JSON.stringify({
-	facebook: "",
-	github: "",
-	twitter: "",
-	linkedIn: ""
-});
 function AuthorInfo({ userInfo }) {
 	const { fullName, id, imgSrc, bio } = userInfo;
 	const {
@@ -17,7 +11,7 @@ function AuthorInfo({ userInfo }) {
 		github = null,
 		twitter = null,
 		linkedIn = null
-	} = JSON.parse(userInfo.socialLinks || data);
+	} = JSON.parse(userInfo.socialLinks || SOCIAL_LINKS);
 	return (
 		<div>
 			<section className="hero author-info-hero">
