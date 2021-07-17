@@ -216,7 +216,7 @@ textarea:disabled {
 	}
 	.blog-info {
 		margin: 0 50px 0 70px;
-
+		width: 100%;
 		.title {
 			line-height: 49px;
 			text-align: left;
@@ -604,6 +604,7 @@ footer {
 .author-time-info {
 	justify-content: space-between;
 	width: 100%;
+	align-items: center;
 }
 
 .like-save-share-section {

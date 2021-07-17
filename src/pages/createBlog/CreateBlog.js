@@ -69,7 +69,7 @@ function CreateBlog(props) {
 			categories: category && category.label,
 			blogContent: value,
 			published: publish,
-			createdAt:new Date().toISOString().slice(0, 19).replace('T', ' ')
+			createdAt: new Date().toISOString().slice(0, 19).replace("T", " ")
 		};
 		const url = isEdit ? `/blogs/${isEdit.id}` : `/blogs`;
 		const method = isEdit ? "PUT" : "POST";
@@ -114,6 +114,7 @@ function CreateBlog(props) {
 								placeholder="Title"
 								value={title}
 								onChange={e => setTitle(e.target.value)}
+								maxLength={70}
 							/>
 							<input
 								type="text"
@@ -121,6 +122,7 @@ function CreateBlog(props) {
 								placeholder="Subtitle"
 								value={subTitle}
 								onChange={e => setSubTitle(e.target.value)}
+								maxLength={50}
 							/>
 							<div className="select-box-area">
 								<Select

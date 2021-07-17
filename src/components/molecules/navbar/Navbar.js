@@ -116,7 +116,7 @@ function Navbar(props) {
 									</div>
 								) : (
 									<img
-										className="is-32x32"
+										className="is-32x32 "
 										src="/icons/akar-icons_search.svg"
 										alt="search-icon"
 										onClick={() => setShowSearch(true)}
@@ -133,15 +133,15 @@ function Navbar(props) {
 						</div>
 					) : (
 						<Fragment>
-							<Link to="/create-blog">
-								<span className="navbar-item mt-5 hover-color">
-									Write a blog
-								</span>
-							</Link>
+							<div className="navbar-item">
+								<Link to="/create-blog">
+									<Button>Write a blog</Button>
+								</Link>
+							</div>
 							<div className="navbar-item mr-6">
 								<div className="navbar-item has-dropdown is-hoverable">
 									<span className="navbar-link is-hidden-touch">
-										<figure className="image is-42x42 mt-3  ">
+										<figure className="image is-42x42   ">
 											<img
 												className="is-rounded"
 												src={(user && user.imgSrc) || IMG_SRC}

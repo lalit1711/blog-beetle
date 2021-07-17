@@ -7,6 +7,7 @@ import AuthorProfile from "../../components/organisms/author/AuthorProfile";
 import BlogsOfAuthor from "../../components/organisms/author/BlogsOfAuthor";
 import Draft from "../../components/organisms/author/Draft";
 import SavedBlogs from "../../components/organisms/author/SavedBlogs";
+import { SOCIAL_LINKS } from "../../constants/user";
 import { AuthenticatorContext } from "../../context/authenticatorContext";
 import { _getAuthorInfo } from "./services";
 
@@ -32,6 +33,7 @@ function AuthorPage() {
 
 	useEffect(() => {
 		_getAuthorInfo(params.id).then(res => {
+			if (res.data.socialLinks === "") res.data.socialLinks = SOCIAL_LINKS;
 			setAuthorInfo(res.data);
 			if (user && params.id === user.id) {
 				updateLocalStorage(res.data);
