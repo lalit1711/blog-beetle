@@ -10,9 +10,11 @@ import LatestLoader from "../../components/organisms/loader/LatestLoader";
 import { Fragment } from "react";
 import SuggestedLoader from "../../components/organisms/loader/SuggestedLoader";
 import ReactLottie from "../../animation/LottieReact";
+import axios from "axios";
 
 function LandingPage() {
 	const [blogsList, setBlogsList] = useState([]);
+	const [mostLikedBlogs, setMostLikedBlogs] = useState([])
 	const [triggered, setTriggered] = useState(false);
 	const [blogsListLatest, setLatestBlogsList] = useState([]);
 	const [load, setLoad] = useState(false);
@@ -21,7 +23,7 @@ function LandingPage() {
 	useEffect(() => {
 		setTimeout(() => {
 			setShowWelcomeMessage(false);
-		}, 600);
+		}, 2000);
 	}, []);
 	useEffect(() => {
 		if (!showWelcomeMessage) {
@@ -60,9 +62,27 @@ function LandingPage() {
 		}
 	}, [showWelcomeMessage, triggered]);
 
-	// const getMostLikedBlogContent=()=>{
-	// 	axios.get("/blogs?filter=")
-	// }
+	useEffect(() => {
+		getMostLikedBlogContent(blogsList)
+	}, [blogsList])
+
+	const getMostLikedBlogContent = async (blogsList) => {
+		if (blogsList) {
+			let BlogsListAltered = [...blogsList]
+			let BlogListWithCount = await Promise.all(BlogsListAltered.map(BLOG => {
+				return new Promise((resolve, reject) => {
+					axios.get("/blog-likes/count?where=" + encodeURIComponent(JSON.stringify({ blogId: BLOG.id, active: 1 }))).then(res => {
+						BLOG.likesCount = res.data.count;
+						resolve(BLOG)
+					})
+				})
+			}))
+
+			let sortedBlogsBasedOnLikes = BlogListWithCount.sort(compare)
+			console.log(sortedBlogsBasedOnLikes)
+			setMostLikedBlogs(sortedBlogsBasedOnLikes)
+		}
+	}
 
 	return (
 		<div className="landing-page">
@@ -71,12 +91,13 @@ function LandingPage() {
 					<WelcomeMessage />
 					<ReactLottie keyIndex={1} />
 				</>
-			) : (
-				<div className="container">
+			) : (<div>
+				<WelcomeMessage Message={"Most liked blogs"} />
+					<div className="container">
 					<div className="mt-10">
 						{!load ? (
 							<TrendingBlogs
-								blogsList={blogsList}
+								blogsList={mostLikedBlogs}
 								triggered={triggered}
 								setTriggered={setTriggered}
 							/>
@@ -111,12 +132,14 @@ function LandingPage() {
 						<ReactLottie />
 					</div>
 				</div>
+			
+			</div>
 			)}
 		</div>
 	);
 }
 
-const WelcomeMessage = () => (
+const WelcomeMessage = ({ Message = "Welcome To BlogBeetle" }) => (
 	<h1
 		style={{
 			textAlign: "center",
@@ -132,10 +155,18 @@ const WelcomeMessage = () => (
 				color: "#a3ce20",
 				textDecoration: "underline"
 			}}>
-			W
+			{Message.substring(0, 1)}
 		</span>
-		elcome To BlogBeetle
+		{Message.substring(1, Message.length)}
 	</h1>
 );
 
 export default LandingPage;
+
+function compare(a, b) {
+	if (a.likesCount < b.likesCount)
+		return 1;
+	if (a.likesCount > b.likesCount)
+		return -1;
+	return 0;
+}
