@@ -20,7 +20,7 @@ function ImageCard({ blogInfo, height = 270, date = true }) {
 	return (
 		<div className="card image-card-border" style={{ height: height }}>
 			<div className="card-content is-paddingless" style={{ height: "100%" }}>
-				<div className="image-card has-background-primary"></div>
+				<div className="image-card has-background-dark"></div>
 				<div className="content image-card-content">
 					<Link
 						to={`/search?query=${
