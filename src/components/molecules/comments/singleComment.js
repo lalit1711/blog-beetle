@@ -44,10 +44,10 @@ function SingleComment({ comment, authorId, handleDelete }) {
 						<div className="content-crud is-flex-desktop">
 							<div className="comment">{comment.comment}</div>
 							<div className="edit-delete">
-								{(user && authorId === user.id) ||
-									(user && user.id === comment.userId && (
-										<BiTrash onClick={() => handleDelete(comment.id)} />
-									))}
+								{((user && authorId === user.id) ||
+									(user && user.id === comment.userId)) && (
+									<BiTrash onClick={() => handleDelete(comment.id)} />
+								)}
 							</div>
 						</div>
 					</div>
