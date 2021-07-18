@@ -23,7 +23,7 @@ function LandingPage() {
 	useEffect(() => {
 		setTimeout(() => {
 			setShowWelcomeMessage(false);
-		}, 2000);
+		}, 1000);
 	}, []);
 	useEffect(() => {
 		if (!showWelcomeMessage) {
@@ -72,14 +72,13 @@ function LandingPage() {
 						axios
 							.get(
 								"/blog-likes/count?where=" +
-								encodeURIComponent(
-									JSON.stringify({ blogId: BLOG.id, active: 1 })
-								)
+									encodeURIComponent(
+										JSON.stringify({ blogId: BLOG.id, active: 1 })
+									)
 							)
 							.then(res => {
 								BLOG.likesCount = res.data.count;
 								resolve(BLOG);
-							
 							});
 					});
 				})
