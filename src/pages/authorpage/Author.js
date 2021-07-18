@@ -29,6 +29,7 @@ function AuthorPage() {
 	useEffect(() => {
 		const shouldShowSavedBlogs = location.search === "?savedBlogs";
 		if (shouldShowSavedBlogs) setActiveTab(2);
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
 	useEffect(() => {

@@ -32,6 +32,9 @@
 
 A Blogging Web Application that provides ease of blogging in any niche of interest and an open reading section for all readers to read all kinds of blogs posted on the platform.
 
+##PRD
+https://drive.google.com/file/d/1ZMdz4jSosEDhQR1PmRuaSqIfk5PQVMfK/view?usp=sharing
+
 ## Description
 
 People Love to Read & Write. Also, search blogs on topics that fall under user's interest. Blog Beetle lets you
@@ -43,7 +46,7 @@ People Love to Read & Write. Also, search blogs on topics that fall under user's
 5. Landing Page with Most liked Blogs and Suggested Blogs Feature.
 6. Share a Blog, Search A Blog.
 
-## ****************\*\*\*\*****************
+## ******\*\*\*\*******\*\*\*\*******\*\*\*\*******
 
 ## Installation
 

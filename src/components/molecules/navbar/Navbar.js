@@ -2,7 +2,7 @@ import React, { Fragment, useContext, useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import Button from "../../atoms/button/Button";
 import { Link, useHistory, useLocation } from "react-router-dom";
-import { BsBookmark, BsBookmarkFill } from "react-icons/bs";
+import { BsBookmarkFill } from "react-icons/bs";
 import { AuthenticatorContext } from "../../../context/authenticatorContext";
 import Auth from "@aws-amplify/auth";
 import blogBeetleLogo from ".././../../assets/beetle.jpg";

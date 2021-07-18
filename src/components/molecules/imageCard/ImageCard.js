@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import DEFAULT_CATEGORY_INFO from "./constants/ImageCategory.default";
-import { FaClock, FaUser } from "react-icons/fa";
+import { FaUser } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import BlogReader from "../../../readers/blog";
 import categories from "../../../constants/categories";
 import { _getAuthorInfo } from "../../../services/services";
 import ReactTimeAgo from "react-time-ago";
-import LikeSaveShare from "../../organisms/Blog/LikeSaveShare";
 
 function ImageCard({ blogInfo, height = 270, date = true }) {
 	const [authorInfo, setAuthorInfo] = useState(null);

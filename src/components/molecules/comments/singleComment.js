@@ -16,6 +16,7 @@ function SingleComment({ comment, authorId, handleDelete }) {
 			setCommentUser(res.data);
 		});
 	}, [comment]);
+
 	if (commentUser)
 		return (
 			<div className="mt-5">
@@ -44,8 +45,9 @@ function SingleComment({ comment, authorId, handleDelete }) {
 							<div className="comment">{comment.comment}</div>
 							<div className="edit-delete">
 								{(user && authorId === user.id) ||
-									(user && user.id === comment.userId && <BiTrash />)}
-								{/* <img src="/icons/edit.svg" alt="search-img" /> */}
+									(user && user.id === comment.userId && (
+										<BiTrash onClick={() => handleDelete(comment.id)} />
+									))}
 							</div>
 						</div>
 					</div>
