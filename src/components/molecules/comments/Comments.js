@@ -47,9 +47,25 @@ function Comments({ blogId, authorId }) {
 	return (
 		<div className="comment-container p-2">
 			<div className="title-area">
-				<hr className="is-hidden-touch" />{" "}
-				<div className="subtitle has-text-weight-bold">Comments</div>
-				<hr className="is-hidden-touch" />
+				{/* <hr className="is-hidden-touch" />{" "} */}
+				<h3
+					style={{
+						textAlign: "center",
+						fontSize: "25px",
+						fontWeight: "bold",
+						marginBottom: "50px"
+					}}>
+					<span
+						style={{
+							fontSize: "35px",
+							color: "#a3ce20",
+							textDecoration: "underline"
+						}}>
+						C
+					</span>
+					omments
+				</h3>
+				{/* <hr className="is-hidden-touch" /> */}
 			</div>
 			<div className="main-section ">
 				{comments.length ? (

@@ -21,7 +21,7 @@ function SuggestedBlogs({
 	useEffect(() => {
 		_getFilterBlogs(
 			"/blogs?filter=" +
-			encodeURIComponent(JSON.stringify(requestData(getFilterObject())))
+				encodeURIComponent(JSON.stringify(requestData(getFilterObject())))
 		).then(res => filterBlogs(res.data));
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [user, categories, triggered]);
@@ -64,27 +64,32 @@ function SuggestedBlogs({
 						uggested blogs
 					</h1>
 				)}
-				{blogsList.length ? <div className="columns is-multiline">
-					{_map(blogsList, o => renderBlogCard(o, triggered, setTriggered))}
-				</div> : <><ReactLottie keyIndex={4} />
-					<h1 className="noResults">Sorry We could not find any blogs relevant to your interests</h1>
-					<h4 className="noResultsSub">care to add more interests for better suggestions</h4></>}
-				</div>
+				{blogsList.length ? (
+					<div className="columns is-multiline">
+						{_map(blogsList, o => renderBlogCard(o, triggered, setTriggered))}
+					</div>
+				) : (
+					<>
+						<ReactLottie keyIndex={4} />
+						<h1 className="noResults">Sorry We could not find any blogs </h1>
+					</>
+				)}
+			</div>
 			{!fullWidth && <div className="column is-1"></div>}
-			</div>
-			);
+		</div>
+	);
 }
 
-			function renderBlogCard(blog, triggered, setTriggered) {
+function renderBlogCard(blog, triggered, setTriggered) {
 	return (
-			<div className="column is-4" key={BlogReader.id(blog)}>
-				<BlogCard
-					blogInfo={blog}
-					triggered={triggered}
-					setTriggered={setTriggered}
-				/>
-			</div>
-			);
+		<div className="column is-4" key={BlogReader.id(blog)}>
+			<BlogCard
+				blogInfo={blog}
+				triggered={triggered}
+				setTriggered={setTriggered}
+			/>
+		</div>
+	);
 }
 
-			export default SuggestedBlogs;
+export default SuggestedBlogs;
