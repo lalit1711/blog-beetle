@@ -89,6 +89,10 @@ function SignUp(props) {
 											value={email}
 											onChange={e => setEmail(e.target.value)}
 										/>
+										<span className="is-help is-size-7">
+											we will send you a confirmation link kindly confirm to
+											create your account
+										</span>
 									</div>
 								</div>
 								<div className="field">
