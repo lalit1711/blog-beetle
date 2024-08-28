@@ -153,7 +153,7 @@ function Navbar(props) {
 									<div className="navbar-dropdown is-right">
 										<span className="navbar-item ">
 											<Link
-												to={`/author/${user && user.id}`}
+												to={`/author/${user && user._id}`}
 												className="has-text-dark ">
 												<span className="hover-color">
 													<FaUserAlt className="mr-2" /> Profile

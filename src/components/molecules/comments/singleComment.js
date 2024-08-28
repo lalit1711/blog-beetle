@@ -10,10 +10,9 @@ import { BiTrash } from "react-icons/bi";
 function SingleComment({ comment, authorId, handleDelete }) {
 	const { user } = useContext(AuthenticatorContext);
 	const [commentUser, setCommentUser] = useState(null);
-
 	useEffect(() => {
-		_getUserInfo(comment.userId).then(res => {
-			setCommentUser(res.data);
+		_getUserInfo(comment.authorId).then(res => {
+			setCommentUser(res.data.user);
 		});
 	}, [comment]);
 
@@ -42,11 +41,11 @@ function SingleComment({ comment, authorId, handleDelete }) {
 							</div>
 						</div>
 						<div className="content-crud is-flex-desktop">
-							<div className="comment">{comment.comment}</div>
+							<div className="comment">{comment.content}</div>
 							<div className="edit-delete">
 								{((user && authorId === user.id) ||
 									(user && user.id === comment.userId)) && (
-									<BiTrash onClick={() => handleDelete(comment.id)} />
+									<BiTrash onClick={() => handleDelete(comment._id)} />
 								)}
 							</div>
 						</div>

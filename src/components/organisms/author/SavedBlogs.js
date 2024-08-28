@@ -15,6 +15,7 @@ function SavedBlogs() {
 	useEffect(() => {
 		setLoader(true);
 		_getSavedBlogs(userId).then(res => {
+			console.log({ res });
 			setBlogsList(res);
 			setLoader(false);
 		});

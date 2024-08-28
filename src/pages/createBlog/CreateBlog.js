@@ -7,13 +7,14 @@ import Editor from "../../components/organisms/Editor";
 import { AuthenticatorContext } from "../../context/authenticatorContext";
 import { _getBlogById } from "../blog/services";
 import { _createAndEditBlog } from "./services";
+import { categoriesArray } from "../../constants/categories";
 
 function CreateBlog(props) {
 	const [title, setTitle] = useState("");
 	const [subTitle, setSubTitle] = useState("");
 	const [value, setValue] = useState("");
 	const [category, setCategory] = useState(null);
-	const [list, setList] = useState([]);
+	const [list, setList] = useState();
 	const [loader, setLoader] = useState(false);
 	const [isEdit, setEdit] = useState(false);
 	const [isPublished, setIsPublished] = useState("0");
@@ -27,16 +28,15 @@ function CreateBlog(props) {
 	}, [user, props.history]);
 
 	useEffect(() => {
-		axios.get(`/categories`).then(res => {
-			setList(convertCategoryForSelectBox(res.data));
-		});
+		setList(convertCategoryForSelectBox(categoriesArray()));
 	}, []);
 
 	useState(() => {
-		setCategory(list[0]);
+		// setCategory(list[0]);
 	}, [list]);
 
 	const convertCategoryForSelectBox = arr => {
+		console.log({ arr });
 		return arr.map(o => {
 			return { value: o.id, label: o.categoryName };
 		});
@@ -59,7 +59,7 @@ function CreateBlog(props) {
 		}
 	};
 
-	const handleBlog = (publish = "1") => {
+	const handleBlog = (publish = true) => {
 		setLoader(true);
 		const dataToSend = {
 			authorId: user.id,
@@ -72,13 +72,13 @@ function CreateBlog(props) {
 			createdAt: new Date().toISOString().slice(0, 19).replace("T", " ")
 		};
 		const url = isEdit ? `/blogs/${isEdit.id}` : `/blogs`;
-		const method = isEdit ? "PUT" : "POST";
+		const method = isEdit ? "PATCH" : "POST";
 		_createAndEditBlog(dataToSend, method, url)
 			.then(res => {
 				setLoader(false);
 				if (isEdit) props.history.push(`/blog/${isEdit.id}`);
 				else {
-					if (publish === "1") props.history.push(`/blog/${res.data.id}`);
+					if (publish) props.history.push(`/blog/${res.data.id}`);
 				}
 			})
 			.catch(err => {

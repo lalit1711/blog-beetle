@@ -20,4 +20,10 @@ const categories = {
 	Programming: { id: 20, color: "#F382B0" }
 };
 
+export const categoriesArray = () =>
+	Object.keys(categories).map(el => ({
+		color: categories[el].color,
+		categoryName: el,
+		id: categories[el].id
+	}));
 export default categories;

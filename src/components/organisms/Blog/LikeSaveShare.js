@@ -41,11 +41,9 @@ function LikeSaveShare({
 	// get likes count
 	useEffect(() => {
 		if (!blogInfo) return;
-		_getLikeCount(blogInfo.id).then(res => {
-			setCount(res.data.count);
-		});
+		setCount(blogInfo.like.length);
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [likeId, blogInfo]);
+	}, [blogInfo]);
 
 	// find out weather loggedIn user has liked the blog or not
 	useEffect(() => {
@@ -53,36 +51,18 @@ function LikeSaveShare({
 
 		// alert("USERID:"+user.id)
 
-		axios
-			.get(
-				"/blog-likes?filter=" +
-					encodeURIComponent(
-						JSON.stringify(requestDataUserLikesBlog(blogInfo.id, user.id))
-					)
-			)
-			.then(res => {
-				if (res.data.length) {
-					setLikeId(res.data[0].id);
-				}
-			});
+		axios.get(`/blogs/like/${blogInfo._id}`).then(res => {
+			setLikeId(res.data.data);
+		});
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [user, blogInfo, likeId]);
+	}, [user, blogInfo]);
 
-	// find out weather loggedIn user has liked the blog or not
+	// find out weather loggedIn user has saved the blog or not
 	useEffect(() => {
 		if (!user || !blogInfo || user === 1 || blogInfo === "" || onlyView) return;
-		axios
-			.get(
-				"/saved-blogs?filter=" +
-					encodeURIComponent(
-						JSON.stringify(requestDataUserLikesBlog(blogInfo.id, user.id))
-					)
-			)
-			.then(res => {
-				if (res.data.length) {
-					setSaveId(res.data[0].id);
-				}
-			});
+		axios.get(`/users/save/${blogInfo._id}`).then(res => {
+			setSaveId(res.data.data);
+		});
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [user, blogInfo]);
 
@@ -98,56 +78,15 @@ function LikeSaveShare({
 	const handleDelete = () => setOpenConfirmationBox(true);
 
 	const handleLike = () => {
-		const userBlogInfo = {
-			userId: user.id,
-			blogId: blogInfo.id
-		};
-		const data = {
-			where: userBlogInfo
-		};
-
-		_getCurrentUserContextLikes(data).then(res => {
-			if (res.data.length === 0) {
-				_likeBlog(userBlogInfo).then(res => {
-					setLikeId(res.data.id);
-				});
-			}
-			if (res.data.length > 0) {
-				if (res.data[0].active) {
-				} else {
-					_reLike(userBlogInfo).then(respp => {
-						setLikeId(1);
-					});
-				}
-			}
+		_likeBlog(blogInfo._id).then(res => {
+			setCount(res.data.data ? count + 1 : count - 1);
+			setLikeId(res.data.data);
 		});
 	};
 
 	const handleSave = () => {
-		const data = {
-			userId: user.id,
-			blogId: blogInfo.id,
-			active: 1
-		};
-		axios.post(`/saved-blogs`, data).then(res => {
-			setSaveId(res.data.id);
-		});
-	};
-
-	const handleLikeDelete = () => {
-		const data = {
-			userId: user.id,
-			blogId: blogInfo.id
-		};
-		_revokeLike(data).then(res => {
-			setLikeId(0);
-		});
-	};
-
-	const handleSavedDelete = () => {
-		_removeSavedBlog(saveId).then(res => {
-			setSaveId(0);
-			setTriggered(!triggered);
+		axios.patch(`/users/save/${blogInfo._id}?save=${!saveId}`).then(res => {
+			setSaveId(res.data.data);
 		});
 	};
 
@@ -178,7 +117,7 @@ function LikeSaveShare({
 										<AiFillLike
 											style={{ cursor: "pointer" }}
 											className="animateLikeButton"
-											onClick={handleLikeDelete}
+											onClick={handleLike}
 										/>
 									) : (
 										<AiOutlineLike
@@ -192,7 +131,7 @@ function LikeSaveShare({
 										<BsBookmarkFill
 											style={{ cursor: "pointer" }}
 											className="animateSaveButton"
-											onClick={handleSavedDelete}
+											onClick={handleSave}
 										/>
 									) : (
 										<BsBookmark

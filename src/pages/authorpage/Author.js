@@ -9,7 +9,8 @@ import Draft from "../../components/organisms/author/Draft";
 import SavedBlogs from "../../components/organisms/author/SavedBlogs";
 import { SOCIAL_LINKS } from "../../constants/user";
 import { AuthenticatorContext } from "../../context/authenticatorContext";
-import { _getAuthorInfo } from "./services";
+import { _getAuthorInfo } from "../../services/services";
+// import { _getAuthorInfo } from "./services";
 
 function AuthorPage() {
 	const [activeTab, setActiveTab] = useState(0);
@@ -34,10 +35,10 @@ function AuthorPage() {
 
 	useEffect(() => {
 		_getAuthorInfo(params.id).then(res => {
-			if (res.data.socialLinks === "") res.data.socialLinks = SOCIAL_LINKS;
-			setAuthorInfo(res.data);
-			if (user && params.id === user.id) {
-				updateLocalStorage(res.data);
+			if (res.data.user.socialLinks === "") res.data.socialLinks = SOCIAL_LINKS;
+			setAuthorInfo(res.data.user);
+			if (user && params.id === user._id) {
+				updateLocalStorage(res.data.user);
 			}
 		});
 		// eslint-disable-next-line react-hooks/exhaustive-deps
@@ -53,7 +54,7 @@ function AuthorPage() {
 						<div className="column is-8">
 							<div className="tab-section">
 								{!user ||
-									(user && params.id === user.id && (
+									(user && params.id === user._id && (
 										<Tabs
 											tabOptions={tabOptions}
 											active={activeTab}

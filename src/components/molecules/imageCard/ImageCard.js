@@ -13,7 +13,7 @@ function ImageCard({ blogInfo, height = 270, date = true }) {
 
 	useEffect(() => {
 		_getAuthorInfo(blogInfo.authorId).then(res => {
-			setAuthorInfo(res.data);
+			setAuthorInfo(res.data.user);
 		});
 	}, [blogInfo.authorId]);
 
@@ -37,7 +37,7 @@ function ImageCard({ blogInfo, height = 270, date = true }) {
 							{BlogReader.categories(blogInfo)}
 						</span>
 					</Link>
-					<Link to={`/blog/${BlogReader.id(blogInfo)}`}>
+					<Link to={`/blog/${blogInfo._id}`}>
 						<span className="card-title has-text-white">
 							{BlogReader.title(blogInfo)}
 						</span>

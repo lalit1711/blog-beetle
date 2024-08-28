@@ -10,7 +10,15 @@ export function _signIn(username, password, setLoader, setErrorMessage) {
 
 export function _getUserInfo(id) {
 	return axios({
-		method: "GET",
+		method: "Get",
 		url: `/users/${id}`
+	});
+}
+
+export function _logIn(payload) {
+	return axios({
+		method: "POST",
+		url: `/users/login`,
+		data: payload
 	});
 }

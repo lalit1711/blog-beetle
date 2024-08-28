@@ -6,7 +6,6 @@ import SuggestedBlogs from "../../components/organisms/Blog/SuggestedBlogs";
 import BlogSearch from "../../components/organisms/search/BlogSearch";
 import UsersSearch from "../../components/organisms/search/UserSearch";
 import { deBouncingFunction } from "../../helpers/helpers";
-import { requestDataLike, requestDataUserLike } from "../../helpers/util";
 import { _getFilterBlogs } from "../landingPage/services";
 
 function Search() {
@@ -39,19 +38,13 @@ function Search() {
 		if (!key.trim()) return null;
 		setLoader(true);
 		if (active === 0) {
-			_getFilterBlogs(
-				"/blogs?filter=" +
-					encodeURIComponent(JSON.stringify(requestDataLike(key)))
-			).then(res => {
-				setSearchedBlogs(res.data.filter(e => e.published === "1"));
+			_getFilterBlogs(`/blogs/search/${key}`).then(res => {
+				setSearchedBlogs(res.data.blogs.filter(e => e.published));
 				setLoader(false);
 			});
 		} else if (active === 1) {
-			_getFilterBlogs(
-				"/users?filter=" +
-					encodeURIComponent(JSON.stringify(requestDataUserLike(key)))
-			).then(res => {
-				setSearchedUser(res.data);
+			_getFilterBlogs(`/users/search/${key}`).then(res => {
+				setSearchedUser(res.data.users);
 				setLoader(false);
 			});
 		} else {

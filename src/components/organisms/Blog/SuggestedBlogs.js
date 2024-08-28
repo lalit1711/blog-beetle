@@ -9,7 +9,7 @@ import ReactLottie from "../../../animation/LottieReact";
 
 function SuggestedBlogs({
 	search = false,
-	categories = [],
+	categories = "",
 	title = true,
 	fullWidth = false,
 	blogId = null
@@ -19,23 +19,14 @@ function SuggestedBlogs({
 	const { user } = useContext(AuthenticatorContext);
 
 	useEffect(() => {
-		_getFilterBlogs(
-			"/blogs?filter=" +
-				encodeURIComponent(JSON.stringify(requestData(getFilterObject())))
-		).then(res => filterBlogs(res.data));
+		_getFilterBlogs(`/blogs?categories=${categories}`).then(res =>
+			filterBlogs(res.data.data.blogs)
+		);
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [user, categories, triggered]);
 
-	const getFilterObject = () => {
-		return categories.map(o => {
-			return { categories: o };
-		});
-	};
-
 	const filterBlogs = blogs => {
-		const data = blogs
-			.filter(e => e.published === "1")
-			.filter(e => e.id !== blogId);
+		const data = blogs.filter(e => e._id !== blogId);
 		if (search) setBlogsList(data);
 		else setBlogsList(user ? data.filter(o => o.authorId !== user.id) : data);
 	};

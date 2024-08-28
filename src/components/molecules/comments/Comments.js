@@ -20,19 +20,16 @@ function Comments({ blogId, authorId }) {
 	}, [blogId]);
 
 	const getComments = () => {
-		_getFilterBlogs(
-			"/blog-comments?filter=" +
-				encodeURIComponent(
-					JSON.stringify(requestDataComment({ blogId: blogId }))
-				)
-		).then(res => setComments(res.data));
+		_getFilterBlogs(`/blogs/comment/${blogId}`).then(res => {
+			setComments(res.data.comments);
+		});
 	};
 
 	const handleAddComment = () => {
 		if (!newComment.trim()) return null;
 		setLoader(true);
-		const data = { comment: newComment, blogId: blogId, userId: user.id };
-		axios.post(`/blog-comments`, data).then(res => {
+		const data = { content: newComment };
+		axios.post(`/blogs/comment/${blogId}`, data).then(res => {
 			setNewComment("");
 			setLoader(false);
 			getComments();
@@ -40,9 +37,14 @@ function Comments({ blogId, authorId }) {
 	};
 
 	const handleDelete = id => {
-		axios.delete(`/blog-comments/${id}`).then(res => {
-			getComments();
-		});
+		axios
+			.delete(`/blogs/comment/${id}`)
+			.then(res => {
+				getComments();
+			})
+			.catch(() => {
+				getComments();
+			});
 	};
 	return (
 		<div className="comment-container p-2">
@@ -63,7 +65,7 @@ function Comments({ blogId, authorId }) {
 						}}>
 						C
 					</span>
-					omments
+					comments
 				</h3>
 				{/* <hr className="is-hidden-touch" /> */}
 			</div>
@@ -72,7 +74,7 @@ function Comments({ blogId, authorId }) {
 					<div className="read-comment ">
 						{_map(comments, comment => (
 							<SingleComment
-								key={comment.id}
+								key={comment?._id}
 								comment={comment}
 								authorId={authorId}
 								handleDelete={handleDelete}

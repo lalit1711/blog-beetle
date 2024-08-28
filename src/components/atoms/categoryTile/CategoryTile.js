@@ -14,6 +14,7 @@ function CategoryTile(props) {
 	return (
 		<div
 			className={tileClasses}
+			style={{ ...(!selected && { border: `4px solid ${category.color}` }) }}
 			onClick={() =>
 				onClick(category.categoryName, selected ? "remove" : "add")
 			}>

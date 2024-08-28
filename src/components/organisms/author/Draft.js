@@ -17,8 +17,8 @@ function Draft() {
 
 	useEffect(() => {
 		setLoader(true);
-		_getDraftBlogs(userId).then(res => {
-			setBlogsList(res.data);
+		_getDraftBlogs().then(res => {
+			setBlogsList(res.data.data);
 			setLoader(false);
 		});
 	}, [userId, triggered]);

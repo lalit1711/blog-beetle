@@ -17,10 +17,11 @@ function BlogsOfAuthor() {
 		if (!params.id) return;
 		setLoader(true);
 		_getAuthorsPublishedBlogs(params.id).then(res => {
-			setBlogsList(res.data);
+			setBlogsList(res.data.data.blogs);
 			setLoader(false);
 		});
 	}, [params.id, triggered]);
+
 	if (loader) return <Skeleton height={200} />;
 	return (
 		<div className="authors-blogs">

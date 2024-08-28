@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 // components import
-import { _getAllBlogs, _getFilterBlogs } from "./services";
+import { TEMPDATA, _getAllBlogs, _getFilterBlogs } from "./services";
 import LatestBlogs from "../../components/organisms/Blog/LatestBlogs";
 import TrendingBlogs from "../../components/organisms/Blog/TrendingBlogs";
 import { AuthenticatorContext } from "../../context/authenticatorContext";
@@ -20,41 +20,22 @@ function LandingPage() {
 	const [load, setLoad] = useState(false);
 	const [showWelcomeMessage, setShowWelcomeMessage] = useState(true);
 	const { user } = useContext(AuthenticatorContext);
+
 	useEffect(() => {
 		setTimeout(() => {
 			setShowWelcomeMessage(false);
 		}, 1000);
 	}, []);
+
 	useEffect(() => {
 		if (!showWelcomeMessage) {
 			setLoad(true);
 			_getAllBlogs().then(res => {
-				setBlogsList(res.data.filter(e => e.published === "1"));
+				setBlogsList(res.data.data.blogs);
 			});
 			//------------------------Latest Blog Fetch------------------------
-			let requestData = {
-				offset: 0,
-				limit: 100,
-				skip: 0,
-				order: "createdAt DESC",
-				fields: {
-					id: true,
-					title: true,
-					coverImgSrc: true,
-					subTitle: true,
-					authorId: true,
-					blogContent: true,
-					published: true,
-					categories: true,
-					createdAt: true,
-					updatedAt: true
-				}
-			};
-
-			_getFilterBlogs(
-				"/blogs?filter=" + encodeURIComponent(JSON.stringify(requestData))
-			).then(res => {
-				setLatestBlogsList(res.data.filter(e => e.published === "1"));
+			_getFilterBlogs("/blogs").then(res => {
+				setLatestBlogsList(res.data.data.blogs);
 			});
 		}
 	}, [showWelcomeMessage, triggered]);
@@ -66,26 +47,7 @@ function LandingPage() {
 	const getMostLikedBlogContent = async blogsList => {
 		if (blogsList) {
 			let BlogsListAltered = [...blogsList];
-			let BlogListWithCount = await Promise.all(
-				BlogsListAltered.map(BLOG => {
-					return new Promise((resolve, reject) => {
-						axios
-							.get(
-								"/blog-likes/count?where=" +
-									encodeURIComponent(
-										JSON.stringify({ blogId: BLOG.id, active: 1 })
-									)
-							)
-							.then(res => {
-								BLOG.likesCount = res.data.count;
-								resolve(BLOG);
-							});
-					});
-				})
-			);
-
-			let sortedBlogsBasedOnLikes = BlogListWithCount.sort(compare);
-			console.log(sortedBlogsBasedOnLikes);
+			let sortedBlogsBasedOnLikes = BlogsListAltered.sort(compare);
 			setMostLikedBlogs(sortedBlogsBasedOnLikes);
 			setLoad(false);
 		}
@@ -130,7 +92,7 @@ function LandingPage() {
 									{user && user.interests && (
 										<SuggestedBlogs
 											userId={user.id}
-											categories={user.interests.split(",")}
+											categories={user.interests}
 										/>
 									)}
 								</Fragment>
@@ -171,7 +133,7 @@ const WelcomeMessage = ({ Message = "Welcome To BlogBeetle" }) => (
 export default LandingPage;
 
 function compare(a, b) {
-	if (a.likesCount < b.likesCount) return 1;
-	if (a.likesCount > b.likesCount) return -1;
+	if (a.like.length < b.like.length) return 1;
+	if (a.like.length > b.like.length) return -1;
 	return 0;
 }

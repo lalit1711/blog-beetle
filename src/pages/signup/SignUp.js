@@ -10,6 +10,7 @@ import { AiOutlineClose } from "react-icons/ai";
 function SignUp(props) {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
+	const [passwordConfirm, setPasswordConfirm] = useState("");
 	const [name, setName] = useState("");
 	const [loader, setLoader] = useState(false);
 	const [errorMessage, setErrorMessage] = useState("");
@@ -25,16 +26,18 @@ function SignUp(props) {
 		setLoader(true);
 		setErrorMessage("");
 		e.preventDefault();
-		const userData = { email, password, name };
-		_signUp(userData)
-			.then(user => {
-				_createUser(userData, user.userSub, setLoader).then(res => {
-					setLoader(false);
-					props.history.push(`/category?id=${user.userSub}`);
-				});
+		const userData = { email, password, fullName: name, passwordConfirm };
+
+		_createUser(userData, setLoader)
+			.then(res => {
+				setLoader(false);
+				props.history.push(`/category?id=${res.data.token}`);
 			})
 			.catch(err => {
-				setErrorMessage(err.message);
+				console.log({ err });
+				setErrorMessage(
+					err?.response?.data?.message || "Something went wrong!"
+				);
 				setLoader(false);
 			});
 	}
@@ -105,6 +108,19 @@ function SignUp(props) {
 											placeholder="Enter your password"
 											value={password}
 											onChange={e => setPassword(e.target.value)}
+										/>
+									</div>
+								</div>
+								<div className="field">
+									<label className="label">Password Confirm</label>
+									<div className="control">
+										<input
+											style={{ backgroundColor: "#d5ead5" }}
+											className="input"
+											type="password"
+											placeholder="Enter your password"
+											value={passwordConfirm}
+											onChange={e => setPasswordConfirm(e.target.value)}
 										/>
 									</div>
 								</div>
