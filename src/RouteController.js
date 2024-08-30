@@ -11,11 +11,13 @@ import LogIn from "./pages/login";
 import SampleComponents from "./pages/SampleComponents";
 import Search from "./pages/search";
 import SignUp from "./pages/signup";
+import ScrollToTop from "./common/ScrollToTop";
 
 function RouteController() {
 	return (
 		<Router>
 			<Skeleton>
+				<ScrollToTop />
 				<Switch>
 					<Route exact path="/">
 						<LandingPage />
