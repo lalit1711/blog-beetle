@@ -13,9 +13,10 @@ function BlogCard({ blogInfo, triggered = false, setTriggered = () => {} }) {
 	const [authorInfo, setAuthorInfo] = useState(null);
 	useEffect(() => {
 		_getAuthorInfo(blogInfo.authorId).then(res => {
-			setAuthorInfo(res.data);
+			setAuthorInfo(res.data.user);
 		});
-	}, [blogInfo.authorId, triggered]);
+	}, [blogInfo?.authorId, triggered]);
+	if (!blogInfo) return null;
 	return (
 		<div className="card" style={{ height: 270 }}>
 			<div className="card-content">
@@ -57,7 +58,7 @@ function BlogCard({ blogInfo, triggered = false, setTriggered = () => {} }) {
 					<span className="blog-description">
 						{blogInfo.subTitle
 							? blogInfo.subTitle
-							: ReactHtmlParser(BlogReader.blogContent(blogInfo))}
+							: ReactHtmlParser(BlogReader.blogContent(`<p>${blogInfo}</p>`))}
 					</span>
 					<span className="blog-author-card has-text-weight-bold is-uppercase is-flex mt-4 ">
 						<Link to={`author/${blogInfo.authorId}`} className="has-text-dark">

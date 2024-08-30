@@ -16,26 +16,25 @@ export const _deleteBlog = function (id) {
 	});
 };
 
-export const _likeBlog = function (data) {
+export const _likeBlog = function (blogId) {
 	return axios({
-		method: "POST",
-		url: `/blog-likes`,
-		data: data
+		method: "PATCH",
+		url: `/blogs/like/${blogId}`
 	});
 };
 
 //-----------------------get Current Context Likes---------------------
 export const _getCurrentUserContextLikes = function (data) {
 	// alert("called")
-	return axios.get("/blog-likes?filter=" + encodeURIComponent(JSON.stringify(data)))
+	return axios.get(
+		"/blog-likes?filter=" + encodeURIComponent(JSON.stringify(data))
+	);
 };
-
-
-
 
 export const _getLikeCount = function (id) {
 	const query = { blogId: id, active: 1 };
-	const url = "/blog-likes/count?where=" + encodeURIComponent(JSON.stringify(query));
+	const url =
+		"/blog-likes/count?where=" + encodeURIComponent(JSON.stringify(query));
 	return axios.get(url);
 };
 
@@ -43,15 +42,19 @@ export const _reLike = function (data) {
 	let query = data;
 	// alert(JSON.stringify(query))
 	let bodyData = { active: 1 };
-	return axios.patch("/blog-likes?where=" + encodeURIComponent(JSON.stringify(query)), bodyData)
+	return axios.patch(
+		"/blog-likes?where=" + encodeURIComponent(JSON.stringify(query)),
+		bodyData
+	);
 };
-
-
 
 export const _revokeLike = function (data) {
 	let query = data;
 	let bodyData = { active: 0 };
-	return axios.patch("/blog-likes?where=" + encodeURIComponent(JSON.stringify(query)), bodyData)
+	return axios.patch(
+		"/blog-likes?where=" + encodeURIComponent(JSON.stringify(query)),
+		bodyData
+	);
 };
 
 export const _removeSavedBlog = function (id) {

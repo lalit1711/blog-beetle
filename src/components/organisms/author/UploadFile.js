@@ -2,39 +2,23 @@ import axios from "axios";
 import React from "react";
 import Swal from "sweetalert2";
 import { IMG_SRC } from "../../../constants/user";
+import { IMAGE_URL } from "../../../config/axios";
 
 const UploadFile = ({ userData, updateData, setUpdateData }) => {
 	async function onChange(e) {
 		const file = e.target.files[0];
+		let formData = new FormData();
+		formData.append("imgSrc", file);
 		try {
-			let formData = new FormData();
-			formData.append("sampleFile", file);
-			let result = await axios.post(
-				"http://3.7.98.9:5000/upload",
-				formData,
-				{}
-			);
-			if (result.data.status) {
-				let fileLocation = result.data.fileData.Location;
-				let bodyData = {
-					imgSrc: fileLocation
-				};
-				let response = await axios.patch(
-					"/users?where=" +
-						encodeURIComponent(JSON.stringify({ id: userData.id })),
-					bodyData
-				);
-
-				if (response.data.count > 0) {
-					Swal.fire({
-						icon: "success",
-						timer: 2000,
-						title: "Profile Pic Updated Successfully"
-					}).then(res => {
-						setUpdateData(!updateData);
-					});
-				}
-			}
+			axios.patch("/users/updateMe", formData).then(res => {
+				Swal.fire({
+					icon: "success",
+					timer: 2000,
+					title: "Profile Pic Updated Successfully"
+				}).then(res => {
+					setUpdateData(!updateData);
+				});
+			});
 		} catch (error) {
 			console.log("Error uploading file: ", error);
 		}
@@ -46,7 +30,9 @@ const UploadFile = ({ userData, updateData, setUpdateData }) => {
 			<div className="control">
 				<div
 					className="file is-small is-boxed user-profile-img"
-					style={{ background: `url(${userData.imgSrc || IMG_SRC})` }}>
+					style={{
+						background: `url(${IMAGE_URL + userData.imgSrc || IMG_SRC})`
+					}}>
 					<label className="file-label">
 						<input
 							className="file-input"

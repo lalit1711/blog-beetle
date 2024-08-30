@@ -8,6 +8,7 @@ import Auth from "@aws-amplify/auth";
 import blogBeetleLogo from ".././../../assets/beetle.jpg";
 import { IMG_SRC } from "../../../constants/user";
 import { FaSignOutAlt, FaUserAlt } from "react-icons/fa";
+import { IMAGE_URL } from "../../../config/axios";
 
 function Navbar(props) {
 	const [isLoggedIn, setIsLoggedIn] = useState(false);
@@ -41,8 +42,8 @@ function Navbar(props) {
 	async function signOut() {
 		openDropDown();
 		try {
-			await Auth.signOut();
 			localStorage.removeItem("user");
+			localStorage.removeItem("token");
 			userLoggedIn();
 			history.push(`/`);
 		} catch (error) {
@@ -144,7 +145,7 @@ function Navbar(props) {
 										<figure className="image is-42x42   ">
 											<img
 												className="is-rounded"
-												src={(user && user.imgSrc) || IMG_SRC}
+												src={`${IMAGE_URL + user?.imgSrc || IMG_SRC}`}
 												alt="user-profile"
 											/>
 										</figure>
@@ -153,7 +154,7 @@ function Navbar(props) {
 									<div className="navbar-dropdown is-right">
 										<span className="navbar-item ">
 											<Link
-												to={`/author/${user && user.id}`}
+												to={`/author/${user && user._id}`}
 												className="has-text-dark ">
 												<span className="hover-color">
 													<FaUserAlt className="mr-2" /> Profile

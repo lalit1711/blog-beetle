@@ -11,7 +11,7 @@ function BriefCard({ blogInfo }) {
 
 	useEffect(() => {
 		_getAuthorInfo(blogInfo.authorId).then(res => {
-			setAuthorInfo(res.data);
+			setAuthorInfo(res.data.user);
 		});
 	}, [blogInfo.authorId]);
 

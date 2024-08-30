@@ -25,12 +25,11 @@ function Blog(props) {
 		setLoader(true);
 		_getBlogById(blogId)
 			.then(res => {
-				setContent(res.data);
+				setContent(res.data.data.blog);
 
-				if (res.data.published === "0" && user.id !== res.data.authorId)
-					props.history.push("/");
-				_getUserInfo(res.data.authorId).then(res => {
-					setAuthorInfo(res.data);
+				// if (user.id !== res.data.authorId) props.history.push("/");
+				_getUserInfo(res.data.data.blog.authorId).then(res => {
+					setAuthorInfo(res.data.user);
 					setLoader(false);
 				});
 			})
@@ -77,9 +76,7 @@ function Blog(props) {
 									<span className="subtitle ">
 										<FaClock style={{ height: 16 }} />{" "}
 										<span className="is-size-6">
-											{content &&
-											content.createdAt &&
-											content.published === "1" ? (
+											{content && content.createdAt && content.published ? (
 												<ReactTimeAgo date={content.createdAt} locale="en-US" />
 											) : (
 												"Not Published"
@@ -100,8 +97,8 @@ function Blog(props) {
 					<div className="column is-10">
 						{authorInfo && <AuthorInfo userInfo={authorInfo} />}
 						<Comments
-							blogId={content.id}
-							authorId={authorInfo && authorInfo.id}
+							blogId={content._id}
+							authorId={authorInfo && authorInfo._id}
 						/>
 					</div>
 					<div className="column is-1"></div>
@@ -111,9 +108,9 @@ function Blog(props) {
 					<div className="column is-1"></div>
 					<div className="column is-10">
 						<SuggestedBlogs
-							categories={[content.categories]}
+							categories={content.categories}
 							landingPage={false}
-							blogId={content.id}
+							blogId={content._id}
 						/>
 					</div>
 					<div className="column is-1"></div>

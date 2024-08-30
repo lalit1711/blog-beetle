@@ -7,13 +7,14 @@ import Editor from "../../components/organisms/Editor";
 import { AuthenticatorContext } from "../../context/authenticatorContext";
 import { _getBlogById } from "../blog/services";
 import { _createAndEditBlog } from "./services";
+import { categoriesArray } from "../../constants/categories";
 
 function CreateBlog(props) {
 	const [title, setTitle] = useState("");
 	const [subTitle, setSubTitle] = useState("");
 	const [value, setValue] = useState("");
 	const [category, setCategory] = useState(null);
-	const [list, setList] = useState([]);
+	const [list, setList] = useState();
 	const [loader, setLoader] = useState(false);
 	const [isEdit, setEdit] = useState(false);
 	const [isPublished, setIsPublished] = useState("0");
@@ -27,13 +28,11 @@ function CreateBlog(props) {
 	}, [user, props.history]);
 
 	useEffect(() => {
-		axios.get(`/categories`).then(res => {
-			setList(convertCategoryForSelectBox(res.data));
-		});
+		setList(convertCategoryForSelectBox(categoriesArray()));
 	}, []);
 
 	useState(() => {
-		setCategory(list[0]);
+		// setCategory(list[0]);
 	}, [list]);
 
 	const convertCategoryForSelectBox = arr => {
@@ -45,8 +44,10 @@ function CreateBlog(props) {
 	const checkIsValidEditBlog = async () => {
 		if (props.match.path.indexOf("edit-blog") > -1) {
 			const blogId = props.match.params.id;
-			const { data } = await _getBlogById(blogId);
-			if (data.authorId !== user.id) {
+			const res = await _getBlogById(blogId);
+			const data = res.data.data.blog;
+			console.log({ data });
+			if (data.authorId !== user._id) {
 				props.history.push(`/`);
 			} else {
 				setEdit(data);
@@ -59,7 +60,7 @@ function CreateBlog(props) {
 		}
 	};
 
-	const handleBlog = (publish = "1") => {
+	const handleBlog = (publish = true) => {
 		setLoader(true);
 		const dataToSend = {
 			authorId: user.id,
@@ -68,18 +69,13 @@ function CreateBlog(props) {
 			subTitle: subTitle,
 			categories: category && category.label,
 			blogContent: value,
-			published: publish,
-			createdAt: new Date().toISOString().slice(0, 19).replace("T", " ")
+			published: publish
 		};
-		const url = isEdit ? `/blogs/${isEdit.id}` : `/blogs`;
-		const method = isEdit ? "PUT" : "POST";
+		const url = isEdit ? `/blogs/${isEdit._id}` : `/blogs`;
+		const method = isEdit ? "PATCH" : "POST";
 		_createAndEditBlog(dataToSend, method, url)
 			.then(res => {
-				setLoader(false);
-				if (isEdit) props.history.push(`/blog/${isEdit.id}`);
-				else {
-					if (publish === "1") props.history.push(`/blog/${res.data.id}`);
-				}
+				props.history.push(`/blog/${res.data.data._id}`);
 			})
 			.catch(err => {
 				setLoader(false);
@@ -150,12 +146,10 @@ function CreateBlog(props) {
 				</Button>
 				<Button
 					outlined={false}
-					disabled={
-						loader || isPublished === "1" || shouldDisabledPublishButton()
-					}
+					disabled={loader || isPublished || shouldDisabledPublishButton()}
 					loading={loader}
 					onClick={() => handleBlog("1")}>
-					{isPublished === "0" ? "Publish" : "Published"}
+					{!isPublished ? "Publish" : "Published"}
 				</Button>
 				<Button type="is-light" onClick={clearAllValues}>
 					Clear All

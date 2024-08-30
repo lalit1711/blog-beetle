@@ -3,18 +3,13 @@ import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router";
 import Button from "../../components/atoms/button";
 import CategoryTile from "../../components/atoms/categoryTile";
+import { categoriesArray } from "../../constants/categories";
 
 function Categories(props) {
-	const [categoryList, setCategoryList] = useState([]);
+	const [categoryList, setCategoryList] = useState(categoriesArray);
 	const [selectedCategory, setSelectedCategory] = useState([]);
 	const [loader, setLoader] = useState(false);
 	const location = useLocation();
-
-	useEffect(() => {
-		axios.get(`/categories`).then(res => {
-			setCategoryList(res.data);
-		});
-	}, []);
 
 	function updateCategoryTile(categoryName, action) {
 		if (action === "add") {
@@ -25,12 +20,19 @@ function Categories(props) {
 	}
 
 	function saveCategories() {
-		setLoader(true);
-		const data = { interests: selectedCategory.join(",") };
-		axios.patch(`/users/${location.search.split("=")[1]}`, data).then(res => {
-			setLoader(false);
-			routeToLogin();
-		});
+		// setLoader(true);
+		const data = { interests: selectedCategory };
+		axios
+			.patch(`/users/updateMe`, data, {
+				headers: {
+					Authorization: `Bearer ${location.search.split("=")[1]}`
+				}
+			})
+			.then(res => {
+				setLoader(false);
+				routeToLogin();
+			})
+			.catch(err => console.log(err));
 	}
 
 	function routeToLogin() {

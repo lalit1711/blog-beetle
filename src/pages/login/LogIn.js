@@ -1,9 +1,9 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { zoomIn } from "react-animations";
 import { StyleSheet, css } from "aphrodite";
 import Button from "../../components/atoms/button";
 import { Link } from "react-router-dom";
-import { _getUserInfo, _signIn } from "./services";
+import { _getUserInfo, _logIn, _signIn } from "./services";
 import { AuthenticatorContext } from "../../context/authenticatorContext";
 import beetleLogo from "./../../assets/beetle.jpg";
 import { AiOutlineClose } from "react-icons/ai";
@@ -13,7 +13,7 @@ function LogIn(props) {
 	const [password, setPassword] = useState("");
 	const [loader, setLoader] = useState(false);
 	const [errorMessage, setErrorMessage] = useState("");
-	const { userLoggedIn } = useContext(AuthenticatorContext);
+	const { user, userLoggedIn } = useContext(AuthenticatorContext);
 
 	const styles = StyleSheet.create({
 		bounce: {
@@ -22,24 +22,28 @@ function LogIn(props) {
 		}
 	});
 
+	useEffect(() => {
+		if (user) goBack();
+	}, [user]);
+
 	async function handleSubmit(e) {
 		e.preventDefault();
 		setLoader(true);
-		setErrorMessage("");
-		const cognitoIdentity = await _signIn(
-			username,
-			password,
-			setLoader,
-			setErrorMessage
-		);
-		setLoader(false);
-		if (!cognitoIdentity) return;
-		const user = await _getUserInfo(cognitoIdentity.attributes.sub);
+		// setErrorMessage("")
 
-		if (!user) return;
-		localStorage.setItem("user", JSON.stringify(user.data));
-		userLoggedIn();
-		props.history.push(`/`);
+		_logIn({ email: username, password })
+			.then(user => {
+				console.log({ user });
+				setLoader(false);
+				localStorage.setItem("user", JSON.stringify(user.data.data.user));
+				localStorage.setItem("token", user.data.token);
+				userLoggedIn();
+				window.location.reload();
+			})
+			.catch(err => {
+				setLoader(false);
+				setErrorMessage(err.response.data.message);
+			});
 	}
 
 	function goBack() {

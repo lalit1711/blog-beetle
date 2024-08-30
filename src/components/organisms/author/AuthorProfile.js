@@ -65,7 +65,10 @@ function AuthorProfile({ updateData, setUpdateData, authorInfo }) {
 			case "socialLinks":
 				{
 					reqData.socialLinks = socialLinks;
-					reqData.socialLinks[socialLinkName] = enteredFieldValue;
+					reqData.socialLinks = {
+						...socialLinks,
+						[socialLinkName]: enteredFieldValue
+					};
 					reqData.socialLinks = JSON.stringify(reqData.socialLinks);
 				}
 				break;
@@ -85,9 +88,9 @@ function AuthorProfile({ updateData, setUpdateData, authorInfo }) {
 		}
 
 		axios
-			.patch("/users/" + userId, reqData)
+			.patch("/users/updateMe", reqData)
 			.then(res => {
-				if (res.status === 204) {
+				if (res.status === 200) {
 					Swal.fire({
 						icon: "success",
 						title: capitalizeFirstLetter(fieldName) + " Updated Successfully!",

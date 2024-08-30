@@ -14,7 +14,7 @@ function LargeBlogCard({ blogInfo, triggered, setTriggered }) {
 
 	useEffect(() => {
 		_getAuthorInfo(blogInfo.authorId).then(res => {
-			setAuthorInfo(res.data);
+			setAuthorInfo(res.data.user);
 		});
 	}, [blogInfo.authorId]);
 	return (

@@ -3,9 +3,10 @@ import PropTypes from "prop-types";
 import { FaFacebook, FaGithub, FaLinkedin, FaTwitter } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { IMG_SRC, SOCIAL_LINKS } from "../../../constants/user";
+import { IMAGE_URL } from "../../../config/axios";
 
 function AuthorInfo({ userInfo }) {
-	const { fullName, id, imgSrc, bio } = userInfo;
+	const { fullName, _id: id, imgSrc, bio } = userInfo;
 	const {
 		facebook = null,
 		github = null,
@@ -20,7 +21,9 @@ function AuthorInfo({ userInfo }) {
 						<div
 							className="user-image"
 							style={{
-								backgroundImage: `url(${imgSrc || IMG_SRC})`
+								backgroundImage: `url(${
+									IMAGE_URL + userInfo.imgSrc || IMG_SRC
+								})`
 							}}></div>
 						<Link to={`/author/${id}`}>
 							{" "}

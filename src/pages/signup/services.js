@@ -13,21 +13,18 @@ export const _signUp = ({ email, password, name }) => {
 	});
 };
 
-export const _createUser = (user, id, setLoader) => {
+export const _createUser = user => {
 	const postData = {
-		id: id,
-		emailAddress: user.email,
+		email: user.email,
 		imgSrc: "",
-		userName: user.email,
-		fullName: user.name,
+		fullName: user.fullName,
 		socialLinks: "",
-		password: "****"
+		password: user.password,
+		passwordConfirm: user.passwordConfirm
 	};
 	return axios({
 		method: "POST",
-		url: "/users",
+		url: "/users/signup",
 		data: postData
-	}).catch(err => {
-		setLoader(false);
 	});
 };
