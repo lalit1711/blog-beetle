@@ -187,3 +187,26 @@ export const getSavedBlogRequestData = blogIdArray => {
 		}
 	};
 };
+
+export const getImageFromBlog = (str, substring = `<img src=`) => {
+	const startIndex = str.indexOf(substring);
+	let endIndex = 0;
+
+	for (let i = startIndex; i < str.length; i++) {
+		if (str[i] === ">") {
+			if (!endIndex) endIndex = i;
+		}
+	}
+	const imgTag = str.slice(startIndex + substring.length + 1, endIndex - 1);
+	return imgTag;
+};
+
+export function checkImageExists(url, setBackgroundUrl) {
+	var image = new Image();
+	image.onload = function () {
+		if (this.width > 0) {
+			setBackgroundUrl(url);
+		}
+	};
+	image.src = url;
+}

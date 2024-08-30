@@ -7,6 +7,7 @@ import BlogReader from "../../../readers/blog";
 import categories from "../../../constants/categories";
 import { _getAuthorInfo } from "../../../services/services";
 import ReactTimeAgo from "react-time-ago";
+import { getImageFromBlog } from "../../../helpers/util";
 
 function ImageCard({ blogInfo, height = 270, date = true }) {
 	const [authorInfo, setAuthorInfo] = useState(null);
@@ -16,11 +17,18 @@ function ImageCard({ blogInfo, height = 270, date = true }) {
 			setAuthorInfo(res.data.user);
 		});
 	}, [blogInfo.authorId]);
-
 	return (
 		<div className="card image-card-border" style={{ height: height }}>
 			<div className="card-content is-paddingless" style={{ height: "100%" }}>
-				<div className="image-card has-background-dark"></div>
+				<div
+					className="image-card has-background-dark"
+					style={{
+						backgroundSize: "cover",
+						backgroundRepeat: "no-repeat",
+						background: `url(
+							${getImageFromBlog(blogInfo?.blogContent)}
+						)`
+					}}></div>
 				<div className="content image-card-content">
 					<Link
 						to={`/search?query=${
@@ -38,7 +46,7 @@ function ImageCard({ blogInfo, height = 270, date = true }) {
 						</span>
 					</Link>
 					<Link to={`/blog/${blogInfo._id}`}>
-						<span className="card-title has-text-white">
+						<span className="card-title has-text-white has-font-border">
 							{BlogReader.title(blogInfo)}
 						</span>
 					</Link>
@@ -47,13 +55,13 @@ function ImageCard({ blogInfo, height = 270, date = true }) {
 					<Link
 						to={`/author/${BlogReader.authorId(blogInfo)}`}
 						className="author-time-info is-flex">
-						<span className="has-text-white is-size-7 is-uppercase">
+						<span className="has-text-white has-font-border is-size-7 is-uppercase">
 							<FaUser /> {authorInfo && authorInfo.fullName}
 						</span>
 
 						{date && blogInfo.createdAt && (
 							<span
-								className="subtitle has-text-white "
+								className="subtitle has-text-white has-font-border"
 								style={{ marginLeft: 20 }}>
 								<span className="is-size-7">
 									<ReactTimeAgo date={blogInfo.createdAt} locale="en-US" />

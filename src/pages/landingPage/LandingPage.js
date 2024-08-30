@@ -10,7 +10,6 @@ import LatestLoader from "../../components/organisms/loader/LatestLoader";
 import { Fragment } from "react";
 import SuggestedLoader from "../../components/organisms/loader/SuggestedLoader";
 import ReactLottie from "../../animation/LottieReact";
-import axios from "axios";
 
 function LandingPage() {
 	const [blogsList, setBlogsList] = useState([]);

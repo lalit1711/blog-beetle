@@ -48,7 +48,9 @@ function Blog(props) {
 							<div className="hero-body has-text-centered">
 								<p className="title blog-title ">{content.title}</p>
 								{content.subTitle && (
-									<p className="subtitle mt-3">{content.subTitle}</p>
+									<p className="subtitle mt-3 blog-subtitle">
+										{content.subTitle}
+									</p>
 								)}
 
 								<div className="author-time-info is-flex">

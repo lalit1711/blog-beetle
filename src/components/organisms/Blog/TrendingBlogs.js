@@ -52,7 +52,6 @@ function TrendingBlogs({ blogsList, triggered, setTriggered }) {
 					</div>
 				</div>
 			) : null}
-			<div className="column is-1"></div>
 		</div>
 	);
 }

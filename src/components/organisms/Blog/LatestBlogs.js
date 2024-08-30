@@ -14,7 +14,7 @@ function LatestBlogs({ blogsList, triggered, setTriggered }) {
 		setSectionTwo(tempBlogs.splice(0, tempBlogs.length));
 	}, [blogsList]);
 	return (
-		<div className="columns latest-blog-container">
+		<div className="columns latest-blog-container is-paddingless">
 			<div className="column is-1"></div>
 			{blogsList.length ? (
 				<div className="column is-10">
@@ -52,7 +52,6 @@ function LatestBlogs({ blogsList, triggered, setTriggered }) {
 					</div>
 				</div>
 			) : null}
-			<div className="column is-1"></div>
 		</div>
 	);
 }

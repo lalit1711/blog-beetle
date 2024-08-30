@@ -120,6 +120,10 @@ textarea:disabled {
 	border-radius: 4px;
 }
 
+.has-font-border {
+	text-shadow: 2px 2px 4px #000000;
+}
+
 .image-card-content {
 	display: flex;
 	height: 100%;
@@ -258,7 +262,7 @@ textarea:disabled {
 		width: 100px;
 	}
 	.blog-info {
-		width: 70%;
+		width: 100%;
 		.author-info {
 			font-weight: 600;
 			color: $grey;
@@ -519,6 +523,9 @@ footer {
 
 .blog-title {
 	font-size: 3rem;
+	text-align: left;
+}
+.blog-subtitle {
 	text-align: left;
 }
 
@@ -832,6 +839,9 @@ footer {
 @media only screen and (max-width: 600px) {
 	.user-main {
 		flex-direction: column;
+	}
+	.image-large-blog-card {
+		display: none;
 	}
 }
 
