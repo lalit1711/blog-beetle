@@ -13,6 +13,7 @@
 		"canvas": "^2.8.0",
 		"classnames": "^2.3.1",
 		"dateformat": "^4.5.1",
+		"dotenv": "^16.4.5",
 		"javascript-time-ago": "^2.3.8",
 		"lodash": "^4.17.21",
 		"lottie-react": "^2.1.0",

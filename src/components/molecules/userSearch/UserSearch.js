@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import { IMG_SRC } from "../../../constants/user";
 import UserReader from "../../../readers/user";
+import { IMAGE_URL } from "../../../config/axios";
 
 function UserSearch({ userInfo }) {
 	return (
@@ -10,7 +11,9 @@ function UserSearch({ userInfo }) {
 			<div
 				className="user-image"
 				style={{
-					backgroundImage: `url(${UserReader.imgSrc(userInfo) || IMG_SRC})`
+					backgroundImage: `url(${
+						IMAGE_URL + UserReader.imgSrc(userInfo) || IMG_SRC
+					})`
 				}}></div>
 			<div className="user-info">
 				<Link to={`/author/${UserReader.id(userInfo)}`}>

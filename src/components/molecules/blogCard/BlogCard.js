@@ -15,7 +15,8 @@ function BlogCard({ blogInfo, triggered = false, setTriggered = () => {} }) {
 		_getAuthorInfo(blogInfo.authorId).then(res => {
 			setAuthorInfo(res.data.user);
 		});
-	}, [blogInfo.authorId, triggered]);
+	}, [blogInfo?.authorId, triggered]);
+	if (!blogInfo) return null;
 	return (
 		<div className="card" style={{ height: 270 }}>
 			<div className="card-content">

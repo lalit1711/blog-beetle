@@ -97,9 +97,9 @@ function LikeSaveShare({
 			<div className={`like-save-share-section `}>
 				<div className={`${!onlyView && "social-section"}`}>
 					{user && !onlyView ? (
-						user.id === blogInfo.authorId ? (
+						user._id === blogInfo.authorId ? (
 							<Fragment>
-								<Link to={`/edit-blog/${blogInfo.id}`}>
+								<Link to={`/edit-blog/${blogInfo._id}`}>
 									<span>
 										<BiMessageSquareEdit />
 									</span>

@@ -36,7 +36,6 @@ function CreateBlog(props) {
 	}, [list]);
 
 	const convertCategoryForSelectBox = arr => {
-		console.log({ arr });
 		return arr.map(o => {
 			return { value: o.id, label: o.categoryName };
 		});
@@ -45,8 +44,10 @@ function CreateBlog(props) {
 	const checkIsValidEditBlog = async () => {
 		if (props.match.path.indexOf("edit-blog") > -1) {
 			const blogId = props.match.params.id;
-			const { data } = await _getBlogById(blogId);
-			if (data.authorId !== user.id) {
+			const res = await _getBlogById(blogId);
+			const data = res.data.data.blog;
+			console.log({ data });
+			if (data.authorId !== user._id) {
 				props.history.push(`/`);
 			} else {
 				setEdit(data);
@@ -68,18 +69,13 @@ function CreateBlog(props) {
 			subTitle: subTitle,
 			categories: category && category.label,
 			blogContent: value,
-			published: publish,
-			createdAt: new Date().toISOString().slice(0, 19).replace("T", " ")
+			published: publish
 		};
-		const url = isEdit ? `/blogs/${isEdit.id}` : `/blogs`;
+		const url = isEdit ? `/blogs/${isEdit._id}` : `/blogs`;
 		const method = isEdit ? "PATCH" : "POST";
 		_createAndEditBlog(dataToSend, method, url)
 			.then(res => {
-				setLoader(false);
-				if (isEdit) props.history.push(`/blog/${isEdit.id}`);
-				else {
-					if (publish) props.history.push(`/blog/${res.data.id}`);
-				}
+				props.history.push(`/blog/${res.data.data._id}`);
 			})
 			.catch(err => {
 				setLoader(false);
@@ -150,12 +146,10 @@ function CreateBlog(props) {
 				</Button>
 				<Button
 					outlined={false}
-					disabled={
-						loader || isPublished === "1" || shouldDisabledPublishButton()
-					}
+					disabled={loader || isPublished || shouldDisabledPublishButton()}
 					loading={loader}
 					onClick={() => handleBlog("1")}>
-					{isPublished === "0" ? "Publish" : "Published"}
+					{!isPublished ? "Publish" : "Published"}
 				</Button>
 				<Button type="is-light" onClick={clearAllValues}>
 					Clear All

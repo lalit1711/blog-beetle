@@ -19,8 +19,8 @@ function SuggestedBlogs({
 	const { user } = useContext(AuthenticatorContext);
 
 	useEffect(() => {
-		_getFilterBlogs(`/blogs?categories=${categories}`).then(res =>
-			filterBlogs(res.data.data.blogs)
+		_getFilterBlogs(`/blogs/search/${categories}`).then(res =>
+			filterBlogs(res.data.blogs)
 		);
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [user, categories, triggered]);

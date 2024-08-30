@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import { AuthenticatorContext } from "../../../context/authenticatorContext";
 import ReactTimeAgo from "react-time-ago";
 import { BiTrash } from "react-icons/bi";
+import { IMAGE_URL } from "../../../config/axios";
 
 function SingleComment({ comment, authorId, handleDelete }) {
 	const { user } = useContext(AuthenticatorContext);
@@ -25,7 +26,7 @@ function SingleComment({ comment, authorId, handleDelete }) {
 							className="user-image is-hidden-touch"
 							style={{
 								backgroundImage: `url(${
-									UserReader.imgSrc(commentUser) || IMG_SRC
+									IMAGE_URL + UserReader.imgSrc(commentUser) || IMG_SRC
 								})`
 							}}></div>
 					</div>
@@ -43,8 +44,8 @@ function SingleComment({ comment, authorId, handleDelete }) {
 						<div className="content-crud is-flex-desktop">
 							<div className="comment">{comment.content}</div>
 							<div className="edit-delete">
-								{((user && authorId === user.id) ||
-									(user && user.id === comment.userId)) && (
+								{((user && authorId === user._id) ||
+									(user && user._id === comment.authorId)) && (
 									<BiTrash onClick={() => handleDelete(comment._id)} />
 								)}
 							</div>

@@ -1,12 +1,13 @@
 import React, { useEffect, useState } from "react";
 import Select from "react-select";
 import axios from "./../../../config/axios";
+import { categoriesArray } from "../../../constants/categories";
 
 function ComponentName({ ...props }) {
 	let { inputData, setInterests } = props;
 	const [dropDownOptions, setDropDownOptions] = useState(false);
 	const [dropDownVal, setDropDownValue] = useState(
-		inputData ? getOptions(inputData.split(","), true) : []
+		inputData ? getOptions(inputData, true) : []
 	);
 
 	useEffect(() => {
@@ -21,16 +22,13 @@ function ComponentName({ ...props }) {
 			if (value.length <= 3) {
 				setDropDownValue(value);
 				let interestChanges = value.map(item => item.value);
-				setInterests(interestChanges.toString());
+				setInterests(interestChanges);
 			}
 		}
 	};
 
 	const getCategoriesList = async () => {
-		let response = await axios.get("/categories");
-		if (response.status === 200) {
-			setDropDownOptions(getOptions(response.data));
-		}
+		setDropDownOptions(getOptions(categoriesArray()));
 	};
 
 	return (

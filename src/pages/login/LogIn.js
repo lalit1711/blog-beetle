@@ -31,13 +31,19 @@ function LogIn(props) {
 		setLoader(true);
 		// setErrorMessage("")
 
-		const user = await _logIn({ email: username, password });
-		setLoader(false);
-		if (!user) return;
-		localStorage.setItem("user", JSON.stringify(user.data.data.user));
-		localStorage.setItem("token", user.data.token);
-		userLoggedIn();
-		window.location.reload();
+		_logIn({ email: username, password })
+			.then(user => {
+				console.log({ user });
+				setLoader(false);
+				localStorage.setItem("user", JSON.stringify(user.data.data.user));
+				localStorage.setItem("token", user.data.token);
+				userLoggedIn();
+				window.location.reload();
+			})
+			.catch(err => {
+				setLoader(false);
+				setErrorMessage(err.response.data.message);
+			});
 	}
 
 	function goBack() {

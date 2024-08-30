@@ -3,6 +3,7 @@ import { FaFacebook, FaGithub, FaLinkedin, FaTwitter } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import { IMG_SRC, SOCIAL_LINKS } from "../../../constants/user";
 import UserReader from "../../../readers/user";
+import { IMAGE_URL } from "../../../config/axios";
 // import editIcon from "../../../../public/icons/edit.svg"
 
 function AuthorBanner({ userInfo }) {
@@ -20,7 +21,9 @@ function AuthorBanner({ userInfo }) {
 				<div
 					className="user-image is-rounded scaleAnimate"
 					style={{
-						backgroundImage: `url(${UserReader.imgSrc(userInfo) || IMG_SRC})`,
+						backgroundImage: `url(${
+							IMAGE_URL + UserReader.imgSrc(userInfo) || IMG_SRC
+						})`,
 						height: "6em",
 						width: "6em"
 					}}></div>
