@@ -29,7 +29,7 @@ function BlogsOfAuthor() {
 				<Fragment>
 					{_map(blogList, blog => {
 						return (
-							<div className="blog">
+							<div className="blog" key={blog._id}>
 								<LargeBlogCard
 									blogInfo={blog}
 									triggered={triggered}

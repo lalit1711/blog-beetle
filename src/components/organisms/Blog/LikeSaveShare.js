@@ -67,11 +67,15 @@ function LikeSaveShare({
 	}, [user, blogInfo]);
 
 	const deleteBlog = async () => {
-		await _deleteBlog(blogInfo.id);
-		if (location.pathname.indexOf("/blog/") > -1) history.push("/");
-		else {
-			setTriggered(!triggered);
-			setOpenConfirmationBox(false);
+		try {
+			await _deleteBlog(blogInfo._id);
+			if (location.pathname.indexOf("/blog/") > -1) history.push("/");
+			else {
+				setTriggered(!triggered);
+				setOpenConfirmationBox(false);
+			}
+		} catch (err) {
+			if (location.pathname.indexOf("/blog/") > -1) history.push("/");
 		}
 	};
 

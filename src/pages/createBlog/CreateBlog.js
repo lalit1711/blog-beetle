@@ -75,7 +75,7 @@ function CreateBlog(props) {
 		const method = isEdit ? "PATCH" : "POST";
 		_createAndEditBlog(dataToSend, method, url)
 			.then(res => {
-				props.history.push(`/blog/${res.data.data._id}`);
+				props.history.push(`/blog/${res.data.data.blog._id}`);
 			})
 			.catch(err => {
 				setLoader(false);

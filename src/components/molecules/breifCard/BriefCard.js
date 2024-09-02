@@ -18,7 +18,6 @@ function BriefCard({ blogInfo }) {
 		});
 	}, [blogInfo.authorId]);
 
-	console.log({ backgroundUrl });
 	return (
 		<div className="brief-card columns">
 			{backgroundUrl && (
