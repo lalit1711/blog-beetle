@@ -13,6 +13,7 @@ import { FaClock, FaUser } from "react-icons/fa";
 import categories from "../../constants/categories";
 import ReactTimeAgo from "react-time-ago";
 import { AuthenticatorContext } from "../../context/authenticatorContext";
+import ScrollToTopButton from "../../components/atoms/scrollToTopButton";
 
 function Blog(props) {
 	const [content, setContent] = useState("");
@@ -118,6 +119,7 @@ function Blog(props) {
 					<div className="column is-1"></div>
 				</div>
 			</div>
+			<ScrollToTopButton />
 		</div>
 	);
 }

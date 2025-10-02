@@ -8,6 +8,7 @@ import { AuthenticatorContext } from "../../context/authenticatorContext";
 import { _getBlogById } from "../blog/services";
 import { _createAndEditBlog } from "./services";
 import { categoriesArray } from "../../constants/categories";
+import ScrollToTopButton from "../../components/atoms/scrollToTopButton";
 
 function CreateBlog(props) {
 	const [title, setTitle] = useState("");
@@ -157,6 +158,7 @@ function CreateBlog(props) {
 				<Link to="/">
 					<Button type="is-danger">Cancel</Button>
 				</Link>
+				<ScrollToTopButton />
 			</div>
 		</div>
 	);
